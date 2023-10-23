@@ -24,6 +24,7 @@
         "max-len": ["error", 120],
         "simple-import-sort/imports": "error",
         "simple-import-sort/exports": "error",
+        "no-console": 0,
         // TypeScript Eslint rules
         "@typescript-eslint/indent": ["error", 4],
         "@typescript-eslint/comma-dangle": "off",
