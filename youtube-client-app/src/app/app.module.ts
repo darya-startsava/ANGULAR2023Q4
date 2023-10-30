@@ -6,6 +6,7 @@ import { AppRoutingModule } from "./app-routing.module";
 import { HeaderComponent } from "./header/header.component";
 import { SearchItemComponent } from "./search/search-item/search-item.component";
 import { SearchResultsComponent } from "./search/search-results/search-results.component";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
     declarations: [
@@ -16,7 +17,8 @@ import { SearchResultsComponent } from "./search/search-results/search-results.c
     ],
     imports: [
         BrowserModule,
-        AppRoutingModule
+        AppRoutingModule,
+        BrowserAnimationsModule
     ],
     providers: [],
     bootstrap: [AppComponent]
