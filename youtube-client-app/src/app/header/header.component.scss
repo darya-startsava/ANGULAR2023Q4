@@ -11,6 +11,11 @@ $grey400: mat.define-palette(mat.$grey-palette, 400);
   display: flex;
   justify-content: center;
 
+  mat-icon.logo {
+    height: auto;
+    width: auto;
+    font-size: 50px;
+  }
   .search_form {
     width: 500px;
   }
