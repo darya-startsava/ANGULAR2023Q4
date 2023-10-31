@@ -1,0 +1,17 @@
+@use '@angular/material' as mat;
+
+$grey: mat.define-palette(mat.$grey-palette);
+$grey200: mat.define-palette(mat.$grey-palette, 200);
+$grey400: mat.define-palette(mat.$grey-palette, 400);
+
+.header_wrapper {
+  background-color: mat.get-color-from-palette($grey400);
+  padding-top: 20px;
+  padding-bottom: 5px;
+  display: flex;
+  justify-content: center;
+
+  .search_form {
+    width: 500px;
+  }
+}
