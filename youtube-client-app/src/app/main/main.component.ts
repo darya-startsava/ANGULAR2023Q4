@@ -12,6 +12,6 @@ export class MainComponent {
     response = JSON.parse(JSON.stringify(response));
     showResults(value: boolean): void {
         this.isShownResults = value;
-        console.log(this.response);
+        console.log(this.response.items[0]);
     }
 }
