@@ -1,5 +1,7 @@
 <div class="search-results_wrapper">
-  <p class="search-results_item_wrapper" *ngFor="let item of searchItems">
+  <p class="search-results_item_wrapper" *ngFor="let item of searchItems |
+     orderBy:'date': isAsc : isOrderedByDate |
+      orderBy:'viewCount': isAsc : isOrderedByView">
     <app-search-item class="search-results_item" [item]="item"></app-search-item>
   </p>
 </div>

@@ -10,6 +10,7 @@ import { AppRoutingModule } from "./app-routing.module";
 import { CustomButtonComponent } from "./custom-button/custom-button.component";
 import { HeaderComponent } from "./header/header.component";
 import { MainComponent } from "./main/main.component";
+import { OrderByPipe } from "./pipes/order-by.pipe";
 import { SearchItemComponent } from "./search/search-item/search-item.component";
 import { SearchResultsComponent } from "./search/search-results/search-results.component";
 import { SortSettingsComponent } from "./sort-settings/sort-settings.component";
@@ -20,7 +21,8 @@ import { SortSettingsComponent } from "./sort-settings/sort-settings.component";
         SearchItemComponent,
         SearchResultsComponent,
         MainComponent,
-        SortSettingsComponent
+        SortSettingsComponent,
+        OrderByPipe
     ],
     imports: [
         MatButtonModule,

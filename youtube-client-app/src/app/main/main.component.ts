@@ -10,6 +10,10 @@ import * as response from "../../assets/mockData/response.json";
 export class MainComponent {
     isShownResults = false;
     isShownSettings = false;
+    isSortByDate = false;
+    isSortByViewCount = false;
+    isFilteredByWord = false;
+    isAsc = true;
     response = JSON.parse(JSON.stringify(response));
     showResults(value: boolean): void {
         this.isShownResults = value;
@@ -18,5 +22,23 @@ export class MainComponent {
 
     toggleSettings(): void {
         this.isShownSettings = !this.isShownSettings;
+    }
+
+    sortByDate(): void {
+        if (this.isSortByDate) {
+            this.isAsc = !this.isAsc;
+        }
+        this.isSortByDate = true;
+        this.isSortByViewCount = false;
+        this.isFilteredByWord = false;
+    }
+
+    sortByViewCount(): void {
+        if (this.isSortByViewCount) {
+            this.isAsc = !this.isAsc;
+        }
+        this.isSortByViewCount = true;
+        this.isSortByDate = false;
+        this.isFilteredByWord = false;
     }
 }

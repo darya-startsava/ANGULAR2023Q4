@@ -9,4 +9,7 @@ import { Item } from "../search-item.model";
 })
 export class SearchResultsComponent {
     @Input() searchItems: Item[];
+    @Input() isOrderedByDate: boolean;
+    @Input() isOrderedByView: boolean;
+    @Input() isAsc: boolean;
 }
