@@ -1,20 +1,41 @@
 @use '@angular/material' as mat;
 
-$grey400: mat.define-palette(mat.$grey-palette, 400);
+$grey200: mat.define-palette(mat.$grey-palette, 200);
 
 .header_wrapper {
-  background-color: mat.get-color-from-palette($grey400);
   padding-top: 20px;
   padding-bottom: 5px;
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 5fr 1fr;
+  width: 80%;
+  margin: 0 auto;
+
+
+  div:first-child {
+    display: flex;
+    justify-self: center;
+    align-items: center;
+    column-gap: 10px;
+  }
+
+  div:last-child {
+    justify-self: end;
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+  }
 
   mat-icon.logo {
     height: auto;
     width: auto;
     font-size: 50px;
   }
-  .search_form {
+
+  input {
     width: 500px;
+    background-color: mat.get-color-from-palette($grey200);
+    height: 30px;
+    border: none;
+
   }
 }

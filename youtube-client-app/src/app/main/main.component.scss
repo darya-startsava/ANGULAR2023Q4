@@ -1,3 +1,12 @@
+@use '@angular/material' as mat;
+
+$grey400: mat.define-palette(mat.$grey-palette, 400);
+
+.header-search_wrapper {
+  background-color: mat.get-color-from-palette($grey400);
+
+}
+
 .search-results_wrapper {
   width: 80%;
   margin: 0 auto;

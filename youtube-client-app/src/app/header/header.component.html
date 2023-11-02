@@ -1,11 +1,16 @@
 <div class="header_wrapper">
-  <mat-icon class="logo" color="primary">smart_display</mat-icon>
-  <mat-form-field class="search_form">
-    <mat-label></mat-label>
-    <input matInput value>
-  </mat-form-field>
-  <app-custom-button (click)="onSearch()">Search</app-custom-button>
-  <button mat-raised-button class="setting_button" color="primary">
-    <mat-icon>settings</mat-icon>
-  </button>
+  <div>
+    <mat-icon class="logo" color="primary">smart_display</mat-icon>
+      <input value>
+    <app-custom-button (click)="onSearch()">Search</app-custom-button>
+    <button mat-mini-fab color="primary">
+      <mat-icon>settings</mat-icon>
+    </button>
+  </div>
+  <div>
+    <span>Your Name</span>
+    <button mat-mini-fab color="primary">
+      <mat-icon>person</mat-icon>
+    </button>
+  </div>
 </div>
