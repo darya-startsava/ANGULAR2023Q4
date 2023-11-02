@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { MatCardModule } from "@angular/material/card";
+import { MatIconModule } from "@angular/material/icon";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
@@ -20,6 +21,7 @@ import { SearchResultsComponent } from "./search/search-results/search-results.c
     ],
     imports: [
         MatCardModule,
+        MatIconModule,
         BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,
