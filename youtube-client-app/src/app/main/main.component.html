@@ -1,4 +1,6 @@
-<app-header (showSearchResults)="showResults($event)"></app-header>
-<p *ngIf="isShownResults">
-  <app-search-results [searchItems]="response.items"></app-search-results>
-</p>
+<div class="app_wrapper">
+  <app-header (showSearchResults)="showResults($event)"></app-header>
+  <p *ngIf="isShownResults" class="search-results_wrapper">
+    <app-search-results [searchItems]="response.items"></app-search-results>
+  </p>
+</div>

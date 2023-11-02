@@ -1,7 +1,5 @@
 @use '@angular/material' as mat;
 
-$grey: mat.define-palette(mat.$grey-palette);
-$grey200: mat.define-palette(mat.$grey-palette, 200);
 $grey400: mat.define-palette(mat.$grey-palette, 400);
 
 .header_wrapper {
