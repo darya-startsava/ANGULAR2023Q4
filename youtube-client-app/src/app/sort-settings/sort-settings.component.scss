@@ -1,0 +1,16 @@
+@use '@angular/material' as mat;
+
+$grey100: mat.define-palette(mat.$grey-palette, 100);
+
+.sort-settings_wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 10px;
+
+  input {
+    background-color: mat.get-color-from-palette($grey100);
+    height: 20px;
+    border: none;
+  }
+}

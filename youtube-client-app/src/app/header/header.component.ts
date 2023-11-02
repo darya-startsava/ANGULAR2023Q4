@@ -21,7 +21,12 @@ import { CustomButtonComponent } from "../custom-button/custom-button.component"
 })
 export class HeaderComponent {
     @Output() showSearchResults = new EventEmitter<boolean>();
+    @Output() toggleSortSettings = new EventEmitter();
     onSearch(): void {
         this.showSearchResults.emit(true);
+    }
+
+    onToggleSortSettings(): void {
+        this.toggleSortSettings.emit();
     }
 }

@@ -9,9 +9,14 @@ import * as response from "../../assets/mockData/response.json";
 })
 export class MainComponent {
     isShownResults = false;
+    isShownSettings = false;
     response = JSON.parse(JSON.stringify(response));
     showResults(value: boolean): void {
         this.isShownResults = value;
         console.log(this.response.items[0]);
+    }
+
+    toggleSettings(): void {
+        this.isShownSettings = !this.isShownSettings;
     }
 }

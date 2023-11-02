@@ -1,4 +1,5 @@
 import { NgModule } from "@angular/core";
+import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
 import { MatIconModule } from "@angular/material/icon";
 import { BrowserModule } from "@angular/platform-browser";
@@ -11,15 +12,18 @@ import { HeaderComponent } from "./header/header.component";
 import { MainComponent } from "./main/main.component";
 import { SearchItemComponent } from "./search/search-item/search-item.component";
 import { SearchResultsComponent } from "./search/search-results/search-results.component";
+import { SortSettingsComponent } from "./sort-settings/sort-settings.component";
 
 @NgModule({
     declarations: [
         AppComponent,
         SearchItemComponent,
         SearchResultsComponent,
-        MainComponent
+        MainComponent,
+        SortSettingsComponent
     ],
     imports: [
+        MatButtonModule,
         MatCardModule,
         MatIconModule,
         BrowserModule,

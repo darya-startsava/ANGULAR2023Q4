@@ -1,6 +1,7 @@
 <div class="app_wrapper">
   <div class="header-search_wrapper">
-    <app-header (showSearchResults)="showResults($event)"></app-header>
+    <app-header (showSearchResults)="showResults($event)" (toggleSortSettings)="toggleSettings()"></app-header>
+    <app-sort-settings *ngIf="isShownSettings"></app-sort-settings>
   </div>
   <p *ngIf="isShownResults" class="search-results_wrapper">
     <app-search-results [searchItems]="response.items"></app-search-results>
