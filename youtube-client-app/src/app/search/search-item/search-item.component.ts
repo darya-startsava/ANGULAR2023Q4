@@ -10,8 +10,12 @@ import { Item } from "../search-item.model";
 export class SearchItemComponent implements OnInit {
     @Input() item: Item;
     channelPictureUrl: string;
+    dateStatus: string;
 
     ngOnInit(): void {
         this.channelPictureUrl = this.item.snippet.thumbnails.high.url;
+        this.dateStatus = Math.floor(
+            (+new Date() - +new Date(this.item.snippet.publishedAt)) / 86400000
+        ).toString();
     }
 }

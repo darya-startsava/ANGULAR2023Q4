@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { CustomButtonComponent } from "./custom-button/custom-button.component";
+import { ColoredBorderDirective } from "./directives/colored-border.directive";
 import { HeaderComponent } from "./header/header.component";
 import { MainComponent } from "./main/main.component";
 import { FilterPipe } from "./pipes/filter.pipe";
@@ -25,7 +26,8 @@ import { SortSettingsComponent } from "./sort-settings/sort-settings.component";
         MainComponent,
         SortSettingsComponent,
         OrderByPipe,
-        FilterPipe
+        FilterPipe,
+        ColoredBorderDirective
     ],
     imports: [
         ReactiveFormsModule,
