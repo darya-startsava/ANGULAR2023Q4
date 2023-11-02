@@ -12,4 +12,6 @@ export class SearchResultsComponent {
     @Input() isOrderedByDate: boolean;
     @Input() isOrderedByView: boolean;
     @Input() isAsc: boolean;
+    @Input() isFilteredByWord: boolean;
+    @Input() wordForFilterBy: string;
 }

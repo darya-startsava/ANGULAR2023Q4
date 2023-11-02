@@ -14,6 +14,7 @@ export class MainComponent {
     isSortByViewCount = false;
     isFilteredByWord = false;
     isAsc = true;
+    wordForFilterBy = "";
     response = JSON.parse(JSON.stringify(response));
     showResults(value: boolean): void {
         this.isShownResults = value;
@@ -31,6 +32,7 @@ export class MainComponent {
         this.isSortByDate = true;
         this.isSortByViewCount = false;
         this.isFilteredByWord = false;
+        this.wordForFilterBy = "";
     }
 
     sortByViewCount(): void {
@@ -40,5 +42,13 @@ export class MainComponent {
         this.isSortByViewCount = true;
         this.isSortByDate = false;
         this.isFilteredByWord = false;
+        this.wordForFilterBy = "";
+    }
+
+    filterByWorld(value: string): void {
+        this.isFilteredByWord = true;
+        this.wordForFilterBy = value;
+        this.isSortByViewCount = false;
+        this.isSortByDate = false;
     }
 }

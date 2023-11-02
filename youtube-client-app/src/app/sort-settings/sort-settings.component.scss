@@ -1,6 +1,7 @@
 @use '@angular/material' as mat;
 
 $grey100: mat.define-palette(mat.$grey-palette, 100);
+$indigo: mat.define-palette(mat.$indigo-palette);
 
 .sort-settings_wrapper {
   display: flex;
@@ -12,5 +13,10 @@ $grey100: mat.define-palette(mat.$grey-palette, 100);
     background-color: mat.get-color-from-palette($grey100);
     height: 20px;
     border: none;
+  }
+
+  label {
+    color: mat.get-color-from-palette($indigo);
+    font: 14px;
   }
 }
