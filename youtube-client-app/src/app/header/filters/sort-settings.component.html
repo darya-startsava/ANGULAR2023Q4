@@ -1,0 +1,17 @@
+<div class="sort-settings_wrapper">
+    <span>Sorting by:</span>
+    <button mat-button color="primary" (click)="sortBy(sortType.Date)">date</button>
+    <button mat-button color="primary" (click)="sortBy(sortType.ViewCount)">
+        count of views
+    </button>
+    <div>
+        <label
+            >by word or sentence
+            <input
+                type="text"
+                [(ngModel)]="filterByWordInput"
+                (input)="filterByWord()"
+            />
+        </label>
+    </div>
+</div>

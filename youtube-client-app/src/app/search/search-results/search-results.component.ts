@@ -1,4 +1,8 @@
 import { Component, Input } from "@angular/core";
+import {
+    FilterState,
+    SortType
+} from "src/app/header/filters/filter-state.model";
 
 import { Item } from "../search-item.model";
 
@@ -9,9 +13,35 @@ import { Item } from "../search-item.model";
 })
 export class SearchResultsComponent {
     @Input() searchItems: Item[];
-    @Input() isOrderedByDate: boolean;
-    @Input() isOrderedByView: boolean;
-    @Input() isAsc: boolean;
-    @Input() isFilteredByWord: boolean;
-    @Input() wordForFilterBy: string;
+
+    sortItems(filterState: FilterState) {
+        switch (filterState.sortType) {
+            case SortType.Date: {
+                return this.searchItems?.sort((a, b) => {
+                    if (filterState.isAsc) {
+                        return (
+                            +new Date(a.snippet.publishedAt) -
+                            +new Date(b.snippet.publishedAt)
+                        );
+                    }
+                    return (
+                        +new Date(b.snippet.publishedAt) -
+                        +new Date(a.snippet.publishedAt)
+                    );
+                });
+            }
+            case SortType.ViewCount: {
+                return this.searchItems?.sort((a, b) => {
+                    if (filterState.isAsc) {
+                        return (
+                            +a.statistics.viewCount - +b.statistics.viewCount
+                        );
+                    }
+                    return +b.statistics.viewCount - +a.statistics.viewCount;
+                });
+            }
+            default:
+                return this.searchItems;
+        }
+    }
 }

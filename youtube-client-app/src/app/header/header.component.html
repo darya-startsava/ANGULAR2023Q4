@@ -1,16 +1,10 @@
-<div class="header_wrapper">
-  <div>
-    <mat-icon class="logo" color="primary">smart_display</mat-icon>
-      <input value>
-    <app-custom-button (click)="onSearch()">Search</app-custom-button>
-    <button mat-mini-fab color="primary" (click)="onToggleSortSettings()">
-      <mat-icon>settings</mat-icon>
-    </button>
-  </div>
-  <div>
-    <span>Your Name</span>
-    <button mat-mini-fab color="primary">
-      <mat-icon>person</mat-icon>
-    </button>
-  </div>
+<div class="header-search_wrapper">
+    <app-header-input
+        (toggleSortSettings)="toggleSettings()"
+    ></app-header-input>
+    <app-sort-settings
+        *ngIf="isShownSettings"
+        (changeFilters)="onChangeFilters($event)"
+    >
+    </app-sort-settings>
 </div>

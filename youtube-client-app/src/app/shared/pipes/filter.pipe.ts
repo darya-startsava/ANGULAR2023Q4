@@ -1,17 +1,13 @@
 import { Pipe, PipeTransform } from "@angular/core";
 
-import { Item } from "../search/search-item.model";
+import { Item } from "../../search/search-item.model";
 
 @Pipe({
     name: "filter"
 })
 export class FilterPipe implements PipeTransform {
-    transform(
-        searchItems: Item[],
-        wordForFilterBy: string,
-        isFilteredByWord: boolean
-    ): Item[] {
-        if (!wordForFilterBy || !isFilteredByWord) {
+    transform(searchItems: Item[], wordForFilterBy: string): Item[] {
+        if (!wordForFilterBy) {
             return searchItems;
         }
         return searchItems.filter((i) =>

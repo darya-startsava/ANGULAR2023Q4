@@ -1,5 +1,6 @@
+import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
-import { ReactiveFormsModule } from "@angular/forms";
+import { FormsModule } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
 import { MatIconModule } from "@angular/material/icon";
@@ -8,37 +9,36 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app-routing.module";
-import { CustomButtonComponent } from "./custom-button/custom-button.component";
-import { ColoredBorderDirective } from "./directives/colored-border.directive";
+import { SortSettingsComponent } from "./header/filters/sort-settings.component";
 import { HeaderComponent } from "./header/header.component";
-import { MainComponent } from "./main/main.component";
-import { FilterPipe } from "./pipes/filter.pipe";
-import { OrderByPipe } from "./pipes/order-by.pipe";
+import { HeaderInputComponent } from "./header/input/header-input.component";
 import { SearchItemComponent } from "./search/search-item/search-item.component";
 import { SearchResultsComponent } from "./search/search-results/search-results.component";
-import { SortSettingsComponent } from "./sort-settings/sort-settings.component";
+import { ColoredBorderDirective } from "./shared/directives/colored-border.directive";
+import { FilterPipe } from "./shared/pipes/filter.pipe";
+import { SharedModule } from "./shared/shared.module";
 
 @NgModule({
     declarations: [
         AppComponent,
         SearchItemComponent,
         SearchResultsComponent,
-        MainComponent,
         SortSettingsComponent,
-        OrderByPipe,
         FilterPipe,
-        ColoredBorderDirective
+        ColoredBorderDirective,
+        HeaderComponent
     ],
     imports: [
-        ReactiveFormsModule,
+        FormsModule,
         MatButtonModule,
         MatCardModule,
         MatIconModule,
         BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,
-        HeaderComponent,
-        CustomButtonComponent
+        SharedModule,
+        HttpClientModule,
+        HeaderInputComponent
     ],
     providers: [],
     bootstrap: [AppComponent]

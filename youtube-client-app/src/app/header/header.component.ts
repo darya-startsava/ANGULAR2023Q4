@@ -1,32 +1,30 @@
 import { Component, EventEmitter, Output } from "@angular/core";
-import { MatButtonModule } from "@angular/material/button";
-import { MatFormFieldModule } from "@angular/material/form-field";
-import { MatIconModule } from "@angular/material/icon";
-import { MatInputModule } from "@angular/material/input";
 
-import { CustomButtonComponent } from "../custom-button/custom-button.component";
+import { FilterState, SortType } from "./filters/filter-state.model";
 
 @Component({
-    standalone: true,
-    imports: [
-        CustomButtonComponent,
-        MatInputModule,
-        MatFormFieldModule,
-        MatButtonModule,
-        MatIconModule
-    ],
     selector: "app-header",
     templateUrl: "./header.component.html",
     styleUrls: ["./header.component.scss"]
 })
 export class HeaderComponent {
-    @Output() showSearchResults = new EventEmitter<boolean>();
-    @Output() toggleSortSettings = new EventEmitter();
-    onSearch(): void {
-        this.showSearchResults.emit(true);
+    isShownSettings = false;
+    filterState: FilterState = {
+        isSorted: false,
+        sortType: SortType.Date,
+        isFilteredByWord: false,
+        isAsc: true,
+        wordForFilterBy: ""
+    };
+
+    @Output() changeFilters = new EventEmitter<FilterState>();
+
+    toggleSettings(): void {
+        this.isShownSettings = !this.isShownSettings;
     }
 
-    onToggleSortSettings(): void {
-        this.toggleSortSettings.emit();
+    onChangeFilters(filterState: FilterState) {
+        this.filterState = filterState;
+        this.changeFilters.emit(filterState);
     }
 }

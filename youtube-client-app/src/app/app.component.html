@@ -1,1 +1,16 @@
-<app-main ></app-main>
+<div class="app_wrapper">
+    <app-header #header (changeFilters)="results.sortItems($event)">
+    </app-header>
+    <div class="search-results_wrapper">
+        <app-search-results
+            [searchItems]="
+                searchResultsService.data$
+                    | async
+                    | filter: header.filterState.wordForFilterBy
+            "
+            #results
+        >
+        </app-search-results>
+    </div>
+</div>
+

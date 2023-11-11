@@ -6,7 +6,7 @@ import { Directive, ElementRef, Input, OnInit } from "@angular/core";
 export class ColoredBorderDirective implements OnInit {
     constructor(private el: ElementRef) {}
     @Input() appColoredBorder: string;
-    ngOnInit() {
+    ngOnInit(): void {
         this.el.nativeElement.style.borderBottom = `10px solid ${this.getColor()}`;
     }
     getColor(): string {
