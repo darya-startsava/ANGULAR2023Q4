@@ -14,10 +14,8 @@ export class SearchResultService {
     public data$ = new BehaviorSubject<Item[]>([]);
 
     getData(): void {
-        console.log("getData():");
         this.http
             .get<Response>(this.URL)
             .subscribe((data) => this.data$.next(data.items));
-        console.log(this.data$);
     }
 }
