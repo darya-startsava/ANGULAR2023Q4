@@ -1,6 +1,9 @@
 import { Component, EventEmitter, Output } from "@angular/core";
 
-import { FilterState, SortType } from "./filter-state.model";
+import {
+    FilterState,
+    SortType
+} from "../../../../youtube/models/filter-state.model";
 
 @Component({
     selector: "app-sort-settings",

@@ -2,8 +2,8 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable, OnDestroy } from "@angular/core";
 import { BehaviorSubject, Subscription } from "rxjs";
 
-import { Item } from "../search/search-item.model";
-import { Response } from "../search/search-response.model";
+import { Item } from "../models/search-item.model";
+import { Response } from "../models/search-response.model";
 
 @Injectable({
     providedIn: "root"

@@ -9,24 +9,20 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app-routing.module";
-import { SortSettingsComponent } from "./header/filters/sort-settings.component";
-import { HeaderComponent } from "./header/header.component";
-import { HeaderInputComponent } from "./header/input/header-input.component";
-import { SearchItemComponent } from "./search/search-item/search-item.component";
-import { SearchResultsComponent } from "./search/search-results/search-results.component";
+import { CoreModule } from "./core/core.module";
 import { ColoredBorderDirective } from "./shared/directives/colored-border.directive";
 import { FilterPipe } from "./shared/pipes/filter.pipe";
 import { SharedModule } from "./shared/shared.module";
+import { SearchItemComponent } from "./youtube/components/search-item/search-item.component";
+import { SearchResultsComponent } from "./youtube/components/search-results/search-results.component";
 
 @NgModule({
     declarations: [
         AppComponent,
         SearchItemComponent,
         SearchResultsComponent,
-        SortSettingsComponent,
         FilterPipe,
-        ColoredBorderDirective,
-        HeaderComponent
+        ColoredBorderDirective
     ],
     imports: [
         FormsModule,
@@ -36,9 +32,9 @@ import { SharedModule } from "./shared/shared.module";
         BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,
+        CoreModule,
         SharedModule,
-        HttpClientModule,
-        HeaderInputComponent
+        HttpClientModule
     ],
     providers: [],
     bootstrap: [AppComponent]

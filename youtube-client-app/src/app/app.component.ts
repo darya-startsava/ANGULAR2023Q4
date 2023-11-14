@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 
-import { SearchResultService } from "./services/search-result.service";
+import { SearchResultService } from "./youtube/services/search-result.service";
 
 @Component({
     selector: "app-root",

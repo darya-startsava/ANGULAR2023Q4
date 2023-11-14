@@ -2,9 +2,9 @@ import { Component, Input } from "@angular/core";
 import {
     FilterState,
     SortType
-} from "src/app/header/filters/filter-state.model";
+} from "src/app/youtube/models/filter-state.model";
 
-import { Item } from "../search-item.model";
+import { Item } from "../../models/search-item.model";
 
 @Component({
     selector: "app-search-results",

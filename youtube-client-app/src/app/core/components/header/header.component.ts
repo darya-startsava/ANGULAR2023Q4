@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Output } from "@angular/core";
-
-import { FilterState, SortType } from "./filters/filter-state.model";
+import {
+    FilterState,
+    SortType
+} from "src/app/youtube/models/filter-state.model";
 
 @Component({
     selector: "app-header",
