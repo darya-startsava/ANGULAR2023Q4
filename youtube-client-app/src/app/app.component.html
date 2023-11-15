@@ -6,7 +6,7 @@
             [searchItems]="
                 searchResultsService.data$
                     | async
-                    | filter: header.filterState.wordForFilterBy
+                    | filter: header.wordForFilterBy
             "
             #results
         >

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from "@angular/core";
 
-import { FilterState, SortType } from "./filters/filter-state.model";
+import { FilterState } from "./filters/filter-state.model";
 
 @Component({
     selector: "app-header",
@@ -9,13 +9,7 @@ import { FilterState, SortType } from "./filters/filter-state.model";
 })
 export class HeaderComponent {
     isShownSettings = false;
-    filterState: FilterState = {
-        isSorted: false,
-        sortType: SortType.Date,
-        isFilteredByWord: false,
-        isAsc: true,
-        wordForFilterBy: ""
-    };
+    wordForFilterBy = "";
 
     @Output() changeFilters = new EventEmitter<FilterState>();
 
@@ -23,8 +17,8 @@ export class HeaderComponent {
         this.isShownSettings = !this.isShownSettings;
     }
 
-    onChangeFilters(filterState: FilterState) {
-        this.filterState = filterState;
+    onChangeFilters(filterState: FilterState): void {
+        this.wordForFilterBy = filterState.wordForFilterBy;
         this.changeFilters.emit(filterState);
     }
 }

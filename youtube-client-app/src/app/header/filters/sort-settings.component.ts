@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from "@angular/core";
 
-import { FilterState, SortType } from "./filter-state.model";
+import { FilterState, FilterType } from "./filter-state.model";
 
 @Component({
     selector: "app-sort-settings",
@@ -8,30 +8,27 @@ import { FilterState, SortType } from "./filter-state.model";
     styleUrls: ["./sort-settings.component.scss"]
 })
 export class SortSettingsComponent {
-    filterState = {
-        isSorted: false,
-        sortType: SortType.Date,
-        isFilteredByWord: false,
-        isAsc: true,
-        wordForFilterBy: ""
-    };
     filterByWordInput = "";
-    sortType = SortType;
+    defaultState = {
+        filterType: FilterType.SortByDate,
+        isAsc: true,
+        wordForFilterBy: this.filterByWordInput
+    };
+    filterState = this.defaultState;
+    filterType = FilterType;
+
     @Output() changeFilters = new EventEmitter<FilterState>();
 
-    sortBy(type: SortType): void {
-        this.filterState.wordForFilterBy = "";
-        this.filterState.isFilteredByWord = false;
-        this.filterState.isAsc = !this.filterState.isAsc;
-        this.filterState.isSorted = true;
-        this.filterState.sortType = type;
-        this.changeFilters.emit(this.filterState);
-    }
-
-    filterByWord(): void {
-        this.filterState.wordForFilterBy = this.filterByWordInput || "";
-        this.filterState.isFilteredByWord = true;
-        this.filterState.isSorted = false;
+    filter(type: FilterType): void {
+        this.filterState = {
+            ...this.filterState,
+            wordForFilterBy: this.filterByWordInput || "",
+            isAsc:
+                this.filterState.filterType === type
+                    ? !this.filterState.isAsc
+                    : this.filterState.isAsc,
+            filterType: type
+        };
         this.changeFilters.emit(this.filterState);
     }
 }

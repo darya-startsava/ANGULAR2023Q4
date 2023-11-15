@@ -1,7 +1,7 @@
 import { Component, Input } from "@angular/core";
 import {
     FilterState,
-    SortType
+    FilterType
 } from "src/app/header/filters/filter-state.model";
 
 import { Item } from "../search-item.model";
@@ -14,9 +14,9 @@ import { Item } from "../search-item.model";
 export class SearchResultsComponent {
     @Input() searchItems: Item[];
 
-    sortItems(filterState: FilterState) {
-        switch (filterState.sortType) {
-            case SortType.Date: {
+    sortItems(filterState: FilterState): Item[] {
+        switch (filterState.filterType) {
+            case FilterType.SortByDate: {
                 return this.searchItems?.sort((a, b) => {
                     if (filterState.isAsc) {
                         return (
@@ -30,7 +30,7 @@ export class SearchResultsComponent {
                     );
                 });
             }
-            case SortType.ViewCount: {
+            case FilterType.SortByViewCount: {
                 return this.searchItems?.sort((a, b) => {
                     if (filterState.isAsc) {
                         return (

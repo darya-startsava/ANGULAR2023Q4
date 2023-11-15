@@ -9,14 +9,14 @@ import { Response } from "../search/search-response.model";
     providedIn: "root"
 })
 export class SearchResultService implements OnDestroy {
-    URL = "assets/mockData/response.json";
-    subscription: Subscription;
-    constructor(private http: HttpClient) {}
+    private readonly url = "assets/mockData/response.json";
+    private subscription: Subscription;
     public data$ = new BehaviorSubject<Item[]>([]);
+    constructor(private http: HttpClient) {}
 
     getData(): void {
         this.subscription = this.http
-            .get<Response>(this.URL)
+            .get<Response>(this.url)
             .subscribe((data) => this.data$.next(data.items));
     }
 

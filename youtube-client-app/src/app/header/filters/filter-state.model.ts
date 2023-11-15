@@ -1,12 +1,11 @@
-export enum SortType {
-    Date = "date",
-    ViewCount = "viewCount"
+export enum FilterType {
+    SortByDate = "sortByDate",
+    SortByViewCount = "sortByViewCount",
+    FilterByWord = "filterByWord"
 }
 
 export interface FilterState {
-    isSorted: boolean;
-    sortType: SortType;
-    isFilteredByWord: boolean;
+    filterType: FilterType;
     isAsc: boolean;
     wordForFilterBy: string;
 }
