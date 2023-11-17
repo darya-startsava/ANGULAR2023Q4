@@ -9,6 +9,6 @@ export const routes: Routes = [
     { path: "", redirectTo: "/auth", pathMatch: "full" },
     { path: "auth", component: LoginPageComponent },
     { path: "main", component: MainPageComponent },
-    { path: "details", component: DetailedInformationPageComponent },
+    { path: "details/:id", component: DetailedInformationPageComponent },
     { path: "**", component: NotFoundPageComponent }
 ];

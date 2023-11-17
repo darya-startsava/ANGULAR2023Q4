@@ -6,29 +6,16 @@
             [src]="channelPictureUrl"
             alt=" "
         />
-        <mat-card-subtitle class="search-item_information">
-            <div>
-                <mat-icon>remove_red_eye</mat-icon>
-                <span>{{ item.statistics.viewCount }}</span>
-            </div>
-            <div>
-                <mat-icon>thumb_up</mat-icon>
-                <span>{{ item.statistics.likeCount }}</span>
-            </div>
-            <div>
-                <mat-icon>thumb_down</mat-icon>
-                <span>{{ item.statistics.dislikeCount }}</span>
-            </div>
-            <div>
-                <mat-icon>forum</mat-icon>
-                <span>{{ item.statistics.commentCount }}</span>
-            </div>
+        <mat-card-subtitle>
+            <app-item-statistics
+                [statistics]="item.statistics"
+            ></app-item-statistics>
         </mat-card-subtitle>
         <mat-card-title class="search-item_title">
             {{ item.snippet.title }}
         </mat-card-title>
     </mat-card-header>
-    <app-custom-button [template]="moreButton"></app-custom-button>
+    <a routerLink="/details/{{ item.id }}">more...</a>
 </mat-card>
 
 <ng-template #moreButton>

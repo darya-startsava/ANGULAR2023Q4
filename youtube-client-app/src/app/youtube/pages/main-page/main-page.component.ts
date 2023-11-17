@@ -8,5 +8,5 @@ import { SearchResultService } from "../../services/search-result.service";
     styleUrls: ["./main-page.component.scss"]
 })
 export class MainPageComponent {
-    constructor(public searchResultsService: SearchResultService) {}
+    constructor(public searchResultService: SearchResultService) {}
 }

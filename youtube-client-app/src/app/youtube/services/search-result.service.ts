@@ -13,6 +13,7 @@ export class SearchResultService implements OnDestroy {
     private readonly url = "assets/mockData/response.json";
     private subscriptionGetData: Subscription;
     private subscriptionFilterData: Subscription;
+    private subscriptionGetItemById: Subscription;
     private defaultState = {
         filterType: FilterType.SortByDate,
         isAsc: true,
@@ -20,12 +21,14 @@ export class SearchResultService implements OnDestroy {
     };
     private filterState = this.defaultState;
     public data$ = new BehaviorSubject<Item[]>([]);
+    public item$ = new BehaviorSubject<Item>({} as Item);
 
     constructor(private http: HttpClient) {}
 
     ngOnDestroy(): void {
         this.subscriptionGetData.unsubscribe();
         this.subscriptionFilterData.unsubscribe();
+        this.subscriptionGetItemById.unsubscribe();
     }
 
     public get wordForFilterBy() {
@@ -86,5 +89,12 @@ export class SearchResultService implements OnDestroy {
         this.subscriptionFilterData = this.http
             .get<Response>(this.url)
             .subscribe((data) => this.data$.next(this.sort(data.items)));
+    }
+
+    getItemById(id: string) {
+        this.getData();
+        this.data$.subscribe((data) =>
+            this.item$.next(data.find((i) => i.id === id))
+        );
     }
 }

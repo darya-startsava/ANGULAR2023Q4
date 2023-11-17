@@ -1,1 +1,28 @@
-<p>detailed-information-page works!</p>
+<div class="item_wrapper">
+    <a routerLink="/main">&lt;</a>
+    <mat-card class="item">
+        <img
+            mat-card-image
+            class="item_image"
+            [src]="item.snippet.thumbnails.high.url"
+            alt=""
+        />
+        <div class="item_information" [appColoredBorder]="dateStatus">
+            <div class="item_title_wrapper">
+                <mat-card-title class="item_title">
+                    {{ item.snippet.title }}
+                </mat-card-title>
+                <p>{{ item.snippet.publishedAt | date: "fullDate" }}</p>
+            </div>
+            <mat-card-content class="item_description">
+                <h4>Description:</h4>
+                {{ item.snippet.description }}
+            </mat-card-content>
+            <mat-card-subtitle class="item_statistics">
+                <app-item-statistics
+                    [statistics]="item.statistics"
+                ></app-item-statistics>
+            </mat-card-subtitle>
+        </div>
+    </mat-card>
+</div>

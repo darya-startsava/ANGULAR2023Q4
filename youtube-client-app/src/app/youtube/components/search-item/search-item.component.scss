@@ -1,6 +1,7 @@
 @use '@angular/material' as mat;
 
 $grey400: mat.define-palette(mat.$grey-palette, 400);
+$indigo: mat.define-palette(mat.$indigo-palette);
 
 .search-item {
 
@@ -24,12 +25,16 @@ $grey400: mat.define-palette(mat.$grey-palette, 400);
     .search-item_image {
       width: 100%;
       height: auto;
+      margin-bottom: 10px;
     }
+  }
 
-    .search-item_information {
-      display: flex;
-      justify-content: space-between;
-      padding: 5px;
-    }
+  a {
+    background-color: mat.get-color-from-palette($indigo);
+    text-decoration: none;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 10px 30px;
   }
 }
