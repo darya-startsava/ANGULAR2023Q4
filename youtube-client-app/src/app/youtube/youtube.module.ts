@@ -7,6 +7,7 @@ import { SharedModule } from "../shared/shared.module";
 import { SearchItemComponent } from "./components/search-item/search-item.component";
 import { SearchResultsComponent } from "./components/search-results/search-results.component";
 import { ColoredBorderDirective } from "./directives/colored-border.directive";
+import { DetailedInformationPageComponent } from "./pages/detailed-information-page/detailed-information-page.component";
 import { MainPageComponent } from "./pages/main-page/main-page.component";
 
 @NgModule({
@@ -15,8 +16,9 @@ import { MainPageComponent } from "./pages/main-page/main-page.component";
         SearchItemComponent,
         SearchResultsComponent,
         ColoredBorderDirective,
+        DetailedInformationPageComponent
     ],
     imports: [CommonModule, SharedModule, MatCardModule, MatIconModule],
-    exports: [MainPageComponent]
+    exports: [MainPageComponent, DetailedInformationPageComponent]
 })
 export class YoutubeModule {}
