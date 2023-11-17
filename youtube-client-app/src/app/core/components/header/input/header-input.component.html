@@ -2,7 +2,8 @@
     <div>
         <mat-icon class="logo" color="primary">smart_display</mat-icon>
         <input value />
-        <app-custom-button (click)="onSearch()">Search</app-custom-button>
+        <app-custom-button [template]="searchButton" (click)="onSearch()">
+        </app-custom-button>
         <button mat-mini-fab color="primary" (click)="onToggleSortSettings()">
             <mat-icon>settings</mat-icon>
         </button>
@@ -14,3 +15,7 @@
         </button>
     </div>
 </div>
+
+<ng-template #searchButton>
+    <button mat-raised-button color="primary">Search</button>
+</ng-template>
