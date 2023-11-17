@@ -1,8 +1,4 @@
-import { Component, EventEmitter, Output } from "@angular/core";
-import {
-    FilterState,
-    SortType
-} from "src/app/youtube/models/filter-state.model";
+import { Component } from "@angular/core";
 
 @Component({
     selector: "app-header",
@@ -11,22 +7,8 @@ import {
 })
 export class HeaderComponent {
     isShownSettings = false;
-    filterState: FilterState = {
-        isSorted: false,
-        sortType: SortType.Date,
-        isFilteredByWord: false,
-        isAsc: true,
-        wordForFilterBy: ""
-    };
-
-    @Output() changeFilters = new EventEmitter<FilterState>();
 
     toggleSettings(): void {
         this.isShownSettings = !this.isShownSettings;
-    }
-
-    onChangeFilters(filterState: FilterState) {
-        this.filterState = filterState;
-        this.changeFilters.emit(filterState);
     }
 }

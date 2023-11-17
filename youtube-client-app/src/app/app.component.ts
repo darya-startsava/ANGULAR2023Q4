@@ -1,7 +1,5 @@
 import { Component } from "@angular/core";
 
-import { SearchResultService } from "./youtube/services/search-result.service";
-
 @Component({
     selector: "app-root",
     templateUrl: "./app.component.html",
@@ -9,5 +7,4 @@ import { SearchResultService } from "./youtube/services/search-result.service";
 })
 export class AppComponent {
     title = "youtube-client-app";
-    constructor(public searchResultsService: SearchResultService) {}
 }

@@ -1,9 +1,7 @@
-import { Component, EventEmitter, Output } from "@angular/core";
+import { Component } from "@angular/core";
+import { SearchResultService } from "src/app/youtube/services/search-result.service";
 
-import {
-    FilterState,
-    SortType
-} from "../../../../youtube/models/filter-state.model";
+import { FilterType } from "../../../../youtube/models/filter-state.model";
 
 @Component({
     selector: "app-sort-settings",
@@ -11,30 +9,21 @@ import {
     styleUrls: ["./sort-settings.component.scss"]
 })
 export class SortSettingsComponent {
-    filterState = {
-        isSorted: false,
-        sortType: SortType.Date,
-        isFilteredByWord: false,
-        isAsc: true,
-        wordForFilterBy: ""
-    };
-    filterByWordInput = "";
-    sortType = SortType;
-    @Output() changeFilters = new EventEmitter<FilterState>();
+    public filterByWordInput = "";
+    public filterType = FilterType;
 
-    sortBy(type: SortType): void {
-        this.filterState.wordForFilterBy = "";
-        this.filterState.isFilteredByWord = false;
-        this.filterState.isAsc = !this.filterState.isAsc;
-        this.filterState.isSorted = true;
-        this.filterState.sortType = type;
-        this.changeFilters.emit(this.filterState);
-    }
+    constructor(private searchResultService: SearchResultService) {}
 
-    filterByWord(): void {
-        this.filterState.wordForFilterBy = this.filterByWordInput || "";
-        this.filterState.isFilteredByWord = true;
-        this.filterState.isSorted = false;
-        this.changeFilters.emit(this.filterState);
+    filter(type: FilterType): void {
+        this.searchResultService.changeFilterState(
+            type,
+            this.filterByWordInput
+        );
+        if (
+            type === FilterType.SortByDate ||
+            type === FilterType.SortByViewCount
+        ) {
+            this.searchResultService.sortData();
+        }
     }
 }

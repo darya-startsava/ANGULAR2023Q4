@@ -2,9 +2,5 @@
     <app-header-input
         (toggleSortSettings)="toggleSettings()"
     ></app-header-input>
-    <app-sort-settings
-        *ngIf="isShownSettings"
-        (changeFilters)="onChangeFilters($event)"
-    >
-    </app-sort-settings>
+    <app-sort-settings *ngIf="isShownSettings"> </app-sort-settings>
 </div>
