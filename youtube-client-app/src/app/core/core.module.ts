@@ -2,6 +2,7 @@ import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
+import { MatIconModule } from "@angular/material/icon";
 
 import { SortSettingsComponent } from "./components/header/filters/sort-settings.component";
 import { HeaderComponent } from "./components/header/header.component";
@@ -14,7 +15,13 @@ import { NotFoundPageComponent } from "./pages/not-found-page/not-found-page.com
         SortSettingsComponent,
         NotFoundPageComponent
     ],
-    imports: [CommonModule, FormsModule, MatButtonModule, HeaderInputComponent],
+    imports: [
+        CommonModule,
+        FormsModule,
+        MatButtonModule,
+        MatIconModule,
+        HeaderInputComponent
+    ],
     exports: [HeaderComponent, HeaderInputComponent, NotFoundPageComponent]
 })
 export class CoreModule {}
