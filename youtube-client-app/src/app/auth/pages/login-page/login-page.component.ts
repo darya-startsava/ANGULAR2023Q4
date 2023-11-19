@@ -18,7 +18,6 @@ export class LoginPageComponent {
     ) {}
 
     onSubmit() {
-        console.log(this.loginForm.value);
         this.loginService.login();
         this.router.navigate(["/main"]);
     }

@@ -13,9 +13,15 @@
         <button mat-mini-fab color="primary">
             <mat-icon>person</mat-icon>
         </button>
+        <app-custom-button [template]="logoutButton" (click)="onLogout()">
+        </app-custom-button>
     </div>
 </div>
 
 <ng-template #searchButton>
     <button mat-raised-button color="primary">Search</button>
+</ng-template>
+
+<ng-template #logoutButton>
+    <button mat-raised-button color="primary">Logout</button>
 </ng-template>

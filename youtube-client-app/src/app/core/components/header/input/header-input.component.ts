@@ -3,6 +3,9 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatIconModule } from "@angular/material/icon";
 import { MatInputModule } from "@angular/material/input";
+import { Router } from "@angular/router";
+import { AuthModule } from "src/app/auth/auth.module";
+import { LoginService } from "src/app/auth/services/login.service";
 import { SharedModule } from "src/app/shared/shared.module";
 import { SearchResultService } from "src/app/youtube/services/search-result.service";
 
@@ -10,6 +13,7 @@ import { SearchResultService } from "src/app/youtube/services/search-result.serv
     standalone: true,
     imports: [
         SharedModule,
+        AuthModule,
         MatInputModule,
         MatFormFieldModule,
         MatButtonModule,
@@ -22,12 +26,21 @@ import { SearchResultService } from "src/app/youtube/services/search-result.serv
 export class HeaderInputComponent {
     @Output() toggleSortSettings = new EventEmitter();
 
-    constructor(private searchResultService: SearchResultService) {}
+    constructor(
+        private searchResultService: SearchResultService,
+        private loginService: LoginService,
+        private router: Router
+    ) {}
     onSearch(): void {
         this.searchResultService.getData();
     }
 
     onToggleSortSettings(): void {
         this.toggleSortSettings.emit();
+    }
+
+    onLogout() {
+        this.loginService.logout();
+        this.router.navigate(["/auth"]);
     }
 }
