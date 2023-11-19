@@ -1,5 +1,8 @@
 import { Component } from "@angular/core";
 import { FormBuilder } from "@angular/forms";
+import { Router } from "@angular/router";
+
+import { LoginService } from "../../services/login.service";
 
 @Component({
     selector: "app-login-page",
@@ -8,9 +11,15 @@ import { FormBuilder } from "@angular/forms";
 })
 export class LoginPageComponent {
     loginForm = this.formBuilder.group({ login: [""], password: [""] });
-    constructor(private formBuilder: FormBuilder) {}
+    constructor(
+        private formBuilder: FormBuilder,
+        private loginService: LoginService,
+        private router: Router
+    ) {}
 
     onSubmit() {
         console.log(this.loginForm.value);
+        this.loginService.login();
+        this.router.navigate(["/main"]);
     }
 }
