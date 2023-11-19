@@ -10,7 +10,6 @@ import { routes } from "./app.routes";
 import { AuthModule } from "./auth/auth.module";
 import { CoreModule } from "./core/core.module";
 import { SharedModule } from "./shared/shared.module";
-import { YoutubeModule } from "./youtube/youtube.module";
 
 @NgModule({
     declarations: [AppComponent],
@@ -20,7 +19,6 @@ import { YoutubeModule } from "./youtube/youtube.module";
         BrowserAnimationsModule,
         CoreModule,
         SharedModule,
-        YoutubeModule,
         AuthModule,
         HttpClientModule,
         RouterOutlet
