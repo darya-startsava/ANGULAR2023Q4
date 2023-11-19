@@ -1,1 +1,18 @@
-<p>login-page works!</p>
+<div class="login_wrapper">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <h3>Login</h3>
+        <label for="login"> login </label>
+        <input name="login" formControlName="login" />
+        <label for="password"> password </label>
+        <input type="password" name="password" formControlName="password" />
+        <app-custom-button
+            class="login_button_wrapper"
+            [template]="submitButton"
+        >
+        </app-custom-button>
+    </form>
+</div>
+
+<ng-template #submitButton>
+    <button mat-raised-button color="primary" type="submit">Login</button>
+</ng-template>

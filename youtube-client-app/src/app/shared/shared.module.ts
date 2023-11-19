@@ -8,6 +8,6 @@ import { FilterPipe } from "./pipes/filter.pipe";
 @NgModule({
     declarations: [CustomButtonComponent, FilterPipe],
     imports: [CommonModule, MatButtonModule],
-    exports: [CustomButtonComponent, FilterPipe]
+    exports: [CustomButtonComponent, FilterPipe, MatButtonModule]
 })
 export class SharedModule {}
