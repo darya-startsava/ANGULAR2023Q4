@@ -1,7 +1,5 @@
 import { CommonModule, DatePipe } from "@angular/common";
 import { NgModule } from "@angular/core";
-import { MatCardModule } from "@angular/material/card";
-import { MatIconModule } from "@angular/material/icon";
 import { RouterLink } from "@angular/router";
 
 import { SharedModule } from "../shared/shared.module";
@@ -24,8 +22,6 @@ import { MainPageComponent } from "./pages/main-page/main-page.component";
     imports: [
         CommonModule,
         SharedModule,
-        MatCardModule,
-        MatIconModule,
         RouterLink,
         DatePipe
     ],
