@@ -1,0 +1,16 @@
+.search-results_wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+  margin-top: 20px;
+
+  .search-results_item_wrapper {
+    width: 25%;
+
+    .search-results_item {
+      display: block;
+      width: 100%;
+    }
+  }
+}
