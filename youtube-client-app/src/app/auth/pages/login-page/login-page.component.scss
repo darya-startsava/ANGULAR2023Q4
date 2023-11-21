@@ -3,6 +3,7 @@
 $grey200: mat.define-palette(mat.$grey-palette, 200);
 $grey400: mat.define-palette(mat.$grey-palette, 400);
 $grey500: mat.define-palette(mat.$grey-palette, 500);
+$red: mat.define-palette(mat.$red-palette);
 
 .login_wrapper {
   display: flex;
@@ -31,9 +32,14 @@ $grey500: mat.define-palette(mat.$grey-palette, 500);
       padding: 0 5px;
     }
 
+    .form_error {
+      color: mat.get-color-from-palette($red);
+      font-size: 12px;
+    }
+
     .login_button_wrapper {
       display: flex;
-      justify-content: end;
+      justify-content: flex-end;
     }
   }
 }

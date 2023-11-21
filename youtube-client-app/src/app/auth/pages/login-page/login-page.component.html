@@ -2,9 +2,51 @@
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <h3>Login</h3>
         <label for="login"> login </label>
-        <input name="login" formControlName="login" />
+        <input
+            name="login"
+            formControlName="login"
+            type="email"
+            required
+            email
+        />
+        <div
+            class="form_error"
+            *ngIf="login.invalid && (login.dirty || login.touched)"
+        >
+            <div *ngIf="login.errors?.['required']">
+                Please enter a login email
+            </div>
+            <div *ngIf="login.errors?.['email']">
+                The login email is invalid
+            </div>
+        </div>
         <label for="password"> password </label>
         <input type="password" name="password" formControlName="password" />
+        <div
+            class="form_error"
+            *ngIf="password.invalid && (password.dirty || password.touched)"
+        >
+            <div *ngIf="password.errors?.['required']">
+                Please enter a password
+            </div>
+            <div
+                *ngIf="
+                    !password.errors?.['required'] &&
+                    password.errors?.['weakPassword']
+                "
+            >
+                Your password isn't strong enough. Strong password contains:
+                <ul>
+                    <li>at least 8 characters</li>
+                    <li>a mixture of both uppercase and lowercase letters</li>
+                    <li>a mixture of letters and numbers</li>
+                    <li>
+                        inclusion of at least one special character, e.g., ! @ #
+                        ? ]
+                    </li>
+                </ul>
+            </div>
+        </div>
         <app-custom-button
             class="login_button_wrapper"
             [template]="submitButton"
@@ -14,5 +56,12 @@
 </div>
 
 <ng-template #submitButton>
-    <button mat-raised-button color="primary" type="submit">Login</button>
+    <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="loginForm.invalid"
+    >
+        Login
+    </button>
 </ng-template>
