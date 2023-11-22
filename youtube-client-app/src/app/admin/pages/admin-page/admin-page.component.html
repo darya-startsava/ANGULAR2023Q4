@@ -1,0 +1,29 @@
+<div class="create_card_wrapper">
+    <form [formGroup]="createCardForm" (ngSubmit)="onSubmit()">
+        <h3>Create new card</h3>
+        <label for="title">Title</label>
+        <input name="title" formControlName="title" required />
+        <label for="description">Description</label>
+        <input name="description" formControlName="description" required />
+        <label for="image">Image</label>
+        <input name="image" formControlName="image" required />
+                <label for="linkVideo">Link video</label>
+        <input name="linkVideo" formControlName="linkVideo" required />
+        <app-custom-button
+            class="create_card_button_wrapper"
+            [template]="submitButton"
+        >
+        </app-custom-button>
+    </form>
+</div>
+
+<ng-template #submitButton>
+    <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="createCardForm.invalid"
+    >
+        Create card
+    </button>
+</ng-template>

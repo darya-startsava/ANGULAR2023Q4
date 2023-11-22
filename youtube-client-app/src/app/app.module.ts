@@ -5,6 +5,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { provideRouter, RouterOutlet } from "@angular/router";
 
+import { AdminModule } from "./admin/admin.module";
 import { AppComponent } from "./app.component";
 import { routes } from "./app.routes";
 import { AuthModule } from "./auth/auth.module";
@@ -20,6 +21,7 @@ import { SharedModule } from "./shared/shared.module";
         CoreModule,
         SharedModule,
         AuthModule,
+        AdminModule,
         HttpClientModule,
         RouterOutlet
     ],
