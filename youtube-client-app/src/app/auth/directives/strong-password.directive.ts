@@ -5,6 +5,6 @@ export function strongPasswordValidator(): ValidatorFn {
         const reg =
             /^(?=.*\d)(?=.*[!@#$%^&*\]?}{()])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
         const isStrong = reg.test(control.value);
-        return !isStrong ? { weakPassword: { value: control.value } } : null;
+        return !isStrong ? { strongPassword: { value: control.value } } : null;
     };
 }

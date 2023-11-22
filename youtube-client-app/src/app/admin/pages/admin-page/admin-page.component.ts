@@ -1,5 +1,7 @@
 import { Component } from "@angular/core";
-import { FormBuilder } from "@angular/forms";
+import { FormBuilder, Validators } from "@angular/forms";
+
+import { dateBeforeValidator } from "../../directives/date-before.directive";
 
 @Component({
     selector: "app-admin-page",
@@ -8,16 +10,24 @@ import { FormBuilder } from "@angular/forms";
 })
 export class AdminPageComponent {
     createCardForm = this.formBuilder.group({
-        title: [""],
-        description: [""],
-        image: [""],
-        linkVideo: [""]
+        title: [
+            "",
+            [
+                Validators.required,
+                Validators.minLength(3),
+                Validators.maxLength(20)
+            ]
+        ],
+        description: ["", [Validators.maxLength(255)]],
+        image: ["", [Validators.required]],
+        video: ["", [Validators.required]],
+        date: ["", [Validators.required, dateBeforeValidator()]]
     });
 
     constructor(private formBuilder: FormBuilder) {}
 
     onSubmit() {
-        console.log("The form was created");
+        console.log(this.createCardForm);
     }
 
     get title() {
@@ -32,7 +42,11 @@ export class AdminPageComponent {
         return this.createCardForm.get("image");
     }
 
-    get linkVideo() {
-        return this.createCardForm.get("linkVideo");
+    get video() {
+        return this.createCardForm.get("video");
+    }
+
+    get date() {
+        return this.createCardForm.get("date");
     }
 }

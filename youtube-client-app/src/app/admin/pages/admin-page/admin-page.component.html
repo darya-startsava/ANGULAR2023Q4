@@ -3,12 +3,60 @@
         <h3>Create new card</h3>
         <label for="title">Title</label>
         <input name="title" formControlName="title" required />
+        <div
+            class="form_error"
+            *ngIf="title.invalid && (title.dirty || title.touched)"
+        >
+            <div *ngIf="title.errors?.['required']">Please enter a title</div>
+            <div *ngIf="title.errors?.['minlength']">
+                The title is too short
+            </div>
+            <div *ngIf="title.errors?.['maxlength']">The title is too long</div>
+        </div>
         <label for="description">Description</label>
-        <input name="description" formControlName="description" required />
+        <input name="description" formControlName="description" />
+        <div class="form_error" *ngIf="description.invalid">
+            <div *ngIf="description.errors?.['maxlength']">
+                The description is too long
+            </div>
+        </div>
         <label for="image">Image</label>
         <input name="image" formControlName="image" required />
-                <label for="linkVideo">Link video</label>
-        <input name="linkVideo" formControlName="linkVideo" required />
+        <div
+            class="form_error"
+            *ngIf="image.invalid && (image.dirty || image.touched)"
+        >
+            <div *ngIf="image.errors?.['required']">
+                Please enter a link to the image
+            </div>
+        </div>
+        <label for="video">Link video</label>
+        <input name="video" formControlName="video" required />
+        <div
+            class="form_error"
+            *ngIf="video.invalid && (video.dirty || video.touched)"
+        >
+            <div *ngIf="video.errors?.['required']">
+                Please enter a link to the video
+            </div>
+        </div>
+        <label for="date">Creation date</label>
+        <input name="date" formControlName="date" required type="date" />
+        <div
+            class="form_error"
+            *ngIf="date.invalid && (date.dirty || date.touched)"
+        >
+            <div *ngIf="date.errors?.['required']">
+                Please enter a creation date
+            </div>
+            <div
+                *ngIf="
+                    !date.errors?.['required'] && date.errors?.['dateBefore']
+                "
+            >
+                The date is invalid
+            </div>
+        </div>
         <app-custom-button
             class="create_card_button_wrapper"
             [template]="submitButton"
