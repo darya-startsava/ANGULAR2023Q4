@@ -57,6 +57,7 @@
                 The date is invalid
             </div>
         </div>
+        <div class="tags_title">Tags</div>
         <div class="tags_wrapper">
             <div formArrayName="tags">
                 <div *ngFor="let tag of tags.controls; let i = index">
@@ -89,11 +90,10 @@
             >
             </app-custom-button>
         </div>
-        <app-custom-button
-            class="create_card_button_wrapper"
-            [template]="submitButton"
-        >
-        </app-custom-button>
+        <div class="form_buttons_wrapper">
+            <app-custom-button [template]="resetButton"> </app-custom-button>
+            <app-custom-button [template]="submitButton"> </app-custom-button>
+        </div>
     </form>
 </div>
 
@@ -111,5 +111,16 @@
 <ng-template #addTagButton>
     <button mat-raised-button color="primary" type="button" (click)="addTag()">
         Add tag
+    </button>
+</ng-template>
+
+<ng-template #resetButton>
+    <button
+        mat-raised-button
+        color="primary"
+        type="button"
+        (click)="resetForm()"
+    >
+        Reset
     </button>
 </ng-template>

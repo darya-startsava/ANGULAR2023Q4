@@ -19,7 +19,7 @@ $red: mat.define-palette(mat.$red-palette);
     background-color: mat.get-color-from-palette($grey200);
     border-radius: 3px;
 
-    label {
+    label, .tags_title {
       color: mat.get-color-from-palette($grey500);
       font-size: 12px;
     }
@@ -63,6 +63,11 @@ $red: mat.define-palette(mat.$red-palette);
       .add_tag_button_wrapper {
         width: 32%;
       }
+    }
+
+    .form_buttons_wrapper {
+      display: flex;
+      justify-content: space-between;
     }
   }
 }

@@ -35,7 +35,8 @@ export class AdminPageComponent {
     constructor(private formBuilder: FormBuilder) {}
 
     onSubmit() {
-        console.log(this.createCardForm);
+        console.log(this.createCardForm.value);
+        this.resetForm();
     }
 
     get title() {
@@ -74,5 +75,11 @@ export class AdminPageComponent {
 
     removeTag(i: number) {
         this.tags.removeAt(i);
+    }
+
+    resetForm() {
+        this.tags.clear();
+        this.createCardForm.reset();
+        this.addTag();
     }
 }
