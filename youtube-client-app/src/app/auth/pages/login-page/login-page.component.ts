@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { FormBuilder, Validators } from "@angular/forms";
+import { AbstractControl, FormBuilder, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 
 import { strongPasswordValidator } from "../../directives/strong-password.directive";
@@ -13,13 +13,7 @@ import { LoginService } from "../../services/login.service";
 export class LoginPageComponent {
     loginForm = this.formBuilder.group({
         login: ["", [Validators.required, Validators.email]],
-        password: [
-            "",
-            [
-                Validators.required,
-                strongPasswordValidator()
-            ]
-        ]
+        password: ["", [Validators.required, strongPasswordValidator()]]
     });
     constructor(
         private formBuilder: FormBuilder,
@@ -27,16 +21,16 @@ export class LoginPageComponent {
         private router: Router
     ) {}
 
-    onSubmit() {
+    onSubmit(): void {
         this.loginService.login();
         this.router.navigate(["/main"]);
     }
 
-    get login() {
+    get login(): AbstractControl {
         return this.loginForm.get("login");
     }
 
-    get password() {
+    get password(): AbstractControl {
         return this.loginForm.get("password");
     }
 }

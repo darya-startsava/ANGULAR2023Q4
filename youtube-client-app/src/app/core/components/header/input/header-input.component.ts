@@ -33,18 +33,19 @@ export class HeaderInputComponent {
     ) {}
     onSearch(): void {
         this.searchResultService.getData();
+        this.router.navigate(["/main"]);
     }
 
     onToggleSortSettings(): void {
         this.toggleSortSettings.emit();
     }
 
-    onLogout() {
+    onLogout(): void {
         this.loginService.logout();
         this.router.navigate(["/auth"]);
     }
 
-    onGoToAdminPage() {
+    onGoToAdminPage(): void {
         this.router.navigate(["/admin"]);
     }
 }

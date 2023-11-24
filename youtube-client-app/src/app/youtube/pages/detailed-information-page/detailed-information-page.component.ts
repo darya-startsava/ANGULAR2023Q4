@@ -22,7 +22,7 @@ export class DetailedInformationPageComponent implements OnInit {
         this.getItem();
     }
 
-    getItem() {
+    getItem(): void {
         const id = this.route.snapshot.paramMap.get("id");
         this.searchResultService.getItemById(id);
         this.searchResultService.item$.subscribe((item) => (this.item = item));

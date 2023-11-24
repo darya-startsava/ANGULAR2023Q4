@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import {
+    AbstractControl,
     FormArray,
     FormBuilder,
     FormControl,
@@ -34,28 +35,28 @@ export class AdminPageComponent {
 
     constructor(private formBuilder: FormBuilder) {}
 
-    onSubmit() {
+    onSubmit(): void {
         console.log(this.createCardForm.value);
         this.resetForm();
     }
 
-    get title() {
+    get title(): AbstractControl {
         return this.createCardForm.get("title");
     }
 
-    get description() {
+    get description(): AbstractControl {
         return this.createCardForm.get("description");
     }
 
-    get image() {
+    get image(): AbstractControl {
         return this.createCardForm.get("image");
     }
 
-    get video() {
+    get video(): AbstractControl {
         return this.createCardForm.get("video");
     }
 
-    get date() {
+    get date(): AbstractControl {
         return this.createCardForm.get("date");
     }
 
@@ -73,11 +74,11 @@ export class AdminPageComponent {
         }
     }
 
-    removeTag(i: number) {
+    removeTag(i: number): void {
         this.tags.removeAt(i);
     }
 
-    resetForm() {
+    resetForm(): void {
         this.tags.clear();
         this.createCardForm.reset();
         this.addTag();

@@ -31,7 +31,7 @@ export class SearchResultService implements OnDestroy {
         this.subscriptionGetItemById.unsubscribe();
     }
 
-    public get wordForFilterBy() {
+    public get wordForFilterBy(): string {
         return this.filterState.wordForFilterBy;
     }
 
@@ -91,7 +91,7 @@ export class SearchResultService implements OnDestroy {
             .subscribe((data) => this.data$.next(this.sort(data.items)));
     }
 
-    getItemById(id: string) {
+    getItemById(id: string): void {
         this.getData();
         this.data$.subscribe((data) =>
             this.item$.next(data.find((i) => i.id === id))
