@@ -30,6 +30,10 @@ $red: mat.define-palette(mat.$red-palette);
       border: none;
       border-radius: 1px;
       padding: 0 5px;
+
+      &.ng-invalid.ng-touched {
+        border-bottom: 5px solid mat.get-color-from-palette($red);
+      }
     }
 
     .form_error {
