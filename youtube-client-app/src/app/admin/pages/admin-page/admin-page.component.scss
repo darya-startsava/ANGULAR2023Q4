@@ -41,5 +41,24 @@ $red: mat.define-palette(mat.$red-palette);
       display: flex;
       justify-content: flex-end;
     }
+
+    .tags_wrapper {
+      display: flex;
+      justify-content: space-between;
+
+      .tag_wrapper {
+        display: flex;
+        align-items: center;
+
+        input {
+          width: 70%;
+          margin-bottom: 5px;
+        }
+      }
+
+      .add_tag_button_wrapper {
+      width: 32%;
+      }
+    }
   }
 }

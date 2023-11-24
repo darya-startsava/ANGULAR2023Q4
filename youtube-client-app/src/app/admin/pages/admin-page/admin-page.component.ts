@@ -1,5 +1,10 @@
 import { Component } from "@angular/core";
-import { FormBuilder, Validators } from "@angular/forms";
+import {
+    FormArray,
+    FormBuilder,
+    FormControl,
+    Validators
+} from "@angular/forms";
 
 import { dateBeforeValidator } from "../../directives/date-before.directive";
 
@@ -21,7 +26,10 @@ export class AdminPageComponent {
         description: ["", [Validators.maxLength(255)]],
         image: ["", [Validators.required]],
         video: ["", [Validators.required]],
-        date: ["", [Validators.required, dateBeforeValidator()]]
+        date: ["", [Validators.required, dateBeforeValidator()]],
+        tags: this.formBuilder.array([
+            new FormControl("", [Validators.required])
+        ])
     });
 
     constructor(private formBuilder: FormBuilder) {}
@@ -48,5 +56,23 @@ export class AdminPageComponent {
 
     get date() {
         return this.createCardForm.get("date");
+    }
+
+    get tags(): FormArray {
+        return this.createCardForm.get("tags") as FormArray;
+    }
+
+    newTag(): FormControl {
+        return new FormControl("", [Validators.required]);
+    }
+
+    addTag(): void {
+        if (this.tags.length <= 4) {
+            this.tags.push(this.newTag());
+        }
+    }
+
+    removeTag(i: number) {
+        this.tags.removeAt(i);
     }
 }

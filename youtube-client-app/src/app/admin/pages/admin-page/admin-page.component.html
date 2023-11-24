@@ -57,6 +57,38 @@
                 The date is invalid
             </div>
         </div>
+        <div class="tags_wrapper">
+            <div formArrayName="tags">
+                <div *ngFor="let tag of tags.controls; let i = index">
+                    <div class="tag_wrapper">
+                        <input [formControlName]="i" type="text" required />
+                        <button
+                            *ngIf="i > 0"
+                            mat-icon-button
+                            (click)="removeTag(i)"
+                        >
+                            <mat-icon fontIcon="close"></mat-icon>
+                        </button>
+                    </div>
+                    <div
+                        class="form_error"
+                        *ngIf="
+                            tags.controls[i].invalid &&
+                            (tags.controls[i].dirty || tags.controls[i].touched)
+                        "
+                    >
+                        <div *ngIf="tags.controls[i].errors?.['required']">
+                            Please enter a tag
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <app-custom-button
+                class="add_tag_button_wrapper"
+                [template]="addTagButton"
+            >
+            </app-custom-button>
+        </div>
         <app-custom-button
             class="create_card_button_wrapper"
             [template]="submitButton"
@@ -73,5 +105,11 @@
         [disabled]="createCardForm.invalid"
     >
         Create card
+    </button>
+</ng-template>
+
+<ng-template #addTagButton>
+    <button mat-raised-button color="primary" type="button" (click)="addTag()">
+        Add tag
     </button>
 </ng-template>
