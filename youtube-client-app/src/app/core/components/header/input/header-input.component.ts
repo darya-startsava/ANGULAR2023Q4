@@ -43,4 +43,8 @@ export class HeaderInputComponent {
         this.loginService.logout();
         this.router.navigate(["/auth"]);
     }
+
+    onGoToAdminPage() {
+        this.router.navigate(["/admin"]);
+    }
 }
