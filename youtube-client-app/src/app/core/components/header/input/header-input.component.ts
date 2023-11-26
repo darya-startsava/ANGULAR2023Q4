@@ -39,7 +39,7 @@ export class HeaderInputComponent {
         this.toggleSortSettings.emit();
     }
 
-    onLogout() {
+    onLogout(): void {
         this.loginService.logout();
         this.router.navigate(["/auth"]);
     }

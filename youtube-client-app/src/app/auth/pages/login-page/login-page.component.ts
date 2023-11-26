@@ -17,7 +17,7 @@ export class LoginPageComponent {
         private router: Router
     ) {}
 
-    onSubmit() {
+    onSubmit(): void {
         this.loginService.login();
         this.router.navigate(["/main"]);
     }
