@@ -11,9 +11,7 @@ import { Response } from "../models/search-response.model";
 })
 export class SearchResultService implements OnDestroy {
     private readonly url = "assets/mockData/response.json";
-    private subscriptionGetData: Subscription;
-    private subscriptionFilterData: Subscription;
-    private subscriptionGetItemById: Subscription;
+    private subscriptions = new Subscription();
     private defaultState = {
         filterType: FilterType.SortByDate,
         isAsc: true,
@@ -26,9 +24,7 @@ export class SearchResultService implements OnDestroy {
     constructor(private http: HttpClient) {}
 
     ngOnDestroy(): void {
-        this.subscriptionGetData.unsubscribe();
-        this.subscriptionFilterData.unsubscribe();
-        this.subscriptionGetItemById.unsubscribe();
+        this.subscriptions.unsubscribe();
     }
 
     public get wordForFilterBy(): string {
@@ -36,9 +32,11 @@ export class SearchResultService implements OnDestroy {
     }
 
     getData(): void {
-        this.subscriptionGetData = this.http
-            .get<Response>(this.url)
-            .subscribe((data) => this.data$.next(data.items));
+        this.subscriptions.add(
+            this.http
+                .get<Response>(this.url)
+                .subscribe((data) => this.data$.next(data.items))
+        );
     }
 
     changeFilterState(type: FilterType, filterByWordInput: string): void {
@@ -86,15 +84,19 @@ export class SearchResultService implements OnDestroy {
     }
 
     sortData(): void {
-        this.subscriptionFilterData = this.http
-            .get<Response>(this.url)
-            .subscribe((data) => this.data$.next(this.sort(data.items)));
+        this.subscriptions.add(
+            this.http
+                .get<Response>(this.url)
+                .subscribe((data) => this.data$.next(this.sort(data.items)))
+        );
     }
 
     getItemById(id: string): void {
         this.getData();
-        this.data$.subscribe((data) =>
-            this.item$.next(data.find((i) => i.id === id))
+        this.subscriptions.add(
+            this.data$.subscribe((data) =>
+                this.item$.next(data.find((item) => item.id === id))
+            )
         );
     }
 }
