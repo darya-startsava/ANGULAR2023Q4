@@ -1,0 +1,10 @@
+<div class="search-results_wrapper">
+    <app-search-results
+        [searchItems]="
+            searchResultService.data$
+                | async
+                | filter: searchResultService.wordForFilterBy
+        "
+    >
+    </app-search-results>
+</div>

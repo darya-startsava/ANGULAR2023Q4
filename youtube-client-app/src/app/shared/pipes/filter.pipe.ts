@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from "@angular/core";
 
-import { Item } from "../../search/search-item.model";
+import { Item } from "../../youtube/models/search-item.model";
 
 @Pipe({
     name: "filter"
@@ -10,8 +10,8 @@ export class FilterPipe implements PipeTransform {
         if (!wordForFilterBy) {
             return searchItems;
         }
-        return searchItems.filter((i) =>
-            i.snippet.title.toLowerCase().match(wordForFilterBy.toLowerCase())
+        return searchItems.filter((item) =>
+            item.snippet.title.toLowerCase().match(wordForFilterBy.toLowerCase())
         );
     }
 }

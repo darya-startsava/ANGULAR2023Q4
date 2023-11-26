@@ -1,0 +1,18 @@
+.not_found_wrapper {
+
+  display: flex;
+  height: 80vh;
+  align-items: center;
+
+  .not_found {
+
+    display: flex;
+    margin: 0 auto;
+
+    .not_found_icon {
+      height: auto;
+      width: auto;
+      font-size: 50px;
+    }
+  }
+}

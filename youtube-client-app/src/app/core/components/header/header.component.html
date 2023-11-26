@@ -1,0 +1,6 @@
+<div class="header-search_wrapper">
+    <app-header-input
+        (toggleSortSettings)="toggleSettings()"
+    ></app-header-input>
+    <app-sort-settings *ngIf="isShownSettings"> </app-sort-settings>
+</div>
