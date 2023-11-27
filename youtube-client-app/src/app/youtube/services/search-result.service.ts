@@ -10,7 +10,7 @@ import { Response } from "../models/search-response.model";
     providedIn: "root"
 })
 export class SearchResultService implements OnDestroy {
-    private readonly url = "assets/mockData/response.json";
+    private readonly url = `https://www.googleapis.com/youtube/v3/search?key=${process.env["API_KEY"]}&type=video&part=snippet&maxResults=15&q=piano`;
     private subscriptions: Subscription[] = [];
     private defaultState = {
         filterType: FilterType.SortByDate,
@@ -34,7 +34,10 @@ export class SearchResultService implements OnDestroy {
     getData(): void {
         const requestSubscription = this.http
             .get<Response>(this.url)
-            .subscribe((data) => this.data$.next(data.items));
+            .subscribe((data) => {
+                console.log("data:", data);
+                return this.data$.next(data.items);
+            });
         this.subscriptions.push(requestSubscription);
     }
 

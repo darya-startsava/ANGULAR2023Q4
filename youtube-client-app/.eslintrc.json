@@ -1,6 +1,6 @@
 {
     "root": true,
-    "ignorePatterns": ["projects/**/*"],
+    "ignorePatterns": ["projects/**/*", "custom-webpack.config.ts"],
     "plugins": ["simple-import-sort", "import"],
     "parserOptions": {
         "project": "./tsconfig.json"
