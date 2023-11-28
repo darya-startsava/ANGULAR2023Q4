@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Output } from "@angular/core";
+import { FormsModule } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatIconModule } from "@angular/material/icon";
@@ -17,13 +18,15 @@ import { SearchResultService } from "src/app/youtube/services/search-result.serv
         MatInputModule,
         MatFormFieldModule,
         MatButtonModule,
-        MatIconModule
+        MatIconModule,
+        FormsModule
     ],
     selector: "app-header-input",
     templateUrl: "./header-input.component.html",
     styleUrls: ["./header-input.component.scss"]
 })
 export class HeaderInputComponent {
+    public searchInput = "";
     @Output() toggleSortSettings = new EventEmitter();
 
     constructor(
@@ -31,8 +34,8 @@ export class HeaderInputComponent {
         private loginService: LoginService,
         private router: Router
     ) {}
-    onSearch(): void {
-        this.searchResultService.getData();
+    search(): void {
+        this.searchResultService.getData(this.searchInput);
         this.router.navigate(["/main"]);
     }
 

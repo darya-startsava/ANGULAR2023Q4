@@ -35,7 +35,7 @@ export class SearchResultService implements OnDestroy {
         return this.filterState.wordForFilterBy;
     }
 
-    getData(input = "piano"): void {
+    getData(input: string): void {
         const paramsSearch = new HttpParams()
             .set("type", "video")
             .set("part", "snippet")
