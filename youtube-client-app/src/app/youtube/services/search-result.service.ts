@@ -1,16 +1,20 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable, OnDestroy } from "@angular/core";
-import { BehaviorSubject, Subscription } from "rxjs";
+import { BehaviorSubject, Subscription, switchMap } from "rxjs";
 
 import { FilterType } from "../models/filter-state.model";
 import { Item } from "../models/search-item.model";
-import { Response } from "../models/search-response.model";
+import {
+    ResponseSearch,
+    ResponseSnippet
+} from "../models/search-response.model";
 
 @Injectable({
     providedIn: "root"
 })
 export class SearchResultService implements OnDestroy {
-    private readonly url = `https://www.googleapis.com/youtube/v3/search?key=${process.env["API_KEY"]}&type=video&part=snippet&maxResults=15&q=piano`;
+    private readonly urlSearch = `https://www.googleapis.com/youtube/v3/search?key=${process.env["API_KEY"]}`;
+    private readonly urlSnippet = `https://www.googleapis.com/youtube/v3/videos?key=${process.env["API_KEY"]}`;
     private subscriptions: Subscription[] = [];
     private defaultState = {
         filterType: FilterType.SortByDate,
@@ -31,11 +35,31 @@ export class SearchResultService implements OnDestroy {
         return this.filterState.wordForFilterBy;
     }
 
-    getData(): void {
+    getData(input = "piano"): void {
+        const paramsSearch = new HttpParams()
+            .set("type", "video")
+            .set("part", "snippet")
+            .set("maxResults", "15")
+            .set("q", input);
         const requestSubscription = this.http
-            .get<Response>(this.url)
+            .get<ResponseSearch>(this.urlSearch, { params: paramsSearch })
+            .pipe(
+                switchMap((data) => {
+                    console.log("data:", data);
+                    let idsString = "";
+                    data.items.forEach(
+                        (item) => (idsString += `,${item.id?.videoId}`)
+                    );
+                    const paramsSnippet = new HttpParams()
+                        .set("id", idsString)
+                        .set("part", "snippet,statistics");
+                    return this.http.get<ResponseSnippet>(this.urlSnippet, {
+                        params: paramsSnippet
+                    });
+                })
+            )
             .subscribe((data) => {
-                console.log("data:", data);
+                console.log("data2", data);
                 return this.data$.next(data.items);
             });
         this.subscriptions.push(requestSubscription);
@@ -86,17 +110,23 @@ export class SearchResultService implements OnDestroy {
     }
 
     sortData(): void {
-        const requestSubscription = this.http
-            .get<Response>(this.url)
-            .subscribe((data) => this.data$.next(this.sort(data.items)));
+        this.filterState.wordForFilterBy = "";
+        const requestSubscription = this.data$.subscribe((data) =>
+            this.sort(data)
+        );
         this.subscriptions.push(requestSubscription);
     }
 
     getItemById(id: string): void {
-        this.getData();
-        const requestSubscription = this.data$.subscribe((data) =>
-            this.item$.next(data.find((item) => item.id === id))
-        );
+        const paramsSnippet = new HttpParams()
+            .set("id", id)
+            .set("part", "snippet,statistics");
+        const requestSubscription = this.http
+            .get<ResponseSnippet>(this.urlSnippet, { params: paramsSnippet })
+            .subscribe((data) => {
+                console.log("byId", data);
+                return this.item$.next(data.items[0]);
+            });
         this.subscriptions.push(requestSubscription);
     }
 }

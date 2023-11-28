@@ -1,9 +1,22 @@
+export interface ItemSearch {
+    kind: string;
+    etag: string;
+    id: Id;
+    snippet: Snippet;
+    statistics: Statistics;
+}
+
 export interface Item {
     kind: string;
     etag: string;
     id: string;
     snippet: Snippet;
     statistics: Statistics;
+}
+
+export interface Id {
+    kind: string;
+    videoId: string;
 }
 
 export interface Snippet {
@@ -25,7 +38,7 @@ export interface Thumbnails {
     medium: ThumbnailsParameters;
     high: ThumbnailsParameters;
     standard: ThumbnailsParameters;
-    maxres: ThumbnailsParameters
+    maxres: ThumbnailsParameters;
 }
 
 export interface ThumbnailsParameters {
