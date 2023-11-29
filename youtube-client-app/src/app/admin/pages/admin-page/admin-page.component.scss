@@ -5,7 +5,7 @@ $grey400: mat.define-palette(mat.$grey-palette, 400);
 $grey500: mat.define-palette(mat.$grey-palette, 500);
 $red: mat.define-palette(mat.$red-palette);
 
-.login_wrapper {
+.create_card_wrapper {
   display: flex;
   padding-top: 30px;
   justify-content: center;
@@ -19,7 +19,7 @@ $red: mat.define-palette(mat.$red-palette);
     background-color: mat.get-color-from-palette($grey200);
     border-radius: 3px;
 
-    label {
+    label, .tags_title {
       color: mat.get-color-from-palette($grey500);
       font-size: 12px;
     }
@@ -41,9 +41,33 @@ $red: mat.define-palette(mat.$red-palette);
       font-size: 12px;
     }
 
-    .login_button_wrapper {
+    .create_card_button_wrapper {
       display: flex;
       justify-content: flex-end;
+    }
+
+    .tags_wrapper {
+      display: flex;
+      justify-content: space-between;
+
+      .tag_wrapper {
+        display: flex;
+        align-items: center;
+
+        input {
+          width: 70%;
+          margin-bottom: 5px;
+        }
+      }
+
+      .add_tag_button_wrapper {
+        width: 32%;
+      }
+    }
+
+    .form_buttons_wrapper {
+      display: flex;
+      justify-content: space-between;
     }
   }
 }

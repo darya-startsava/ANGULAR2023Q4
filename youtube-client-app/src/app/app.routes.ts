@@ -14,6 +14,11 @@ export const routes: Routes = [
         loadChildren: () =>
             import("./youtube/youtube.module").then((m) => m.YoutubeModule)
     },
+    {
+        path: "admin",
+        loadChildren: () =>
+            import("./admin/admin.module").then((m) => m.AdminModule)
+    },
 
     { path: "**", component: NotFoundPageComponent }
 ];

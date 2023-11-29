@@ -15,6 +15,11 @@
         </button>
         <app-custom-button [template]="logoutButton" (click)="onLogout()">
         </app-custom-button>
+        <app-custom-button
+            [template]="adminPageButton"
+            (click)="onGoToAdminPage()"
+        >
+        </app-custom-button>
     </div>
 </div>
 
@@ -24,4 +29,8 @@
 
 <ng-template #logoutButton>
     <button mat-raised-button color="primary">Logout</button>
+</ng-template>
+
+<ng-template #adminPageButton>
+    <button mat-raised-button color="primary">Admin page</button>
 </ng-template>
