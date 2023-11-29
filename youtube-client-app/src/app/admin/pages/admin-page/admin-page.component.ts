@@ -36,7 +36,6 @@ export class AdminPageComponent {
     constructor(private formBuilder: FormBuilder) {}
 
     onSubmit(): void {
-        console.log(this.createCardForm.value);
         this.resetForm();
     }
 
