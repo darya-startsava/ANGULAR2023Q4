@@ -35,7 +35,7 @@ export class HeaderInputComponent {
         private router: Router
     ) {}
     search(): void {
-        this.searchResultService.getData(this.searchInput);
+        this.searchResultService.setInput(this.searchInput);
         this.router.navigate(["/main"]);
     }
 

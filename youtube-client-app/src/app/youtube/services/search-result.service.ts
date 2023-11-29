@@ -1,6 +1,13 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable, OnDestroy } from "@angular/core";
-import { BehaviorSubject, Subscription, switchMap } from "rxjs";
+import {
+    BehaviorSubject,
+    debounceTime,
+    EMPTY,
+    Observable,
+    Subscription,
+    switchMap
+} from "rxjs";
 
 import { FilterType } from "../models/filter-state.model";
 import { Item } from "../models/search-item.model";
@@ -24,8 +31,23 @@ export class SearchResultService implements OnDestroy {
     private filterState = this.defaultState;
     public data$ = new BehaviorSubject<Item[]>([]);
     public item$ = new BehaviorSubject<Item>({} as Item);
+    private inputSubject = new BehaviorSubject<string>("");
 
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient) {
+        this.inputSubject
+            .pipe(
+                debounceTime(1000),
+                switchMap((input) => {
+                    if (input.length >= 3) {
+                        return this.getData(input);
+                    }
+                    return EMPTY;
+                })
+            )
+            .subscribe((data) => {
+                this.data$.next(data.items);
+            });
+    }
 
     ngOnDestroy(): void {
         this.subscriptions.forEach((item) => item.unsubscribe());
@@ -35,13 +57,13 @@ export class SearchResultService implements OnDestroy {
         return this.filterState.wordForFilterBy;
     }
 
-    getData(input: string): void {
+    getData(input: string): Observable<ResponseSnippet> {
         const paramsSearch = new HttpParams()
             .set("type", "video")
             .set("part", "snippet")
             .set("maxResults", "15")
             .set("q", input);
-        const requestSubscription = this.http
+        return this.http
             .get<ResponseSearch>(this.urlSearch, { params: paramsSearch })
             .pipe(
                 switchMap((data) => {
@@ -57,12 +79,7 @@ export class SearchResultService implements OnDestroy {
                         params: paramsSnippet
                     });
                 })
-            )
-            .subscribe((data) => {
-                console.log("data2", data);
-                return this.data$.next(data.items);
-            });
-        this.subscriptions.push(requestSubscription);
+            );
     }
 
     changeFilterState(type: FilterType, filterByWordInput: string): void {
@@ -128,5 +145,10 @@ export class SearchResultService implements OnDestroy {
                 return this.item$.next(data.items[0]);
             });
         this.subscriptions.push(requestSubscription);
+    }
+
+    setInput(searchInput: string) {
+        this.inputSubject.next(searchInput);
+        console.log("searchInput", searchInput);
     }
 }
