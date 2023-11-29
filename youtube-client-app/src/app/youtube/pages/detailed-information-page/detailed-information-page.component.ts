@@ -24,10 +24,16 @@ export class DetailedInformationPageComponent implements OnInit {
 
     getItem(): void {
         const id = this.route.snapshot.paramMap.get("id");
-        this.searchResultService.getItemById(id);
-        this.searchResultService.item$.subscribe((item) => (this.item = item));
-        this.dateStatus = Math.floor(
-            (+new Date() - +new Date(this.item.snippet.publishedAt)) / 86400000
-        ).toString();
+        this.searchResultService
+            .getItemById(id)
+            .subscribe(({ items: [firstItem] }) => {
+                console.log("byId", firstItem);
+                this.item = firstItem;
+
+                this.dateStatus = Math.floor(
+                    (+new Date() - +new Date(this.item.snippet.publishedAt)) /
+                        86400000
+                ).toString();
+            });
     }
 }

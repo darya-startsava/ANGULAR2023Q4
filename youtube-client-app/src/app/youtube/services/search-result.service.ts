@@ -30,7 +30,6 @@ export class SearchResultService implements OnDestroy {
     };
     private filterState = this.defaultState;
     public data$ = new BehaviorSubject<Item[]>([]);
-    public item$ = new BehaviorSubject<Item>({} as Item);
     private inputSubject = new BehaviorSubject<string>("");
 
     constructor(private http: HttpClient) {
@@ -134,17 +133,13 @@ export class SearchResultService implements OnDestroy {
         this.subscriptions.push(requestSubscription);
     }
 
-    getItemById(id: string): void {
+    getItemById(id: string): Observable<ResponseSnippet> {
         const paramsSnippet = new HttpParams()
             .set("id", id)
             .set("part", "snippet,statistics");
-        const requestSubscription = this.http
-            .get<ResponseSnippet>(this.urlSnippet, { params: paramsSnippet })
-            .subscribe((data) => {
-                console.log("byId", data);
-                return this.item$.next(data.items[0]);
-            });
-        this.subscriptions.push(requestSubscription);
+        return this.http.get<ResponseSnippet>(this.urlSnippet, {
+            params: paramsSnippet
+        });
     }
 
     setInput(searchInput: string) {
