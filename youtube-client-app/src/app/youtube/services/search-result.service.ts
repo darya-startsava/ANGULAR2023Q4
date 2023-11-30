@@ -20,8 +20,8 @@ import {
     providedIn: "root"
 })
 export class SearchResultService implements OnDestroy {
-    private readonly urlSearch = `https://www.googleapis.com/youtube/v3/search?key=${process.env["API_KEY"]}`;
-    private readonly urlSnippet = `https://www.googleapis.com/youtube/v3/videos?key=${process.env["API_KEY"]}`;
+    private readonly urlSearch = "search";
+    private readonly urlSnippet = "videos";
     private subscriptions: Subscription[] = [];
     private defaultState = {
         filterType: FilterType.SortByDate,
