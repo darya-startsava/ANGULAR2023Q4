@@ -3,7 +3,7 @@ import { Injectable, OnDestroy } from "@angular/core";
 import {
     BehaviorSubject,
     debounceTime,
-    EMPTY,
+    filter,
     Observable,
     Subscription,
     switchMap
@@ -16,12 +16,17 @@ import {
     ResponseSnippet
 } from "../models/search-response.model";
 
+function buildParams(params: Record<string, string>): HttpParams {
+    return new HttpParams({ fromObject: params });
+}
+
 @Injectable({
     providedIn: "root"
 })
 export class SearchResultService implements OnDestroy {
-    private readonly urlSearch = "search";
-    private readonly urlSnippet = "videos";
+    private readonly urlSearch = "https://www.googleapis.com/youtube/v3/search";
+    private readonly urlSnippet =
+        "https://www.googleapis.com/youtube/v3/videos";
     private subscriptions: Subscription[] = [];
     private defaultState = {
         filterType: FilterType.SortByDate,
@@ -30,22 +35,19 @@ export class SearchResultService implements OnDestroy {
     };
     private filterState = this.defaultState;
     public data$ = new BehaviorSubject<Item[]>([]);
-    private inputSubject = new BehaviorSubject<string>("");
+    private inputSubject$ = new BehaviorSubject<string>("");
 
     constructor(private http: HttpClient) {
-        this.inputSubject
+        const requestSubscription = this.inputSubject$
             .pipe(
                 debounceTime(1000),
-                switchMap((input) => {
-                    if (input.length >= 3) {
-                        return this.getData(input);
-                    }
-                    return EMPTY;
-                })
+                filter((input) => input.length >= 3),
+                switchMap((input) => this.getData(input))
             )
             .subscribe((data) => {
                 this.data$.next(data.items);
             });
+        this.subscriptions.push(requestSubscription);
     }
 
     ngOnDestroy(): void {
@@ -57,11 +59,12 @@ export class SearchResultService implements OnDestroy {
     }
 
     getData(input: string): Observable<ResponseSnippet> {
-        const paramsSearch = new HttpParams()
-            .set("type", "video")
-            .set("part", "snippet")
-            .set("maxResults", "15")
-            .set("q", input);
+        const paramsSearch = buildParams({
+            type: "video",
+            part: "snippet",
+            maxResults: "15",
+            q: input
+        });
         return this.http
             .get<ResponseSearch>(this.urlSearch, { params: paramsSearch })
             .pipe(
@@ -91,7 +94,7 @@ export class SearchResultService implements OnDestroy {
         };
     }
 
-    sort(dataItems: Item[]): Item[] {
+    sortByFilterType(dataItems: Item[]): Item[] {
         const { filterType, isAsc } = this.filterState;
         switch (filterType) {
             case FilterType.SortByDate: {
@@ -127,21 +130,22 @@ export class SearchResultService implements OnDestroy {
     sortData(): void {
         this.filterState.wordForFilterBy = "";
         const requestSubscription = this.data$.subscribe((data) =>
-            this.sort(data)
+            this.sortByFilterType(data)
         );
         this.subscriptions.push(requestSubscription);
     }
 
     getItemById(id: string): Observable<ResponseSnippet> {
-        const paramsSnippet = new HttpParams()
-            .set("id", id)
-            .set("part", "snippet,statistics");
+        const paramsSnippet = buildParams({
+            id,
+            part: "snippet,statistics"
+        });
         return this.http.get<ResponseSnippet>(this.urlSnippet, {
             params: paramsSnippet
         });
     }
 
-    setInput(searchInput: string) {
-        this.inputSubject.next(searchInput);
+    setInput(searchInput: string): void {
+        this.inputSubject$.next(searchInput);
     }
 }

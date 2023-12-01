@@ -19,9 +19,8 @@ export class UrlShortenerInterceptor implements HttpInterceptor {
         return next.handle(modifiedRequest);
     }
 
-    addKey(url: string) {
-        const urlStart = "https://www.googleapis.com/youtube/v3/";
-        const key = process.env["API_KEY"];
-        return `${urlStart}${url}?$key=${key}`;
+    private addKey(url: string): string {
+        const key = "AIzaSyBp3iql3dSCb4tgFi8e9yhAKAhDvrMaT7A";
+        return `${url}?$key=${key}`;
     }
 }
