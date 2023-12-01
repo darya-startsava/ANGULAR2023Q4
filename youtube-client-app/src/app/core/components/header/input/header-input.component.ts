@@ -1,3 +1,4 @@
+import { CommonModule } from "@angular/common";
 import { Component, EventEmitter, Output } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
@@ -13,6 +14,7 @@ import { SearchResultService } from "src/app/youtube/services/search-result.serv
 @Component({
     standalone: true,
     imports: [
+        CommonModule,
         SharedModule,
         AuthModule,
         MatInputModule,
@@ -31,7 +33,7 @@ export class HeaderInputComponent {
 
     constructor(
         private searchResultService: SearchResultService,
-        private loginService: LoginService,
+        public loginService: LoginService,
         private router: Router
     ) {}
     search(): void {
@@ -44,7 +46,7 @@ export class HeaderInputComponent {
     }
 
     onLogout(): void {
-        this.loginService.logout();
+        this.loginService.logoutFromAccount();
         this.router.navigate(["/auth"]);
     }
 

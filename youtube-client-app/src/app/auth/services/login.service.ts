@@ -6,6 +6,7 @@ import { BehaviorSubject } from "rxjs";
 })
 export class LoginService {
     public isLoggedIn$ = new BehaviorSubject<boolean>(false);
+    public login: string;
 
     constructor() {
         this.isLoggedIn$.next(this.checkInitialLoginState());
@@ -14,13 +15,15 @@ export class LoginService {
     private checkInitialLoginState(): boolean {
         return !!localStorage.getItem("token");
     }
-    login(): void {
+    loginToAccount(login: string): void {
         localStorage.setItem("token", "token");
         this.isLoggedIn$.next(true);
+        this.login = login;
     }
 
-    logout(): void {
+    logoutFromAccount(): void {
         localStorage.removeItem("token");
         this.isLoggedIn$.next(false);
+        this.login = "";
     }
 }

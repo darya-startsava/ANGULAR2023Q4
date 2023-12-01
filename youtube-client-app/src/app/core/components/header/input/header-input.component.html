@@ -1,19 +1,22 @@
 <div class="header_wrapper">
     <div>
         <mat-icon class="logo" color="primary">smart_display</mat-icon>
-        <input type="text" 
-        [(ngModel)]="searchInput"
-         (input)="search()" />
+        <input type="text" [(ngModel)]="searchInput" (input)="search()" />
         <button mat-mini-fab color="primary" (click)="onToggleSortSettings()">
             <mat-icon>settings</mat-icon>
         </button>
     </div>
     <div>
-        <span>Your Name</span>
+        <span>{{ loginService.login }}</span>
         <button mat-mini-fab color="primary">
             <mat-icon>person</mat-icon>
         </button>
-        <app-custom-button [template]="logoutButton" (click)="onLogout()">
+        <app-custom-button
+            [template]="
+                (loginService.isLoggedIn$ | async) ? logoutButton : loginButton
+            "
+            (click)="onLogout()"
+        >
         </app-custom-button>
         <app-custom-button
             [template]="adminPageButton"
@@ -25,6 +28,10 @@
 
 <ng-template #logoutButton>
     <button mat-raised-button color="primary">Logout</button>
+</ng-template>
+
+<ng-template #loginButton>
+    <button mat-raised-button color="primary">Login</button>
 </ng-template>
 
 <ng-template #adminPageButton>
