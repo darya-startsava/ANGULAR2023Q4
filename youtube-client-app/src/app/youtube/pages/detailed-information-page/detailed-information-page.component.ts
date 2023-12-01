@@ -27,9 +27,7 @@ export class DetailedInformationPageComponent implements OnInit {
         this.searchResultService
             .getItemById(id)
             .subscribe(({ items: [firstItem] }) => {
-                console.log("byId", firstItem);
                 this.item = firstItem;
-
                 this.dateStatus = Math.floor(
                     (+new Date() - +new Date(this.item.snippet.publishedAt)) /
                         86400000

@@ -13,7 +13,6 @@ export class UrlShortenerInterceptor implements HttpInterceptor {
         request: HttpRequest<unknown>,
         next: HttpHandler
     ): Observable<HttpEvent<unknown>> {
-        console.log("Interceptor works!");
         const modifiedRequest = request.clone({
             url: this.addKey(request.url)
         });

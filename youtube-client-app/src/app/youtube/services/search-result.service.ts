@@ -66,7 +66,6 @@ export class SearchResultService implements OnDestroy {
             .get<ResponseSearch>(this.urlSearch, { params: paramsSearch })
             .pipe(
                 switchMap((data) => {
-                    console.log("data:", data);
                     let idsString = "";
                     data.items.forEach(
                         (item) => (idsString += `,${item.id?.videoId}`)
@@ -144,6 +143,5 @@ export class SearchResultService implements OnDestroy {
 
     setInput(searchInput: string) {
         this.inputSubject.next(searchInput);
-        console.log("searchInput", searchInput);
     }
 }
