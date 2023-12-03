@@ -1,4 +1,6 @@
+import { CommonModule } from "@angular/common";
 import { Component, EventEmitter, Output } from "@angular/core";
+import { FormsModule } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatIconModule } from "@angular/material/icon";
@@ -12,27 +14,30 @@ import { SearchResultService } from "src/app/youtube/services/search-result.serv
 @Component({
     standalone: true,
     imports: [
+        CommonModule,
         SharedModule,
         AuthModule,
         MatInputModule,
         MatFormFieldModule,
         MatButtonModule,
-        MatIconModule
+        MatIconModule,
+        FormsModule
     ],
     selector: "app-header-input",
     templateUrl: "./header-input.component.html",
     styleUrls: ["./header-input.component.scss"]
 })
 export class HeaderInputComponent {
+    public searchInput = "";
     @Output() toggleSortSettings = new EventEmitter();
 
     constructor(
         private searchResultService: SearchResultService,
-        private loginService: LoginService,
+        public loginService: LoginService,
         private router: Router
     ) {}
-    onSearch(): void {
-        this.searchResultService.getData();
+    search(): void {
+        this.searchResultService.setInput(this.searchInput);
         this.router.navigate(["/main"]);
     }
 
@@ -41,7 +46,7 @@ export class HeaderInputComponent {
     }
 
     onLogout(): void {
-        this.loginService.logout();
+        this.loginService.logoutFromAccount();
         this.router.navigate(["/auth"]);
     }
 

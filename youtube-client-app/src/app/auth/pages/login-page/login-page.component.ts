@@ -22,7 +22,7 @@ export class LoginPageComponent {
     ) {}
 
     onSubmit(): void {
-        this.loginService.login();
+        this.loginService.loginToAccount(this.login.value);
         this.router.navigate(["/main"]);
     }
 

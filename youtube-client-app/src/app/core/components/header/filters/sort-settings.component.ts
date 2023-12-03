@@ -23,6 +23,7 @@ export class SortSettingsComponent {
             type === FilterType.SortByDate ||
             type === FilterType.SortByViewCount
         ) {
+            this.filterByWordInput = "";
             this.searchResultService.sortData();
         }
     }
