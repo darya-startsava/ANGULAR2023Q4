@@ -12,6 +12,7 @@ import { AuthModule } from "./auth/auth.module";
 import { CoreModule } from "./core/core.module";
 import { SharedModule } from "./shared/shared.module";
 import { UrlShortenerInterceptor } from "./youtube/interceptors/url-shortener.interceptor";
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
     declarations: [AppComponent],
@@ -24,7 +25,8 @@ import { UrlShortenerInterceptor } from "./youtube/interceptors/url-shortener.in
         AuthModule,
         AdminModule,
         HttpClientModule,
-        RouterOutlet
+        RouterOutlet,
+        StoreModule.forRoot({}, {})
     ],
     providers: [
         {
