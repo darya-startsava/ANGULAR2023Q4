@@ -4,15 +4,16 @@ import { FormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { provideRouter, RouterOutlet } from "@angular/router";
+import { StoreModule } from "@ngrx/store";
 
 import { AdminModule } from "./admin/admin.module";
 import { AppComponent } from "./app.component";
 import { routes } from "./app.routes";
 import { AuthModule } from "./auth/auth.module";
 import { CoreModule } from "./core/core.module";
+import { sourceReducer } from "./redux/reducers/source.reducer";
 import { SharedModule } from "./shared/shared.module";
 import { UrlShortenerInterceptor } from "./youtube/interceptors/url-shortener.interceptor";
-import { StoreModule } from '@ngrx/store';
 
 @NgModule({
     declarations: [AppComponent],
@@ -26,7 +27,7 @@ import { StoreModule } from '@ngrx/store';
         AdminModule,
         HttpClientModule,
         RouterOutlet,
-        StoreModule.forRoot({}, {})
+        StoreModule.forRoot({ source: sourceReducer })
     ],
     providers: [
         {

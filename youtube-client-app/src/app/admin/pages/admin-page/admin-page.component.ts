@@ -6,6 +6,10 @@ import {
     FormControl,
     Validators
 } from "@angular/forms";
+import { Store } from "@ngrx/store";
+import { Observable } from "rxjs";
+import { createCard } from "src/app/redux/actions/card.actions";
+import { Source } from "src/app/redux/state.models";
 
 import { dateBeforeValidator } from "../../directives/date-before.directive";
 
@@ -32,10 +36,23 @@ export class AdminPageComponent {
             new FormControl("", [Validators.required])
         ])
     });
+    source$: Observable<Source>;
 
-    constructor(private formBuilder: FormBuilder) {}
+    constructor(
+        private formBuilder: FormBuilder,
+        private store: Store<{ source: Source }>
+    ) {
+        this.source$ = store.select("source");
+    }
 
     onSubmit(): void {
+        this.store.dispatch(
+            createCard({
+                id: Date.now().toString(),
+                createdCard: this.createCardForm.value
+            })
+        );
+        this.source$.subscribe((result) => console.log(result));
         this.resetForm();
     }
 
