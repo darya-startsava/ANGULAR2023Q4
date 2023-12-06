@@ -11,6 +11,7 @@ import { AppComponent } from "./app.component";
 import { routes } from "./app.routes";
 import { AuthModule } from "./auth/auth.module";
 import { CoreModule } from "./core/core.module";
+import { currentPageReducer } from "./redux/reducers/currentPage.reducer";
 import { sourceReducer } from "./redux/reducers/source.reducer";
 import { SharedModule } from "./shared/shared.module";
 import { UrlShortenerInterceptor } from "./youtube/interceptors/url-shortener.interceptor";
@@ -27,7 +28,10 @@ import { UrlShortenerInterceptor } from "./youtube/interceptors/url-shortener.in
         AdminModule,
         HttpClientModule,
         RouterOutlet,
-        StoreModule.forRoot({ source: sourceReducer })
+        StoreModule.forRoot({
+            source: sourceReducer,
+            currentPageItems: currentPageReducer
+        })
     ],
     providers: [
         {

@@ -1,4 +1,9 @@
-export interface Source {
+export interface AppState {
+    source: SourceState;
+    currentPageItems: Array<string>;
+}
+
+export interface SourceState {
     [key: string]: CustomCard;
 }
 

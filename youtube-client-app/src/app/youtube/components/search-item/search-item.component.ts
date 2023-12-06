@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
+import { CustomCard } from "src/app/redux/state.models";
 
 import { Item } from "../../models/search-item.model";
 import { getDateStatus } from "../../utils";
@@ -9,12 +10,13 @@ import { getDateStatus } from "../../utils";
     styleUrls: ["./search-item.component.scss"]
 })
 export class SearchItemComponent implements OnInit {
-    @Input() item: Item;
+    @Input() item: CustomCard;
     channelPictureUrl: string;
     dateStatus: string;
+    isFromFetch = false;
 
     ngOnInit(): void {
-        this.channelPictureUrl = this.item.snippet.thumbnails.high.url;
-        this.dateStatus = getDateStatus(this.item.snippet.publishedAt);
+        this.channelPictureUrl = this.item.image;
+        this.dateStatus = getDateStatus(this.item.date);
     }
 }

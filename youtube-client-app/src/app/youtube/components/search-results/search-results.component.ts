@@ -1,6 +1,5 @@
 import { Component, Input } from "@angular/core";
-
-import { Item } from "../../models/search-item.model";
+import { CustomCard } from "src/app/redux/state.models";
 
 @Component({
     selector: "app-search-results",
@@ -8,5 +7,5 @@ import { Item } from "../../models/search-item.model";
     styleUrls: ["./search-results.component.scss"]
 })
 export class SearchResultsComponent {
-    @Input() searchItems: Item[];
+    @Input() searchItems: CustomCard[];
 }

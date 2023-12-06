@@ -1,14 +1,17 @@
 import { createReducer, on } from "@ngrx/store";
 
 import { createCard } from "../actions/card.actions";
-import { Source } from "../state.models";
+import { SourceState } from "../state.models";
 
-export const initialState: Source = {};
+const initialState: SourceState = {};
 
-export const sourceReducer = createReducer<Source>(
+export const sourceReducer = createReducer<SourceState>(
     initialState,
-    on(createCard, (state, { id, createdCard }) => ({
-        ...state,
-        [id]: createdCard
-    }))
+    on(
+        createCard,
+        (state, { id, createdCard }): SourceState => ({
+            ...state,
+            [id]: createdCard
+        })
+    )
 );
