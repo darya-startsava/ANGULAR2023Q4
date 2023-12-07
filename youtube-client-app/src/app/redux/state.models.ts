@@ -4,14 +4,21 @@ export interface AppState {
 }
 
 export interface SourceState {
-    [key: string]: CustomCard;
+    [key: string]: VideoItem;
 }
 
-export interface CustomCard {
+export interface VideoItem {
+    isCustomCard: boolean;
+    id: string;
     title?: string;
     description?: string;
     image?: string;
-    video?: string;
-    date?: string;
-    tags?: Array<string>;
+    publishedAt?: string;
+    statistics?: Statistics | null;
+}
+
+export interface Statistics {
+    viewCount: string;
+    likeCount: string;
+    commentCount: string;
 }

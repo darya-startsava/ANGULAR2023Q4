@@ -1,14 +1,16 @@
-<div class="search-item_information">
-    <div>
-        <mat-icon>remove_red_eye</mat-icon>
-        <span>{{ statistics.viewCount }}</span>
-    </div>
-    <div>
-        <mat-icon>thumb_up</mat-icon>
-        <span>{{ statistics.likeCount }}</span>
-    </div>
-    <div>
-        <mat-icon>forum</mat-icon>
-        <span>{{ statistics.commentCount }}</span>
+<div class="search-item_information_wrapper">
+    <div class="search-item_information" *ngIf="statistics">
+        <div>
+            <mat-icon>remove_red_eye</mat-icon>
+            <span>{{ statistics.viewCount }}</span>
+        </div>
+        <div>
+            <mat-icon>thumb_up</mat-icon>
+            <span>{{ statistics.likeCount }}</span>
+        </div>
+        <div>
+            <mat-icon>forum</mat-icon>
+            <span>{{ statistics.commentCount }}</span>
+        </div>
     </div>
 </div>

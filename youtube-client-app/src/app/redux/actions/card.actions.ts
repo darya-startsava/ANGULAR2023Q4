@@ -1,6 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-
-import { CustomCard } from "../state.models";
+import { CustomCard } from "src/app/core/models/core.models";
 
 export const createCard = createAction(
     "[AdminPage Component] createCard",

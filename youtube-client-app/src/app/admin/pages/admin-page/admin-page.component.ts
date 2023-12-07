@@ -7,9 +7,7 @@ import {
     Validators
 } from "@angular/forms";
 import { Store } from "@ngrx/store";
-import { Observable } from "rxjs";
 import { createCard } from "src/app/redux/actions/card.actions";
-import { CustomCard } from "src/app/redux/state.models";
 
 import { dateBeforeValidator } from "../../directives/date-before.directive";
 
@@ -36,7 +34,6 @@ export class AdminPageComponent {
             new FormControl("", [Validators.required])
         ])
     });
-    currentPageItems$: Observable<CustomCard[]>;
 
     constructor(
         private formBuilder: FormBuilder,

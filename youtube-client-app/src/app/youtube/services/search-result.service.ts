@@ -1,5 +1,6 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable, OnDestroy } from "@angular/core";
+import { Store } from "@ngrx/store";
 import {
     BehaviorSubject,
     debounceTime,
@@ -8,6 +9,7 @@ import {
     Subscription,
     switchMap
 } from "rxjs";
+import { searchVideos } from "src/app/redux/actions/search.actions";
 
 import { FilterType } from "../models/filter-state.model";
 import { Item } from "../models/search-item.model";
@@ -37,7 +39,10 @@ export class SearchResultService implements OnDestroy {
     public data$ = new BehaviorSubject<Item[]>([]);
     private inputSubject$ = new BehaviorSubject<string>("");
 
-    constructor(private http: HttpClient) {
+    constructor(
+        private http: HttpClient,
+        private store: Store
+    ) {
         const requestSubscription = this.inputSubject$
             .pipe(
                 debounceTime(1000),
@@ -147,5 +152,6 @@ export class SearchResultService implements OnDestroy {
 
     setInput(searchInput: string): void {
         this.inputSubject$.next(searchInput);
+        this.store.dispatch(searchVideos({ searchInput }));
     }
 }

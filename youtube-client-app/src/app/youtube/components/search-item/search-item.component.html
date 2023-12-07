@@ -7,15 +7,15 @@
             alt=" "
         />
         <mat-card-subtitle>
-            <!-- <app-item-statistics *ngIf="{isFromFetch}"
+            <app-item-statistics
                 [statistics]="item.statistics"
-            ></app-item-statistics> -->
+            ></app-item-statistics>
         </mat-card-subtitle>
         <mat-card-title class="search-item_title">
             {{ item.title }}
         </mat-card-title>
     </mat-card-header>
-    <a routerLink="/main/{{ item.title }}">more...</a>
+    <a routerLink="/main/{{ item.id }}">more...</a>
 </mat-card>
 
 <ng-template #moreButton>
