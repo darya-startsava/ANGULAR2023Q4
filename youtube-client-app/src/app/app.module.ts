@@ -4,7 +4,8 @@ import { FormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { provideRouter, RouterOutlet } from "@angular/router";
-import { EffectsModule, provideEffects } from "@ngrx/effects";
+import { EffectsModule } from "@ngrx/effects";
+import { routerReducer, StoreRouterConnectingModule } from "@ngrx/router-store";
 import { StoreModule } from "@ngrx/store";
 
 import { AdminModule } from "./admin/admin.module";
@@ -13,7 +14,9 @@ import { routes } from "./app.routes";
 import { AuthModule } from "./auth/auth.module";
 import { CoreModule } from "./core/core.module";
 import { SearchEffects } from "./redux/effects/search.effects";
+import { SearchVideoByIdEffects } from "./redux/effects/searchVideoById.effects";
 import { currentPageReducer } from "./redux/reducers/currentPage.reducer";
+import { currentVideoReducer } from "./redux/reducers/currentVideo.reducer";
 import { sourceReducer } from "./redux/reducers/source.reducer";
 import { SharedModule } from "./shared/shared.module";
 import { UrlShortenerInterceptor } from "./youtube/interceptors/url-shortener.interceptor";
@@ -32,9 +35,12 @@ import { UrlShortenerInterceptor } from "./youtube/interceptors/url-shortener.in
         RouterOutlet,
         StoreModule.forRoot({
             source: sourceReducer,
-            currentPageItems: currentPageReducer
+            currentPageItems: currentPageReducer,
+            currentVideo: currentVideoReducer,
+            router: routerReducer
         }),
-        EffectsModule.forRoot([SearchEffects])
+        EffectsModule.forRoot([SearchEffects, SearchVideoByIdEffects]),
+        StoreRouterConnectingModule.forRoot()
     ],
     providers: [
         {

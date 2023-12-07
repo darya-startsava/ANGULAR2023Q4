@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
-import { selectCurrentPageItems } from "src/app/redux/selectors/currentPageItems.selector";
+import { selectCurrentPageItems } from "src/app/redux/selectors/currentPageItems.selectors";
 import { AppState, VideoItem } from "src/app/redux/state.models";
 
 import { SearchResultService } from "../../services/search-result.service";

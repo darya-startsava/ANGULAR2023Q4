@@ -10,3 +10,13 @@ export const searchSuccess = createAction(
     "searchSuccess",
     props<{ data: ResponseSnippet }>()
 );
+
+export const searchVideoById = createAction(
+    "[DetailedInformationPage Component] searchVideoById",
+    props<{ id: string }>()
+);
+
+export const searchVideoByIdSuccess = createAction(
+    "searchVideoByIdSuccess",
+    props<{ data: ResponseSnippet }>()
+);

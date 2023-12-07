@@ -1,4 +1,5 @@
 import { createReducer, on } from "@ngrx/store";
+import { getDateStatus } from "src/app/youtube/utils";
 
 import { createCard } from "../actions/card.actions";
 import { searchSuccess } from "../actions/search.actions";
@@ -19,7 +20,8 @@ export const sourceReducer = createReducer<SourceState>(
                 description: createdCard.description,
                 image: createdCard.image,
                 publishedAt: createdCard.date,
-                statistics: null
+                statistics: null,
+                dateStatus: getDateStatus(createdCard.date)
             }
         })
     ),
@@ -31,15 +33,9 @@ export const sourceReducer = createReducer<SourceState>(
             description: item.snippet.description,
             image: item.snippet.thumbnails.high.url,
             publishedAt: item.snippet.publishedAt,
-            statistics: item.statistics
+            statistics: item.statistics,
+            dateStatus: getDateStatus(item.snippet.publishedAt)
         }));
-        console.log({
-            ...state,
-            ...selectedVideoProperties.reduce(
-                (accumulator, item) => ({ ...accumulator, [item.id]: item }),
-                {}
-            )
-        });
         return {
             ...state,
             ...selectedVideoProperties.reduce(

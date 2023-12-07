@@ -1,6 +1,7 @@
 export interface AppState {
     source: SourceState;
     currentPageItems: Array<string>;
+    currentVideo: VideoItem;
 }
 
 export interface SourceState {
@@ -15,6 +16,7 @@ export interface VideoItem {
     image?: string;
     publishedAt?: string;
     statistics?: Statistics | null;
+    dateStatus?: string;
 }
 
 export interface Statistics {

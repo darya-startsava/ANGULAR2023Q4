@@ -43,7 +43,7 @@ export class AdminPageComponent {
     onSubmit(): void {
         this.store.dispatch(
             createCard({
-                id: Date.now().toString(),
+                id: `customCard${Date.now()}`,
                 createdCard: this.createCardForm.value
             })
         );
