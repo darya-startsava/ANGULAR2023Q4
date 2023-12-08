@@ -1,7 +1,7 @@
 import { createReducer, on } from "@ngrx/store";
 import { getDateStatus } from "src/app/youtube/utils";
 
-import { createCard } from "../actions/card.actions";
+import { createCard, deleteCustomCard } from "../actions/card.actions";
 import { searchSuccess } from "../actions/search.actions";
 import { SourceState } from "../state.models";
 
@@ -43,5 +43,9 @@ export const sourceReducer = createReducer<SourceState>(
                 {}
             )
         };
+    }),
+    on(deleteCustomCard, (state, { id }): SourceState => {
+        const { [id]: deletedCard, ...newState } = state;
+        return newState;
     })
 );

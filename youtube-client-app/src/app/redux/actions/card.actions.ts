@@ -5,3 +5,8 @@ export const createCard = createAction(
     "[AdminPage Component] createCard",
     props<{ id: string; createdCard: CustomCard }>()
 );
+
+export const deleteCustomCard = createAction(
+    "[SearchItem /DetailedInformationPage Components] deleteCustomCard",
+    props<{ id: string }>()
+);

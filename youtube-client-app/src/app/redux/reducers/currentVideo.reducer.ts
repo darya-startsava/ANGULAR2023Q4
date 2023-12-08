@@ -24,5 +24,5 @@ export const currentVideoReducer = createReducer<VideoItem>(
             dateStatus: getDateStatus(snippet.publishedAt)
         };
     }),
-    on(clearDetailedInformationStore, () => null)
+    on(clearDetailedInformationStore, (): null => null)
 );

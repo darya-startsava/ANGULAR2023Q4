@@ -1,12 +1,7 @@
 <div class="item_wrapper">
     <a routerLink="/main">&lt;</a>
     <mat-card class="item" *ngIf="item$ | async as item">
-        <img
-            mat-card-image
-            class="item_image"
-            [src]="item.image"
-            alt=""
-        />
+        <img mat-card-image class="item_image" [src]="item.image" alt="" />
         <div class="item_information" [appColoredBorder]="item.dateStatus">
             <div class="item_title_wrapper">
                 <mat-card-title class="item_title">
@@ -23,6 +18,17 @@
                     [statistics]="item.statistics"
                 ></app-item-statistics>
             </mat-card-subtitle>
+            <app-custom-button
+                [template]="deleteButton"
+                *ngIf="item.isCustomCard"
+            >
+            </app-custom-button>
         </div>
     </mat-card>
 </div>
+
+<ng-template #deleteButton>
+    <button mat-raised-button color="warn" (click)="deleteCustomCard()">
+        delete
+    </button>
+</ng-template>

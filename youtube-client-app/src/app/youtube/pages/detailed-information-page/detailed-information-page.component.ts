@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { Store } from "@ngrx/store";
 import { Observable, Subscription } from "rxjs";
+import { deleteCustomCard } from "src/app/redux/actions/card.actions";
 import { clearDetailedInformationStore } from "src/app/redux/actions/delete.actions";
 import { searchVideoById } from "src/app/redux/actions/search.actions";
 import {
@@ -20,19 +21,21 @@ import { SearchResultService } from "../../services/search-result.service";
 export class DetailedInformationPageComponent implements OnInit, OnDestroy {
     item$: Observable<VideoItem>;
     private subscriptions: Subscription[] = [];
+    id: string;
 
     constructor(
         private route: ActivatedRoute,
         public searchResultService: SearchResultService,
-        private store: Store<AppState>
+        private store: Store<AppState>,
+        private router: Router
     ) {}
 
     ngOnInit(): void {
-        const id = this.route.snapshot.paramMap.get("id");
-        if (id.includes("customCard")) {
+        this.id = this.route.snapshot.paramMap.get("id");
+        if (this.id.includes("customCard")) {
             this.item$ = this.store.select(selectCurrentItem);
         } else {
-            this.getItem(id);
+            this.getItem(this.id);
             this.item$ = this.store.select<VideoItem>(selectCurrentVideo);
         }
     }
@@ -44,5 +47,10 @@ export class DetailedInformationPageComponent implements OnInit, OnDestroy {
 
     getItem(id: string): void {
         this.store.dispatch(searchVideoById({ id }));
+    }
+
+    deleteCustomCard() {
+        this.store.dispatch(deleteCustomCard({ id: this.id }));
+        this.router.navigate(["/main"]);
     }
 }

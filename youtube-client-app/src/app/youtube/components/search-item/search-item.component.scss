@@ -29,12 +29,19 @@ $indigo: mat.define-palette(mat.$indigo-palette);
     }
   }
 
-  a {
-    background-color: mat.get-color-from-palette($indigo);
-    text-decoration: none;
-    color: #fff;
-    text-align: center;
-    border-radius: 5px;
-    padding: 10px 30px;
+  .buttons_wrapper {
+
+    display: flex;
+    column-gap: 40px;
+
+    a {
+      background-color: mat.get-color-from-palette($indigo);
+      text-decoration: none;
+      color: #fff;
+      text-align: center;
+      border-radius: 5px;
+      padding: 10px 30px;
+    }
   }
+
 }

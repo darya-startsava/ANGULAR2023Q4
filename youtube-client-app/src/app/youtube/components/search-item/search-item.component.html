@@ -15,9 +15,12 @@
             {{ item.title }}
         </mat-card-title>
     </mat-card-header>
-    <a routerLink="/main/{{ item.id }}">more...</a>
+    <div class="buttons_wrapper">
+        <a routerLink="/main/{{ item.id }}">more...</a>
+        <app-custom-button [template]="deleteButton" *ngIf="item.isCustomCard"> </app-custom-button>
+    </div>
 </mat-card>
 
-<ng-template #moreButton>
-    <button mat-raised-button color="primary">more...</button>
+<ng-template #deleteButton>
+    <button mat-raised-button color="warn" (click)="deleteCustomCard()">delete</button>
 </ng-template>
