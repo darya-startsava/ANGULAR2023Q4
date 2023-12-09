@@ -13,6 +13,7 @@ import { AppComponent } from "./app.component";
 import { routes } from "./app.routes";
 import { AuthModule } from "./auth/auth.module";
 import { CoreModule } from "./core/core.module";
+import { PaginationEffects } from "./redux/effects/pagination.effects";
 import { SearchEffects } from "./redux/effects/search.effects";
 import { SearchVideoByIdEffects } from "./redux/effects/searchVideoById.effects";
 import { currentPageReducer } from "./redux/reducers/currentPage.reducer";
@@ -41,7 +42,11 @@ import { UrlShortenerInterceptor } from "./youtube/interceptors/url-shortener.in
             pagination: paginationReducer,
             router: routerReducer
         }),
-        EffectsModule.forRoot([SearchEffects, SearchVideoByIdEffects]),
+        EffectsModule.forRoot([
+            SearchEffects,
+            SearchVideoByIdEffects,
+            PaginationEffects
+        ]),
         StoreRouterConnectingModule.forRoot()
     ],
     providers: [

@@ -1,6 +1,11 @@
 import { Component } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
+import {
+    goToNextPage,
+    goToPreviousPage
+} from "src/app/redux/actions/pagination.action";
+import { selectCurrentPage } from "src/app/redux/selectors/currentPage.selectors";
 import { selectCurrentPageItems } from "src/app/redux/selectors/currentPageItems.selectors";
 import { AppState, VideoItem } from "src/app/redux/state.models";
 
@@ -13,19 +18,21 @@ import { SearchResultService } from "../../services/search-result.service";
 })
 export class MainPageComponent {
     currentPageItems$: Observable<VideoItem[]>;
+    currentPage$: Observable<number>;
+
     constructor(
         public searchResultService: SearchResultService,
         private store: Store<AppState>
     ) {
         this.currentPageItems$ = store.select(selectCurrentPageItems);
+      this.currentPage$ = store.select(selectCurrentPage);
     }
-    page = 1;
 
     goToPreviousPage() {
-        if (this.page > 1) this.page -= 1;
+        this.store.dispatch(goToPreviousPage());
     }
 
     goToNextPage() {
-        this.page += 1;
+        this.store.dispatch(goToNextPage());
     }
 }

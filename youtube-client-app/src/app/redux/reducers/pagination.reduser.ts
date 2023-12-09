@@ -1,10 +1,14 @@
 import { createReducer, on } from "@ngrx/store";
 
-import { goToNextPage, goToPreviousPage } from "../actions/pagination.action";
+import {
+    goToNextPageSuccess,
+    goToPreviousPageSuccess
+} from "../actions/pagination.action";
 import { searchSuccess } from "../actions/search.actions";
 import { PaginationState } from "../state.models";
 
 const initialState: PaginationState = {
+    input: "",
     currentPage: 1,
     nextPageToken: "",
     prevPageToken: ""
@@ -13,26 +17,30 @@ const initialState: PaginationState = {
 export const paginationReducer = createReducer<PaginationState>(
     initialState,
     on(
-        goToNextPage,
+        goToNextPageSuccess,
         (state, { nextPageToken, prevPageToken }): PaginationState => ({
+            ...state,
             currentPage: state.currentPage + 1,
             nextPageToken,
             prevPageToken
         })
     ),
     on(
-        goToPreviousPage,
+        goToPreviousPageSuccess,
         (state, { nextPageToken, prevPageToken }): PaginationState => ({
+            ...state,
             currentPage: state.currentPage - 1,
             nextPageToken,
-            prevPageToken
+            prevPageToken: state.currentPage - 1 === 1 ? "" : prevPageToken
         })
     ),
     on(
         searchSuccess,
-        (state, { nextPageToken }): PaginationState => ({
-            ...initialState,
-            nextPageToken
+        (state, { nextPageToken, input }): PaginationState => ({
+            currentPage: 1,
+            nextPageToken,
+            prevPageToken: "",
+            input
         })
     )
 );

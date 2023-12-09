@@ -67,12 +67,18 @@ export class SearchResultService implements OnDestroy {
         return this.filterState.wordForFilterBy;
     }
 
-    getData(input: string): Observable<ResponseSnippet> {
+    getData(
+        input: string,
+        pageToken = "",
+        customItemsQuantity = 0
+    ): Observable<ResponseSnippet> {
+        // change maxResults to 20
+        const maxResults = (5 - customItemsQuantity).toString();
         const paramsSearch = buildParams({
             type: "video",
             part: "snippet",
-            // TODO update with custom card for first page
-            maxResults: "20",
+            maxResults,
+            pageToken,
             q: input
         });
         return this.http

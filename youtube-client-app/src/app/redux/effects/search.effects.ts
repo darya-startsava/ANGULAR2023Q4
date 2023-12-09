@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
-import { Actions, createEffect, ofType } from "@ngrx/effects";
+import { Actions, concatLatestFrom, createEffect, ofType } from "@ngrx/effects";
+import { Store } from "@ngrx/store";
 import { of } from "rxjs";
 import {
     catchError,
@@ -11,6 +12,8 @@ import {
 import { SearchResultService } from "src/app/youtube/services/search-result.service";
 
 import { searchSuccess, searchVideos } from "../actions/search.actions";
+import { selectCustomItems } from "../selectors/currentPageItems.selectors";
+import { AppState } from "../state.models";
 
 @Injectable()
 export class SearchEffects {
@@ -19,25 +22,32 @@ export class SearchEffects {
             ofType(searchVideos),
             debounceTime(500),
             filter((action) => action.searchInput.length >= 3),
-            mergeMap((action) =>
-                this.searchResultService.getData(action.searchInput).pipe(
-                    map((data) =>
-                        searchSuccess({
-                            data,
-                            nextPageToken:
-                                this.searchResultService.nextPageToken$.value,
-                            prevPageToken:
-                                this.searchResultService.prevPageToken$.value
-                        })
-                    ),
-                    catchError(() => of(null))
-                )
+            concatLatestFrom(() => this.store.select(selectCustomItems)),
+            mergeMap(([action, customItemsState]) =>
+                this.searchResultService
+                    .getData(action.searchInput, "", customItemsState.length)
+                    .pipe(
+                        map((data) =>
+                            searchSuccess({
+                                data,
+                                nextPageToken:
+                                    this.searchResultService.nextPageToken$
+                                        .value,
+                                prevPageToken:
+                                    this.searchResultService.prevPageToken$
+                                        .value,
+                                input: action.searchInput
+                            })
+                        ),
+                        catchError(() => of(null))
+                    )
             )
         );
     });
 
     constructor(
         private actions$: Actions,
-        private searchResultService: SearchResultService
+        private searchResultService: SearchResultService,
+        private store: Store<AppState>
     ) {}
 }

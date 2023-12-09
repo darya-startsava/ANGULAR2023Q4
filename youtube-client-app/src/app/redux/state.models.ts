@@ -1,6 +1,6 @@
 export interface AppState {
     source: SourceState;
-    currentPageItems: Array<string>;
+    currentPageItems: CurrentPageState;
     currentVideo: VideoItem;
     pagination: PaginationState;
 }
@@ -27,7 +27,13 @@ export interface Statistics {
 }
 
 export interface PaginationState {
+    input: string;
     currentPage: number;
     nextPageToken: string;
     prevPageToken: string;
+}
+
+export interface CurrentPageState {
+    customCardIds: Array<string>;
+    currentPageItemsIds: Array<string>;
 }

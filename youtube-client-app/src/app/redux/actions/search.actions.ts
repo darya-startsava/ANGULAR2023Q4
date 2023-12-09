@@ -12,6 +12,7 @@ export const searchSuccess = createAction(
         data: ResponseSnippet;
         nextPageToken: string;
         prevPageToken: string;
+        input: string;
     }>()
 );
 
