@@ -2,6 +2,7 @@ export interface AppState {
     source: SourceState;
     currentPageItems: Array<string>;
     currentVideo: VideoItem;
+    pagination: PaginationState;
 }
 
 export interface SourceState {
@@ -23,4 +24,10 @@ export interface Statistics {
     viewCount: string;
     likeCount: string;
     commentCount: string;
+}
+
+export interface PaginationState {
+    currentPage: number;
+    nextPageToken: string;
+    prevPageToken: string;
 }

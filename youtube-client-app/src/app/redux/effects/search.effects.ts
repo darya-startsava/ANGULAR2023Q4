@@ -21,7 +21,15 @@ export class SearchEffects {
             filter((action) => action.searchInput.length >= 3),
             mergeMap((action) =>
                 this.searchResultService.getData(action.searchInput).pipe(
-                    map((data) => searchSuccess({ data })),
+                    map((data) =>
+                        searchSuccess({
+                            data,
+                            nextPageToken:
+                                this.searchResultService.nextPageToken$.value,
+                            prevPageToken:
+                                this.searchResultService.prevPageToken$.value
+                        })
+                    ),
                     catchError(() => of(null))
                 )
             )

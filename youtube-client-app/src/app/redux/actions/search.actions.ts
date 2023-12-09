@@ -8,7 +8,11 @@ export const searchVideos = createAction(
 
 export const searchSuccess = createAction(
     "searchSuccess",
-    props<{ data: ResponseSnippet }>()
+    props<{
+        data: ResponseSnippet;
+        nextPageToken: string;
+        prevPageToken: string;
+    }>()
 );
 
 export const searchVideoById = createAction(

@@ -38,11 +38,15 @@ export class SearchResultService implements OnDestroy {
     private filterState = this.defaultState;
     public data$ = new BehaviorSubject<Item[]>([]);
     private inputSubject$ = new BehaviorSubject<string>("");
+    public nextPageToken$ = new BehaviorSubject<string>("");
+    public prevPageToken$ = new BehaviorSubject<string>("");
+    public maxResultsForFirstPage: number;
 
     constructor(
         private http: HttpClient,
         private store: Store
     ) {
+        // TODO remove after resolving filter&sort methods
         const requestSubscription = this.inputSubject$
             .pipe(
                 debounceTime(1000),
@@ -67,7 +71,8 @@ export class SearchResultService implements OnDestroy {
         const paramsSearch = buildParams({
             type: "video",
             part: "snippet",
-            maxResults: "15",
+            // TODO update with custom card for first page
+            maxResults: "20",
             q: input
         });
         return this.http
@@ -75,6 +80,8 @@ export class SearchResultService implements OnDestroy {
             .pipe(
                 switchMap((data) => {
                     let idsString = "";
+                    this.nextPageToken$.next(data.nextPageToken || "");
+                    this.prevPageToken$.next(data.prevPageToken || "");
                     data.items.forEach(
                         (item) => (idsString += `,${item.id?.videoId}`)
                     );

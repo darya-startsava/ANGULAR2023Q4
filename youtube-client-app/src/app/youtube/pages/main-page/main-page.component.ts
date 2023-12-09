@@ -19,4 +19,13 @@ export class MainPageComponent {
     ) {
         this.currentPageItems$ = store.select(selectCurrentPageItems);
     }
+    page = 1;
+
+    goToPreviousPage() {
+        if (this.page > 1) this.page -= 1;
+    }
+
+    goToNextPage() {
+        this.page += 1;
+    }
 }

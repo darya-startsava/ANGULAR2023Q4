@@ -1,4 +1,24 @@
+<div class="pagination_wrapper">
+    <app-custom-button
+        [template]="previousPageButton"
+        (click)="goToPreviousPage()"
+    >
+    </app-custom-button>
+    <span class="current_page">{{ page }}</span>
+    <app-custom-button [template]="nextPageButton" (click)="goToNextPage()">
+    </app-custom-button>
+</div>
 <div class="search-results_wrapper">
     <app-search-results [searchItems]="currentPageItems$ | async">
     </app-search-results>
 </div>
+
+<ng-template #previousPageButton>
+    <button mat-raised-button color="primary" [disabled]="page === 1">
+        Prev page
+    </button>
+</ng-template>
+
+<ng-template #nextPageButton>
+    <button mat-raised-button color="primary">Next page</button>
+</ng-template>
