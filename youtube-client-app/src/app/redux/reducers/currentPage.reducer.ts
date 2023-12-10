@@ -4,7 +4,7 @@ import { createCard, deleteCustomCard } from "../actions/card.actions";
 import {
     goToNextPageSuccess,
     goToPreviousPageSuccess
-} from "../actions/pagination.action";
+} from "../actions/pagination.actions";
 import { searchSuccess } from "../actions/search.actions";
 import { CurrentPageState } from "../state.models";
 

@@ -24,6 +24,5 @@ export const routes: Routes = [
         loadChildren: () =>
             import("./favorite/favorite.module").then((m) => m.FavoriteModule)
     },
-
     { path: "**", component: NotFoundPageComponent }
 ];

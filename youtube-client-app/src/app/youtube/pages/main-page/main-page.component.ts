@@ -4,7 +4,7 @@ import { Observable } from "rxjs";
 import {
     goToNextPage,
     goToPreviousPage
-} from "src/app/redux/actions/pagination.action";
+} from "src/app/redux/actions/pagination.actions";
 import { selectCurrentPage } from "src/app/redux/selectors/currentPage.selectors";
 import { selectCurrentPageItems } from "src/app/redux/selectors/currentPageItems.selectors";
 import { AppState, VideoItem } from "src/app/redux/state.models";
@@ -25,7 +25,7 @@ export class MainPageComponent {
         private store: Store<AppState>
     ) {
         this.currentPageItems$ = store.select(selectCurrentPageItems);
-      this.currentPage$ = store.select(selectCurrentPage);
+        this.currentPage$ = store.select(selectCurrentPage);
     }
 
     goToPreviousPage() {

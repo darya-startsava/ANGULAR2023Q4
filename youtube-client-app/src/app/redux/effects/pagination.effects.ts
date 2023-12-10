@@ -10,7 +10,7 @@ import {
     goToNextPageSuccess,
     goToPreviousPage,
     goToPreviousPageSuccess
-} from "../actions/pagination.action";
+} from "../actions/pagination.actions";
 import { selectPagination } from "../selectors/currentPage.selectors";
 import { selectCustomItems } from "../selectors/currentPageItems.selectors";
 import { AppState } from "../state.models";

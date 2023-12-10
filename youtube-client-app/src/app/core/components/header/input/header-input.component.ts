@@ -53,4 +53,8 @@ export class HeaderInputComponent {
     onGoToAdminPage(): void {
         this.router.navigate(["/admin"]);
     }
+
+    onShowFavorite(): void {
+        this.router.navigate(["/favorite"]);
+    }
 }

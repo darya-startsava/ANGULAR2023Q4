@@ -3,6 +3,7 @@ export interface AppState {
     currentPageItems: CurrentPageState;
     currentVideo: VideoItem;
     pagination: PaginationState;
+    favorite: Array<string>;
 }
 
 export interface SourceState {

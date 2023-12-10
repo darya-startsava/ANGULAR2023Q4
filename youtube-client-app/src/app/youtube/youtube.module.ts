@@ -21,7 +21,6 @@ import { routes } from "./youtube.routes";
         ItemStatisticsComponent
     ],
     imports: [CommonModule, SharedModule, RouterLink, DatePipe],
-    providers: [provideRouter(routes)],
-    exports: [MainPageComponent, DetailedInformationPageComponent]
+    providers: [provideRouter(routes)]
 })
 export class YoutubeModule {}

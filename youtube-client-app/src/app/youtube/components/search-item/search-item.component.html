@@ -16,11 +16,36 @@
         </mat-card-title>
     </mat-card-header>
     <div class="buttons_wrapper">
+        <button
+            mat-mini-fab
+            color="primary"
+            (click)="removeFromFavorite()"
+            *ngIf="
+                !item.isCustomCard &&
+                (favoriteItems$ | async)?.includes(item.id)
+            "
+        >
+            <mat-icon>favorite</mat-icon>
+        </button>
+        <button
+            mat-mini-fab
+            color="primary"
+            (click)="addToFavorite()"
+            *ngIf="
+                !item.isCustomCard &&
+                !(favoriteItems$ | async)?.includes(item.id)
+            "
+        >
+            <mat-icon>favorite_border</mat-icon>
+        </button>
         <a routerLink="/main/{{ item.id }}">more...</a>
-        <app-custom-button [template]="deleteButton" *ngIf="item.isCustomCard"> </app-custom-button>
+        <app-custom-button [template]="deleteButton" *ngIf="item.isCustomCard">
+        </app-custom-button>
     </div>
 </mat-card>
 
 <ng-template #deleteButton>
-    <button mat-raised-button color="warn" (click)="deleteCustomCard()">delete</button>
+    <button mat-raised-button color="warn" (click)="deleteCustomCard()">
+        delete
+    </button>
 </ng-template>

@@ -3,7 +3,7 @@ import { createReducer, on } from "@ngrx/store";
 import {
     goToNextPageSuccess,
     goToPreviousPageSuccess
-} from "../actions/pagination.action";
+} from "../actions/pagination.actions";
 import { searchSuccess } from "../actions/search.actions";
 import { PaginationState } from "../state.models";
 
