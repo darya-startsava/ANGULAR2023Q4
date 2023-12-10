@@ -72,7 +72,7 @@ export class SearchResultService implements OnDestroy {
         pageToken = "",
         customItemsQuantity = 0
     ): Observable<ResponseSnippet> {
-        // change maxResults to 20
+        // TODO change maxResults to 20
         const maxResults = (5 - customItemsQuantity).toString();
         const paramsSearch = buildParams({
             type: "video",
