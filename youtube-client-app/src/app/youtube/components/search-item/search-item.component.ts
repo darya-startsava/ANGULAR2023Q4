@@ -6,7 +6,7 @@ import {
     addToFavorite,
     removeFromFavorite
 } from "src/app/redux/actions/favorite.actions";
-import { selectFavorite } from "src/app/redux/selectors/favorite.selectors";
+import { selectFavoriteIds } from "src/app/redux/selectors/favorite.selectors";
 import { AppState, VideoItem } from "src/app/redux/state.models";
 
 @Component({
@@ -21,7 +21,7 @@ export class SearchItemComponent implements OnInit {
     constructor(private store: Store<AppState>) {}
 
     ngOnInit(): void {
-        this.favoriteItems$ = this.store.select(selectFavorite);
+        this.favoriteItems$ = this.store.select(selectFavoriteIds);
     }
 
     deleteCustomCard() {

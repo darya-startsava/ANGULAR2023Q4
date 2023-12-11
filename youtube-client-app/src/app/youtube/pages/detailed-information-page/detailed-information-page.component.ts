@@ -13,7 +13,7 @@ import {
     selectCurrentItem,
     selectCurrentVideo
 } from "src/app/redux/selectors/currentItem.selectors";
-import { selectFavorite } from "src/app/redux/selectors/favorite.selectors";
+import { selectFavoriteIds } from "src/app/redux/selectors/favorite.selectors";
 import { AppState, VideoItem } from "src/app/redux/state.models";
 
 import { SearchResultService } from "../../services/search-result.service";
@@ -38,7 +38,7 @@ export class DetailedInformationPageComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.id = this.route.snapshot.paramMap.get("id");
-        this.favoriteItems$ = this.store.select(selectFavorite);
+        this.favoriteItems$ = this.store.select(selectFavoriteIds);
         if (this.id.includes("customCard")) {
             this.item$ = this.store.select(selectCurrentItem);
         } else {

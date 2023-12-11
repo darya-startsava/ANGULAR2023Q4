@@ -1,6 +1,6 @@
 import { createSelector } from "@ngrx/store";
 
-import { AppState, SourceState, VideoItem } from "../state.models";
+import { AppState, SourceState } from "../state.models";
 
 const selectSource = (state: AppState) => state.source;
 
