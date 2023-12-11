@@ -18,11 +18,35 @@
                     [statistics]="item.statistics"
                 ></app-item-statistics>
             </mat-card-subtitle>
-            <app-custom-button
-                [template]="deleteButton"
-                *ngIf="item.isCustomCard"
-            >
-            </app-custom-button>
+            <div class="buttons_wrapper">
+                <button
+                    mat-mini-fab
+                    color="primary"
+                    (click)="removeFromFavorite()"
+                    *ngIf="
+                        !item.isCustomCard &&
+                        (favoriteItems$ | async)?.includes(item.id)
+                    "
+                >
+                    <mat-icon>favorite</mat-icon>
+                </button>
+                <button
+                    mat-mini-fab
+                    color="primary"
+                    (click)="addToFavorite()"
+                    *ngIf="
+                        !item.isCustomCard &&
+                        !(favoriteItems$ | async)?.includes(item.id)
+                    "
+                >
+                    <mat-icon>favorite_border</mat-icon>
+                </button>
+                <app-custom-button
+                    [template]="deleteButton"
+                    *ngIf="item.isCustomCard"
+                >
+                </app-custom-button>
+            </div>
         </div>
     </mat-card>
 </div>

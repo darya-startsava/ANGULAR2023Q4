@@ -4,11 +4,16 @@ import { Store } from "@ngrx/store";
 import { Observable, Subscription } from "rxjs";
 import { deleteCustomCard } from "src/app/redux/actions/card.actions";
 import { clearDetailedInformationStore } from "src/app/redux/actions/delete.actions";
+import {
+    addToFavorite,
+    removeFromFavorite
+} from "src/app/redux/actions/favorite.actions";
 import { searchVideoById } from "src/app/redux/actions/search.actions";
 import {
     selectCurrentItem,
     selectCurrentVideo
 } from "src/app/redux/selectors/currentItem.selectors";
+import { selectFavorite } from "src/app/redux/selectors/favorite.selectors";
 import { AppState, VideoItem } from "src/app/redux/state.models";
 
 import { SearchResultService } from "../../services/search-result.service";
@@ -20,6 +25,7 @@ import { SearchResultService } from "../../services/search-result.service";
 })
 export class DetailedInformationPageComponent implements OnInit, OnDestroy {
     item$: Observable<VideoItem>;
+    favoriteItems$: Observable<Array<string>>;
     private subscriptions: Subscription[] = [];
     id: string;
 
@@ -32,6 +38,7 @@ export class DetailedInformationPageComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.id = this.route.snapshot.paramMap.get("id");
+        this.favoriteItems$ = this.store.select(selectFavorite);
         if (this.id.includes("customCard")) {
             this.item$ = this.store.select(selectCurrentItem);
         } else {
@@ -52,5 +59,23 @@ export class DetailedInformationPageComponent implements OnInit, OnDestroy {
     deleteCustomCard() {
         this.store.dispatch(deleteCustomCard({ id: this.id }));
         this.router.navigate(["/main"]);
+    }
+
+    removeFromFavorite(): void {
+        const subscription = this.item$.subscribe((item) => {
+            if (item) {
+                this.store.dispatch(removeFromFavorite({ id: item.id }));
+            }
+        });
+        this.subscriptions.push(subscription);
+    }
+
+    addToFavorite(): void {
+        const subscription = this.item$.subscribe((item) => {
+            if (item) {
+                this.store.dispatch(addToFavorite({ id: item.id }));
+            }
+        });
+        this.subscriptions.push(subscription);
     }
 }
