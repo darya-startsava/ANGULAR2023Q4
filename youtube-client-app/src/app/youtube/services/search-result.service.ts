@@ -45,19 +45,7 @@ export class SearchResultService implements OnDestroy {
     constructor(
         private http: HttpClient,
         private store: Store
-    ) {
-        // TODO remove after resolving filter&sort methods
-        const requestSubscription = this.inputSubject$
-            .pipe(
-                debounceTime(1000),
-                filter((input) => input.length >= 3),
-                switchMap((input) => this.getData(input))
-            )
-            .subscribe((data) => {
-                this.data$.next(data.items);
-            });
-        this.subscriptions.push(requestSubscription);
-    }
+    ) {}
 
     ngOnDestroy(): void {
         this.subscriptions.forEach((item) => item.unsubscribe());

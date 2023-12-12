@@ -1,4 +1,8 @@
 <div class="favorite_wrapper">
-    <app-search-results [searchItems]="favoriteItems$ | async">
+    <app-search-results
+        [searchItems]="
+            favoriteItems$ | async | filter: searchResultService.wordForFilterBy
+        "
+    >
     </app-search-results>
 </div>
