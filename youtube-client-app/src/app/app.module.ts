@@ -19,7 +19,7 @@ import { SearchVideoByIdEffects } from "./redux/effects/searchVideoById.effects"
 import { currentPageReducer } from "./redux/reducers/currentPage.reducer";
 import { currentVideoReducer } from "./redux/reducers/currentVideo.reducer";
 import { favoriteReducer } from "./redux/reducers/favorite.reducer";
-import { paginationReducer } from "./redux/reducers/pagination.reduser";
+import { paginationReducer } from "./redux/reducers/pagination.reducer";
 import { sourceReducer } from "./redux/reducers/source.reducer";
 import { SharedModule } from "./shared/shared.module";
 import { UrlShortenerInterceptor } from "./youtube/interceptors/url-shortener.interceptor";

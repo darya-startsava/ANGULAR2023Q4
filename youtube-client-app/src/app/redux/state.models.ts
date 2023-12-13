@@ -37,4 +37,19 @@ export interface PaginationState {
 export interface CurrentPageState {
     customCardIds: Array<string>;
     currentPageItemsIds: Array<string>;
+    currentPageYoutubeItemsSortInfo: Array<CurrentPageItemsSortInfo>;
+    isAsc: boolean;
+    filterType: FilterType;
+}
+
+export interface CurrentPageItemsSortInfo {
+    id: string;
+    publishedAt: string;
+    viewCount: string;
+}
+
+export enum FilterType {
+    SortByDate = "sortByDate",
+    SortByViewCount = "sortByViewCount",
+    WithoutSort = "withoutSort"
 }
