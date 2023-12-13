@@ -28,11 +28,11 @@ export class MainPageComponent {
         this.currentPage$ = store.select(selectCurrentPage);
     }
 
-    goToPreviousPage() {
+    goToPreviousPage():void {
         this.store.dispatch(goToPreviousPage());
     }
 
-    goToNextPage() {
+    goToNextPage():void {
         this.store.dispatch(goToNextPage());
     }
 }

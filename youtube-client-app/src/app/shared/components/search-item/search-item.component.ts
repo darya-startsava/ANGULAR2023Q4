@@ -24,7 +24,7 @@ export class SearchItemComponent implements OnInit {
         this.favoriteItems$ = this.store.select(selectFavoriteIds);
     }
 
-    deleteCustomCard() {
+    deleteCustomCard():void {
         this.store.dispatch(deleteCustomCard({ id: this.item.id }));
     }
     removeFromFavorite(): void {

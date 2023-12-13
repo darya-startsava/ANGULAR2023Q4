@@ -56,7 +56,7 @@ export class DetailedInformationPageComponent implements OnInit, OnDestroy {
         this.store.dispatch(searchVideoById({ id }));
     }
 
-    deleteCustomCard() {
+    deleteCustomCard():void {
         this.store.dispatch(deleteCustomCard({ id: this.id }));
         this.router.navigate(["/main"]);
     }

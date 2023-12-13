@@ -20,7 +20,7 @@ export class UrlShortenerInterceptor implements HttpInterceptor {
     }
 
     private addKey(url: string): string {
-        const key = "AIzaSyBERrQKVy2xM8NFbZB-RDqtLv4VZ1xgDtg";
+        const key = "AIzaSyBp3iql3dSCb4tgFi8e9yhAKAhDvrMaT7A";
         return `${url}?$key=${key}`;
     }
 }

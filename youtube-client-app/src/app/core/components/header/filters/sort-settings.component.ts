@@ -24,7 +24,6 @@ export class SortSettingsComponent {
 
     filter(type: FilterType): void {
         this.searchResultService.changeFilterState(
-            type,
             this.filterByWordInput
         );
         if (type === FilterType.SortByDate) {
