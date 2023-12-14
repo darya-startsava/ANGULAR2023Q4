@@ -1,0 +1,72 @@
+<div class="signup-page_wrapper">
+    <form [formGroup]="signUpForm" (ngSubmit)="signUp()">
+        <h3>Sign Up</h3>
+        <mat-form-field>
+            <mat-label>First name</mat-label>
+            <input matInput name="name" formControlName="name" required />
+            @if (name?.errors?.['required']) {
+                <mat-error>Enter your name</mat-error>
+            } @else if (name?.errors?.['maxlength']) {
+                <mat-error>Name is too long</mat-error>
+            } @else if (name?.errors?.['letterName']) {
+                <mat-error
+                    >Use only latters (at least one) and spaces</mat-error
+                >
+            }
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input
+                matInput
+                name="email"
+                formControlName="email"
+                type="email"
+                required
+            />
+            @if (email?.errors?.['required']) {
+                <mat-error>Enter your email</mat-error>
+            } @else if (email?.errors?.['email']) {
+                <mat-error>Email is incorrect</mat-error>
+            }
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Password</mat-label>
+            <input
+                matInput
+                name="password"
+                formControlName="password"
+                [type]="hide ? 'password' : 'text'"
+                required
+            />
+            <button
+                mat-icon-button
+                matSuffix
+                (click)="hide = !hide"
+                [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide"
+                type="button"
+            >
+                <mat-icon>{{
+                    hide ? 'visibility_off' : 'visibility'
+                }}</mat-icon>
+            </button>
+            @if (password?.errors?.['required']) {
+                <mat-error>Enter your password</mat-error>
+            } @else if (password?.errors?.['strongPassword']) {
+                <mat-error
+                    >Enter minimum 8 symbols (at least 1 capital letter, 1
+                    digit, 1 special symbol)</mat-error
+                >
+            }
+        </mat-form-field>
+        <button
+            class="submit-button"
+            mat-stroked-button
+            color="primary"
+            type="submit"
+            [disabled]="signUpForm.invalid"
+        >
+            Sign Up
+        </button>
+    </form>
+</div>

@@ -1,5 +1,6 @@
+{
     "root": true,
-    "ignorePatterns": ["projects/**/*", "custom-webpack.config.ts"],
+    "ignorePatterns": ["projects/**/*"],
     "plugins": ["simple-import-sort", "import"],
     "parserOptions": {
         "project": "./tsconfig.json"
@@ -17,12 +18,13 @@
             "rules": {
                 "import/prefer-default-export": "off",
                 "import/first": "error",
-                "import/newline-after-import": "error",
+                "import/newline-after-import": "warn",
                 "import/no-duplicates": "error",
                 "import/no-extraneous-dependencies": "off",
-                "simple-import-sort/imports": "error",
-                "simple-import-sort/exports": "error",
+                "simple-import-sort/imports": "warn",
+                "simple-import-sort/exports": "warn",
                 "no-console": 0,
+                "no-trailing-spaces": "warn",
                 "linebreak-style": "off",
                 "operator-linebreak": "off",
                 "implicit-arrow-linebreak": "off",
@@ -30,10 +32,10 @@
                 "class-methods-use-this": "off",
                 "object-curly-newline": "off",
                 "no-return-assign": "off",
-                "@typescript-eslint/indent": ["error", 4],
+                "@typescript-eslint/indent": ["warn", 2],
                 "@typescript-eslint/comma-dangle": "off",
                 "@typescript-eslint/lines-between-class-members": "off",
-                "@typescript-eslint/quotes": ["error", "double"],
+                "@typescript-eslint/quotes": ["warn", "single"],
                 "@typescript-eslint/no-shadow": "error",
                 "@typescript-eslint/no-explicit-any": "error",
                 "@angular-eslint/directive-selector": [
