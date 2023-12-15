@@ -5,6 +5,7 @@ export interface AppState {
 export interface SignUpState {
     data: SignUpDataState | null;
     status: StatusState;
+    error: ErrorState;
 }
 
 export interface SignUpDataState {
@@ -14,13 +15,18 @@ export interface SignUpDataState {
 }
 
 export enum StatusState {
-    Init,
-    Loading,
-    Success,
-    Failed
+    Init = 'Init',
+    Loading = 'Loading',
+    Success = 'Success',
+    Failed = 'Failed'
 }
 
 export interface ErrorState {
-    type: string;
+    type: ErrorType | null;
     message: string;
+}
+
+export enum ErrorType {
+    InvalidFormDataException = 'InvalidFormDataException',
+    PrimaryDuplicationException = 'PrimaryDuplicationException'
 }

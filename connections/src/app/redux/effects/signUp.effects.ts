@@ -17,7 +17,13 @@ export class SignUpEffects {
             mergeMap((action) =>
                 this.signUpService.signUp(action.data).pipe(
                     map((data) => signUpSuccess({ data })),
-                  catchError((error) => of(signUpFailed({ error })))
+                    catchError((error) =>
+                        of(
+                            signUpFailed({
+                                error,
+                            })
+                        )
+                    )
                 )
             )
         );
