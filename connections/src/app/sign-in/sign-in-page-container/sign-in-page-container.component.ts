@@ -1,10 +1,11 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { SignInPageComponent } from '../sign-in-page/sign-in-page.component';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+
 import { selectSignInErrorMessage, selectSignInErrorType, selectSignInStatus } from '../../redux/selectors/signIn.selectors';
 import { AppState, ErrorType, StatusState } from '../../redux/state.models';
-import { Observable } from 'rxjs';
-import { CommonModule } from '@angular/common';
+import { SignInPageComponent } from '../sign-in-page/sign-in-page.component';
 
 @Component({
     selector: 'app-sign-in-page-container',

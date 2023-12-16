@@ -7,4 +7,3 @@ export const selectSignInErrorMessage = (state: AppState) =>
 
 export const selectSignInErrorType = (state: AppState) =>
     state.signIn.error.type;
-

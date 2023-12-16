@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { SignInDataState, SignInResponse } from '../redux/state.models';
 import { Observable } from 'rxjs';
+
+import { SignInDataState, SignInResponse } from '../redux/state.models';
 
 @Injectable({
     providedIn: 'root'

@@ -1,24 +1,22 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { of } from 'rxjs';
+import { catchError, map, mergeMap } from 'rxjs/operators';
+
 import { SignUpService } from '../../sign-up/sign-up.service';
 import {
     signUpFailed,
     signUpLoading,
     signUpSuccess
 } from '../actions/signUp.actions';
-import { mergeMap, map, catchError } from 'rxjs/operators';
-import { of } from 'rxjs';
 
 @Injectable()
 export class SignUpEffects {
-    signUpLoading$ = createEffect(() => {
-        return this.actions$.pipe(
+    signUpLoading$ = createEffect(() => this.actions$.pipe(
             ofType(signUpLoading),
             mergeMap((action) =>
                 this.signUpService.signUp(action.data).pipe(
-                    map(() => {
-                        return signUpSuccess();
-                    }),
+                    map(() => signUpSuccess()),
                     catchError((error) =>
                         of(
                             signUpFailed({
@@ -28,8 +26,7 @@ export class SignUpEffects {
                     )
                 )
             )
-        );
-    });
+        ));
 
     constructor(
         private actions$: Actions,

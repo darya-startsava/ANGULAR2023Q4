@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+
 import { ErrorState, SignUpDataState } from '../state.models';
 
 export const signUpInitAfterFall = createAction(

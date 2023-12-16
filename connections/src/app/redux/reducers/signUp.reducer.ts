@@ -1,4 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
+
 import {
     signUpFailed,
     signUpInitAfterFall,
@@ -23,21 +24,22 @@ export const signUpReducer = createReducer<SignUpState>(
             error: { type: null, message: '' }
         })
     ),
-    // TODO delete data if null
-    on(signUpSuccess, (state): SignUpState => {
-        return {
+    on(
+        signUpSuccess,
+        (state): SignUpState => ({
             ...state,
             status: StatusState.Success,
             error: { type: null, message: '' }
-        };
-    }),
-    on(signUpFailed, (state, { error }): SignUpState => {
-        return {
+        })
+    ),
+    on(
+        signUpFailed,
+        (state, { error }): SignUpState => ({
             ...state,
             status: StatusState.Failed,
             error: { type: error.error.type, message: error.error.message }
-        };
-    }),
+        })
+    ),
     on(
         signUpInitAfterFall,
         (state): SignUpState => ({ ...state, status: StatusState.Init })

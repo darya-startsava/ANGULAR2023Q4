@@ -1,4 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
+
 import {
     signInFailed,
     signInInitAfterFall,
@@ -23,20 +24,22 @@ export const signInReducer = createReducer<SignInState>(
             error: { type: null, message: '' }
         })
     ),
-    on(signInSuccess, (state): SignInState => {
-        return {
+    on(
+        signInSuccess,
+        (state): SignInState => ({
             ...state,
             status: StatusState.Success,
             error: { type: null, message: '' }
-        };
-    }),
-    on(signInFailed, (state, { error }): SignInState => {
-        return {
+        })
+    ),
+    on(
+        signInFailed,
+        (state, { error }): SignInState => ({
             ...state,
             status: StatusState.Failed,
             error: { type: error.error.type, message: error.error.message }
-        };
-    }),
+        })
+    ),
     on(
         signInInitAfterFall,
         (state): SignInState => ({ ...state, status: StatusState.Init })

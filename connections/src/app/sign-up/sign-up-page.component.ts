@@ -1,32 +1,32 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnDestroy } from '@angular/core';
 import {
+    AbstractControl,
     FormBuilder,
     ReactiveFormsModule,
-    Validators,
-    AbstractControl
-} from '@angular/forms';
+    Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { Router, RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { Observable, Subscription, take } from 'rxjs';
+
 import {
     signUpInitAfterFall,
     signUpLoading
 } from '../redux/actions/signUp.actions';
-import { anyLettersNameValidator } from './directives/any-letters-name.directive';
-import { strongPasswordValidator } from './directives/strong-password.directive';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatIconModule } from '@angular/material/icon';
-import { Observable, Subscription, take } from 'rxjs';
-import { AppState, ErrorType, StatusState } from '../redux/state.models';
 import {
     selectSignUpErrorMessage,
     selectSignUpErrorType,
     selectSignUpStatus
 } from '../redux/selectors/signUp.selectors';
-import { CommonModule } from '@angular/common';
+import { AppState, ErrorType, StatusState } from '../redux/state.models';
+import { anyLettersNameValidator } from './directives/any-letters-name.directive';
+import { strongPasswordValidator } from './directives/strong-password.directive';
 import { uniqueEmailValidator } from './directives/unique-email.directive';
-import { Router, RouterModule } from '@angular/router';
-import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 
 @Component({
     selector: 'app-sign-up-page',
@@ -129,7 +129,7 @@ export class SignUpPageComponent implements OnDestroy {
                         );
                     } else if (status === StatusState.Failed) {
                         this.openSnackBar(
-                            'Attempt failed.Try again.',
+                            'Attempt failed. Check your connection and try again.',
                             'Close',
                             {
                                 duration: 3000

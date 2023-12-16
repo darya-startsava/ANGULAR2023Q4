@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
     Component,
     Input,
@@ -5,26 +6,25 @@ import {
     OnDestroy,
     SimpleChanges
 } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';
 import {
+    AbstractControl,
     FormBuilder,
     ReactiveFormsModule,
-    Validators,
-    AbstractControl
-} from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatIconModule } from '@angular/material/icon';
-import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+    Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { Router, RouterModule } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
+
 import {
     signInInitAfterFall,
     signInLoading
 } from '../../redux/actions/signIn.actions';
-import { Store } from '@ngrx/store';
 import { AppState, ErrorType, StatusState } from '../../redux/state.models';
-import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-sign-in-page',
@@ -97,10 +97,10 @@ export class SignInPageComponent implements OnDestroy, OnChanges {
         }
         if (
             changes['errorType'] &&
-            this.errorType != ErrorType.NotFoundException &&
+            this.errorType !== ErrorType.NotFoundException &&
             this.signInStatus === StatusState.Failed
         ) {
-            this.openSnackBar('Attempt failed.Try again.', 'Close', {
+            this.openSnackBar('Attempt failed. Check your connection and try again.', 'Close', {
                 duration: 3000
             });
         }

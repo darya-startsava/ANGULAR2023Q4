@@ -1,16 +1,15 @@
-import { ApplicationConfig } from '@angular/core';
-import { provideRouter } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-import { importProvidersFrom } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom } from '@angular/core';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideRouter } from '@angular/router';
+import { provideEffects } from '@ngrx/effects';
+import { provideState, provideStore } from '@ngrx/store';
 
 import { routes } from './app.routes';
-import { provideState, provideStore } from '@ngrx/store';
-import { signUpReducer } from './redux/reducers/signUp.reducer';
-import { provideEffects } from '@ngrx/effects';
-import { SignUpEffects } from './redux/effects/signUp.effects';
 import { SignInEffects } from './redux/effects/signIn.effects';
-import { provideAnimations } from '@angular/platform-browser/animations';
+import { SignUpEffects } from './redux/effects/signUp.effects';
 import { signInReducer } from './redux/reducers/signIn.reducer';
+import { signUpReducer } from './redux/reducers/signUp.reducer';
 
 export const appConfig: ApplicationConfig = {
     providers: [

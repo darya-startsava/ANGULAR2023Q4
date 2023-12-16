@@ -7,4 +7,3 @@ export const selectSignUpErrorMessage = (state: AppState) =>
 
 export const selectSignUpErrorType = (state: AppState) =>
     state.signUp.error.type;
-
