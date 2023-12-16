@@ -1,0 +1,19 @@
+@use '@angular/material' as mat;
+
+$header: mat.define-palette(mat.$indigo-palette, 400);
+
+.header_wrapper {
+  display: flex;
+      justify-content: space-between;
+        align-items: baseline;
+        padding: 0 20px;
+  background-color: mat.get-color-from-palette($header);
+
+  h2 {
+    margin: 0;
+    padding: 20px 10px;
+  }
+
+  .header_buttons_wrapper{}
+
+}

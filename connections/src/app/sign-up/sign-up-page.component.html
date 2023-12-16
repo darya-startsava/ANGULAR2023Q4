@@ -1,7 +1,9 @@
 <div class="signup-page_wrapper">
     <form [formGroup]="signUpForm" (ngSubmit)="signUp()">
         <h3>Sign Up</h3>
-        <p>Already have an account? Go to <a routerLink="/signin">Sign In</a></p>
+        <p>
+            Already have an account? Go to <a routerLink="/signin">Sign In</a>
+        </p>
         <mat-form-field>
             <mat-label>First name</mat-label>
             <input matInput name="name" formControlName="name" required />
@@ -64,7 +66,7 @@
         </mat-form-field>
         <button
             class="submit-button"
-            mat-stroked-button
+            mat-raised-button
             color="primary"
             type="submit"
             [disabled]="

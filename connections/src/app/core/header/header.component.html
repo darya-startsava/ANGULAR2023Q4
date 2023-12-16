@@ -1,0 +1,15 @@
+<div class="header_wrapper">
+    <h2>Connections</h2>
+    <div>
+        @if ((signInStatus$ | async) === success) {
+            <button
+                class="header_buttons_wrapper"
+                mat-raised-button
+                color="accent"
+                (click)="goToProfilePage()"
+            >
+                Profile
+            </button>
+        }
+    </div>
+</div>
