@@ -11,8 +11,7 @@ export const signUpLoading = createAction(
 );
 
 export const signUpSuccess = createAction(
-    '[SignUpPageComponent] signUpSuccess',
-    props<{ data: SignUpDataState }>()
+    '[SignUpPageComponent] signUpSuccess'
 );
 
 export const signUpFailed = createAction(

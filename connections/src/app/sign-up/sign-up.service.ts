@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { SignUpDataState } from '../redux/state.models';
-import { Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -12,7 +11,7 @@ export class SignUpService {
 
     constructor(private http: HttpClient) {}
 
-    signUp(data: SignUpDataState): Observable<SignUpDataState> {
-        return this.http.post<SignUpDataState>(this.signUpUrl, data);
+    signUp(data: SignUpDataState) {
+        return this.http.post(this.signUpUrl, data);
     }
 }

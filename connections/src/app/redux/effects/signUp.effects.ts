@@ -16,11 +16,13 @@ export class SignUpEffects {
             ofType(signUpLoading),
             mergeMap((action) =>
                 this.signUpService.signUp(action.data).pipe(
-                    map((data) => signUpSuccess({ data })),
+                    map(() => {
+                        return signUpSuccess();
+                    }),
                     catchError((error) =>
                         of(
                             signUpFailed({
-                                error,
+                                error
                             })
                         )
                     )

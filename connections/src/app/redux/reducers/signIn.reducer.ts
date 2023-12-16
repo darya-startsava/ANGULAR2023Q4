@@ -1,37 +1,36 @@
 import { createReducer, on } from '@ngrx/store';
 import {
-    signUpFailed,
-    signUpInitAfterFall,
-    signUpLoading,
-    signUpSuccess
-} from '../actions/signUp.actions';
-import { SignUpState, StatusState } from '../state.models';
+    signInFailed,
+    signInInitAfterFall,
+    signInLoading,
+    signInSuccess
+} from '../actions/signIn.actions';
+import { SignInState, StatusState } from '../state.models';
 
-const initialState: SignUpState = {
+const initialState: SignInState = {
     data: null,
     status: StatusState.Init,
     error: { type: null, message: '' }
 };
 
-export const signUpReducer = createReducer<SignUpState>(
+export const signInReducer = createReducer<SignInState>(
     initialState,
     on(
-        signUpLoading,
-        (state, { data }): SignUpState => ({
+        signInLoading,
+        (state, { data }): SignInState => ({
             data,
             status: StatusState.Loading,
             error: { type: null, message: '' }
         })
     ),
-    // TODO delete data if null
-    on(signUpSuccess, (state): SignUpState => {
+    on(signInSuccess, (state): SignInState => {
         return {
             ...state,
             status: StatusState.Success,
             error: { type: null, message: '' }
         };
     }),
-    on(signUpFailed, (state, { error }): SignUpState => {
+    on(signInFailed, (state, { error }): SignInState => {
         return {
             ...state,
             status: StatusState.Failed,
@@ -39,7 +38,7 @@ export const signUpReducer = createReducer<SignUpState>(
         };
     }),
     on(
-        signUpInitAfterFall,
-        (state): SignUpState => ({ ...state, status: StatusState.Init })
+        signInInitAfterFall,
+        (state): SignInState => ({ ...state, status: StatusState.Init })
     )
 );
