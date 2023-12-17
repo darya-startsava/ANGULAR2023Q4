@@ -8,28 +8,24 @@ import { ProfileResponse } from './profile.model';
     providedIn: 'root'
 })
 export class ProfileService {
-    private uid = localStorage.getItem('uid') || '';
-    private email = localStorage.getItem('email') || '';
-    private token = `Bearer ${localStorage.getItem('token')}`;
-
     private readonly signUpUrl = 'https://tasks.app.rs.school/angular/profile';
 
     constructor(private http: HttpClient) {}
 
     getProfile(): Observable<ProfileResponse> {
         const headers = new HttpHeaders()
-            .set('rs-uid', this.uid)
-            .set('rs-email', this.email)
-            .set('Authorization', this.token);
+            .set('rs-uid', localStorage.getItem('uid') || '')
+            .set('rs-email', localStorage.getItem('email') || '')
+            .set('Authorization', `Bearer ${localStorage.getItem('token')}`);
 
         return this.http.get<ProfileResponse>(this.signUpUrl, { headers });
     }
 
     updateProfile(name: string) {
         const headers = new HttpHeaders()
-            .set('rs-uid', this.uid)
-            .set('rs-email', this.email)
-            .set('Authorization', this.token);
+            .set('rs-uid', localStorage.getItem('uid') || '')
+            .set('rs-email', localStorage.getItem('email') || '')
+            .set('Authorization', `Bearer ${localStorage.getItem('token')}`);
 
         return this.http.put(this.signUpUrl, { name }, { headers });
     }
