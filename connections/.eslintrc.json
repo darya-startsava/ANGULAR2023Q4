@@ -17,10 +17,11 @@
             ],
             "rules": {
                 "import/prefer-default-export": "off",
-                "import/first": "error",
+                "import/first": "warn",
                 "import/newline-after-import": "warn",
                 "import/no-duplicates": "error",
                 "import/no-extraneous-dependencies": "off",
+                "import/order": "warn",
                 "simple-import-sort/imports": "warn",
                 "simple-import-sort/exports": "warn",
                 "no-console": 0,

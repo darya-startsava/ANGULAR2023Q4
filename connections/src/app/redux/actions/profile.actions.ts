@@ -15,3 +15,8 @@ export const profileFailed = createAction(
     '[ProfilePageComponent] profileFailed',
     props<{ error: { error: ErrorState } }>()
 );
+
+export const profileUpdate = createAction(
+    '[ProfilePageComponent] profileUpdate',
+    props<{ name: string }>()
+);
