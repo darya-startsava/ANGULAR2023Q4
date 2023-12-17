@@ -1,6 +1,7 @@
 export interface AppState {
     signUp: SignUpState;
     signIn: SignInState;
+    profile: ProfileState;
 }
 
 export interface SignUpState {
@@ -26,6 +27,19 @@ export interface SignInDataState {
     password?: string | null;
 }
 
+export interface ProfileState {
+    data: ProfileDataState | null;
+    status: StatusState;
+    error: ErrorType | null;
+}
+
+export interface ProfileDataState {
+    uid?: string | null;
+    email?: string | null;
+    name?: string | null;
+    createdAt?: string | null;
+}
+
 export enum StatusState {
     Init = 'Init',
     Loading = 'Loading',
@@ -41,10 +55,7 @@ export interface ErrorState {
 export enum ErrorType {
     InvalidFormDataException = 'InvalidFormDataException',
     PrimaryDuplicationException = 'PrimaryDuplicationException',
-    NotFoundException = 'NotFoundException'
-}
-
-export interface SignInResponse {
-    token: string;
-    uid: string;
+    NotFoundException = 'NotFoundException',
+    InvalidTokenException = 'InvalidTokenException',
+    InvalidIDException = 'InvalidIDException'
 }

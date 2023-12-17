@@ -1,11 +1,9 @@
-import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import { selectSignInStatus } from '../../redux/selectors/signIn.selectors';
-import { AppState, StatusState } from '../../redux/state.models';
+
+import { CheckIsSignedInService } from '../check-is-signed-in.service';
 
 @Component({
     selector: 'app-header',
@@ -15,14 +13,10 @@ import { AppState, StatusState } from '../../redux/state.models';
     styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
-    public signInStatus$: Observable<StatusState>;
-    public success = StatusState.Success;
     constructor(
-        public store: Store<AppState>,
-        private router: Router
-    ) {
-        this.signInStatus$ = store.select(selectSignInStatus);
-    }
+        private router: Router,
+        public checkIsSignedInService: CheckIsSignedInService
+    ) {}
 
     goToProfilePage() {
         this.router.navigate(['/profile']);

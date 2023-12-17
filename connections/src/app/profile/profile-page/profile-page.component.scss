@@ -1,9 +1,24 @@
 .profile-page_wrapper {
   display: flex;
+  flex-direction: column;
   padding-top: 30px;
   justify-content: center;
+  align-items: center;
+
 
   h3 {
     text-align: center;
+  }
+
+  .profile-page_information_wrapper {
+    display: grid;
+    grid-template-columns: 2fr 2fr;
+    grid-gap: 20px;
+
+    h4,
+    p {
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
   }
 }

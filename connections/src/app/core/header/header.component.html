@@ -1,7 +1,7 @@
 <div class="header_wrapper">
     <h2>Connections</h2>
     <div>
-        @if ((signInStatus$ | async) === success) {
+        @if (checkIsSignedInService.isToken) {
             <button
                 class="header_buttons_wrapper"
                 mat-raised-button

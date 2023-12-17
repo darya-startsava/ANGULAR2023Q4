@@ -10,7 +10,8 @@ import {
     AbstractControl,
     FormBuilder,
     ReactiveFormsModule,
-    Validators } from '@angular/forms';
+    Validators
+} from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -100,9 +101,13 @@ export class SignInPageComponent implements OnDestroy, OnChanges {
             this.errorType !== ErrorType.NotFoundException &&
             this.signInStatus === StatusState.Failed
         ) {
-            this.openSnackBar('Attempt failed. Check your connection and try again.', 'Close', {
-                duration: 3000
-            });
+            this.openSnackBar(
+                'Attempt failed. Check your connection and try again.',
+                'Close',
+                {
+                    duration: 3000
+                }
+            );
         }
     }
 

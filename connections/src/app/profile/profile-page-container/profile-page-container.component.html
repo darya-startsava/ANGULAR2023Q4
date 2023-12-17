@@ -1,1 +1,6 @@
-<app-profile-page></app-profile-page>
+<app-profile-page
+    [uid]="uid$ | async"
+    [email]="email$ | async"
+    [name]="name$ | async"
+    [createdAt]="createdAt$ | async"
+></app-profile-page>
