@@ -86,6 +86,7 @@ export class SignInPageComponent implements OnDestroy, OnChanges {
             this.openSnackBar('You were signed in successfully.', 'Close', {
                 duration: 3000
             });
+          this.router.navigate(['/main']);
         }
         if (
             changes['errorType'] &&
