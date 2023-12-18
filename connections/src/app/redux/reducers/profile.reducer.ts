@@ -3,6 +3,7 @@ import { createReducer, on } from '@ngrx/store';
 import {
     profileFailed,
     profileLoading,
+    profileSignOut,
     profileSuccess,
     profileUpdate
 } from '../actions/profile.actions';
@@ -33,5 +34,6 @@ export const profileReducer = createReducer<ProfileState>(
     on(profileUpdate, (state, { name }) => ({
         ...state,
         data: { ...state.data, name }
-    }))
+    })),
+    on(profileSignOut, () => initialState)
 );

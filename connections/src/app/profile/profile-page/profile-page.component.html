@@ -1,3 +1,13 @@
+<div class="logout_button_wrapper">
+    <button
+        mat-raised-button
+        color="warn"
+        (click)="logout()"
+        [disabled]="profileStatus === 'Loading' || editStatus === 'Loading'"
+    >
+        Logout
+    </button>
+</div>
 <div class="profile-page_wrapper">
     <h3>Your profile</h3>
     <div class="profile-page_information_wrapper">

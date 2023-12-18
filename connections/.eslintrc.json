@@ -26,6 +26,7 @@
                 "simple-import-sort/exports": "warn",
                 "no-console": 0,
                 "no-trailing-spaces": "warn",
+                "no-plusplus": "off",
                 "linebreak-style": "off",
                 "operator-linebreak": "off",
                 "implicit-arrow-linebreak": "off",

@@ -29,7 +29,7 @@ export class ProfilePageContainerComponent implements OnInit, OnDestroy {
     public name$: Observable<string | null | undefined>;
     public createdAt$: Observable<string | null | undefined>;
     private errorType$: Observable<ErrorType | null>;
-    private profileStatus$: Observable<StatusState>;
+    public profileStatus$: Observable<StatusState>;
     private subscriptions: Subscription[] = [];
     constructor(
         public store: Store<AppState>,

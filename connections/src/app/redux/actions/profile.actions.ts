@@ -20,3 +20,7 @@ export const profileUpdate = createAction(
     '[ProfilePageComponent] profileUpdate',
     props<{ name: string }>()
 );
+
+export const profileSignOut = createAction(
+    '[ProfilePageComponent] profileSignOut'
+);

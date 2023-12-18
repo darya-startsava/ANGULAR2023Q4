@@ -5,13 +5,15 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 
-import { profileUpdate } from '../../redux/actions/profile.actions';
+import { profileSignOut, profileUpdate } from '../../redux/actions/profile.actions';
 import { AppState } from '../../redux/state.models';
 import { anyLettersNameValidator } from '../../sign-up/directives/any-letters-name.directive';
 import { ProfileService } from '../profile.service';
+import { SignOutService } from '../sign-out.service';
 
 export enum ProfileEditStatus {
     Init = 'Init',
@@ -37,6 +39,7 @@ export class ProfilePageComponent implements OnDestroy {
     @Input() email: string | null | undefined;
     @Input() name: string | null | undefined;
     @Input() createdAt: string | null | undefined;
+    @Input() profileStatus: string | null | undefined;
     editStatus: ProfileEditStatus = ProfileEditStatus.Init;
     init = ProfileEditStatus.Init;
     inProgress = ProfileEditStatus.InProgress;
@@ -50,8 +53,10 @@ export class ProfilePageComponent implements OnDestroy {
 
     constructor(
         private profileService: ProfileService,
+        private signOutService: SignOutService,
         private _snackBar: MatSnackBar,
-        private store: Store<AppState>
+        private store: Store<AppState>,
+        private router: Router
     ) {}
 
     ngOnDestroy(): void {
@@ -95,8 +100,71 @@ export class ProfilePageComponent implements OnDestroy {
                     );
                     this.editStatus = ProfileEditStatus.Init;
                 },
-                () => {
+                (error) => {
                     this.editStatus = ProfileEditStatus.Init;
+                    if (error.status === 400) {
+                        this.openSnackBar(
+                            'Attempt failed. Sign out and sign in again.',
+                            'Close',
+                            {
+                                duration: 3000
+                            }
+                        );
+                    } else {
+                        this.openSnackBar(
+                            'Attempt failed. Check your connection and try again.',
+                            'Close',
+                            {
+                                duration: 3000
+                            }
+                        );
+                    }
+                }
+            );
+        this.subscriptions.push(subscription);
+    }
+
+    onCancelEditProfile(): void {
+        this.editStatus = ProfileEditStatus.Init;
+    }
+
+    clearAllCookies() {
+        const cookies = document.cookie.split(';');
+
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i];
+            const eqPos = cookie.indexOf('=');
+            const name = eqPos > -1 ? cookie.substring(0, eqPos) : cookie;
+            document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+        }
+    }
+
+    logout() {
+        const subscription = this.signOutService.signOut().subscribe(
+            () => {
+                localStorage.clear();
+                sessionStorage.clear();
+                this.clearAllCookies();
+                this.openSnackBar(
+                    'You were successfully signed out.',
+                    'Close',
+                    {
+                        duration: 3000
+                    }
+                );
+                this.store.dispatch(profileSignOut());
+                this.router.navigate(['']);
+            },
+            (error) => {
+                if (error.status === 400) {
+                    this.openSnackBar(
+                        'Attempt failed. Try to sign out later.',
+                        'Close',
+                        {
+                            duration: 3000
+                        }
+                    );
+                } else {
                     this.openSnackBar(
                         'Attempt failed. Check your connection and try again.',
                         'Close',
@@ -105,11 +173,8 @@ export class ProfilePageComponent implements OnDestroy {
                         }
                     );
                 }
-            );
+            }
+        );
         this.subscriptions.push(subscription);
-    }
-
-    onCancelEditProfile(): void {
-        this.editStatus = ProfileEditStatus.Init;
     }
 }

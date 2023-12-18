@@ -1,5 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 
+import { profileSignOut } from '../actions/profile.actions';
 import {
     signInFailed,
     signInInitAfterFall,
@@ -43,5 +44,6 @@ export const signInReducer = createReducer<SignInState>(
     on(
         signInInitAfterFall,
         (state): SignInState => ({ ...state, status: StatusState.Init })
-    )
+    ),
+    on(profileSignOut, () => initialState)
 );
