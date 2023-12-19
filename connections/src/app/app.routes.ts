@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
 
+import { MainPageComponent } from './main-page/main-page/main-page.component';
 import { ProfilePageContainerComponent } from './profile/profile-page-container/profile-page-container.component';
+import { authGuard } from './sign-in/sign-in.guard';
 import { SignInPageContainerComponent } from './sign-in/sign-in-page-container/sign-in-page-container.component';
 import { SignUpPageComponent } from './sign-up/sign-up-page.component';
-import { authGuard } from './sign-in/sign-in.guard';
-import { MainPageComponent } from './main-page/main-page/main-page.component';
 
 export const routes: Routes = [
     { path: '', pathMatch: 'full', redirectTo: 'main' },

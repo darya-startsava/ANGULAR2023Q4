@@ -1,0 +1,24 @@
+<div class="update-button_wrapper">
+    <button
+        mat-raised-button
+        color="accent"
+        (click)="updateGroupsListItems()"
+        [disabled]="
+            this.countdownSubscription && !this.countdownSubscription.closed
+        "
+    >
+        Update
+    </button>
+    <div *ngIf="countdown > 0">
+        You can click this button to update group list in
+        {{ countdown }} seconds.
+    </div>
+</div>
+<h2>Groups List:</h2>
+@if (groupsStatus === status.Success) {
+    @for (group of groupsListItems; track group.id) {
+        <app-group-list-item [group]="group"></app-group-list-item>
+    }
+} @else if (groupsStatus === status.Loading) {
+    <mat-spinner></mat-spinner>
+}

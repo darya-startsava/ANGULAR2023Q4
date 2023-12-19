@@ -1,0 +1,22 @@
+@use '@angular/material' as mat;
+
+$left: mat.define-palette(mat.$pink-palette, 50);
+$right: mat.define-palette(mat.$grey-palette, 50);
+$border: mat.define-palette(mat.$grey-palette, 300);
+
+.main-page_wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+
+  .left_section {
+    background-color: mat.get-color-from-palette($left);
+    border-right: 3px solid mat.get-color-from-palette($border);
+    padding: 20px;
+  }
+
+  .right_section {
+    background-color: mat.get-color-from-palette($right);
+    padding: 20px;
+  }
+}

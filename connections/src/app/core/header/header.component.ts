@@ -21,4 +21,8 @@ export class HeaderComponent {
     goToProfilePage() {
         this.router.navigate(['/profile']);
     }
+
+    goToMainPage() {
+        this.router.navigate(['/main']);
+    }
 }

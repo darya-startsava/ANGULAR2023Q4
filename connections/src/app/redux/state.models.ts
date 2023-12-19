@@ -2,6 +2,7 @@ export interface AppState {
     signUp: SignUpState;
     signIn: SignInState;
     profile: ProfileState;
+    groups: GroupsState;
 }
 
 export interface SignUpState {
@@ -40,6 +41,20 @@ export interface ProfileDataState {
     createdAt?: string | null;
 }
 
+export interface GroupsState {
+    data: GroupsDataState[];
+    status: StatusState;
+  error: ErrorType | null;
+  countdownTimestamp: number;
+}
+
+export interface GroupsDataState {
+    id: string;
+    name: string;
+    createdAt: string;
+    createdBy: string;
+}
+
 export enum StatusState {
     Init = 'Init',
     Loading = 'Loading',
@@ -57,5 +72,6 @@ export enum ErrorType {
     PrimaryDuplicationException = 'PrimaryDuplicationException',
     NotFoundException = 'NotFoundException',
     InvalidTokenException = 'InvalidTokenException',
-    InvalidIDException = 'InvalidIDException'
+    InvalidIDException = 'InvalidIDException',
+    InvalidUserDataException = 'InvalidUserDataException',
 }
