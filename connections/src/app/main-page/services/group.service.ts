@@ -2,7 +2,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { GroupsListResponse } from '../models/group.models';
+import {
+    CreateGroupResponse,
+    GroupsListResponse
+} from '../models/group.models';
 
 @Injectable({
     providedIn: 'root'
@@ -10,6 +13,8 @@ import { GroupsListResponse } from '../models/group.models';
 export class GroupService {
     private readonly groupsListUrl =
         'https://tasks.app.rs.school/angular/groups/list';
+    private readonly createGroupUrl =
+        'https://tasks.app.rs.school/angular/groups/create';
 
     constructor(private http: HttpClient) {}
     getGroupsList(): Observable<GroupsListResponse> {
@@ -19,6 +24,16 @@ export class GroupService {
             .set('Authorization', `Bearer ${localStorage.getItem('token')}`);
 
         return this.http.get<GroupsListResponse>(this.groupsListUrl, {
+            headers
+        });
+    }
+    createGroup(name: string): Observable<CreateGroupResponse> {
+        const headers = new HttpHeaders()
+            .set('rs-uid', localStorage.getItem('uid') || '')
+            .set('rs-email', localStorage.getItem('email') || '')
+            .set('Authorization', `Bearer ${localStorage.getItem('token')}`);
+
+        return this.http.post<CreateGroupResponse>(this.createGroupUrl, name, {
             headers
         });
     }

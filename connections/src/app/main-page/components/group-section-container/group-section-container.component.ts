@@ -6,10 +6,11 @@ import { Observable, Subscription, take } from 'rxjs';
 
 import { groupsListLoading } from '../../../redux/actions/groups.actions';
 import {
+    selectCountdownTimestamp,
+    selectCreateGroupStatus,
     selectErrorType,
     selectGroupsData,
-    selectGroupsStatus,
-    selectCountdownTimestamp
+    selectGroupsStatus
 } from '../../../redux/selectors/groups.selector';
 import {
     AppState,
@@ -31,6 +32,7 @@ export class GroupSectionContainerComponent implements OnInit, OnDestroy {
     public groupsStatus$: Observable<StatusState>;
     public errorType$: Observable<ErrorType | null>;
     public countdownTimestamp$: Observable<number>;
+    public createGroupStatus$: Observable<StatusState>;
     private subscriptions: Subscription[] = [];
     constructor(
         public store: Store<AppState>,
@@ -40,6 +42,7 @@ export class GroupSectionContainerComponent implements OnInit, OnDestroy {
         this.groupsStatus$ = store.select(selectGroupsStatus);
         this.errorType$ = store.select(selectErrorType);
         this.countdownTimestamp$ = store.select(selectCountdownTimestamp);
+        this.createGroupStatus$ = store.select(selectCreateGroupStatus);
 
         const subscription = this.groupsStatus$.subscribe((status) => {
             this.errorType$.pipe(take(1)).subscribe((errorType) => {

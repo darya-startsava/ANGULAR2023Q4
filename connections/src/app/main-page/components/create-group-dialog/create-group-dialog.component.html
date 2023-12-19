@@ -1,0 +1,26 @@
+<div class="dialog_wrapper">
+    <h3>Create new group</h3>
+    <mat-form-field>
+        <input
+            matInput
+            placeholder="Name"
+            [formControl]="nameInput"
+            name="name"
+        />
+        @if (nameInput.errors?.['required']) {
+            <mat-error>Enter group name</mat-error>
+        } @else if (nameInput.errors?.['maxlength']) {
+            <mat-error>Group name is too long</mat-error>
+        } @else if (nameInput.errors?.['letterDigitName']) {
+            <mat-error>Use only letters, digits and spaces</mat-error>
+        }
+    </mat-form-field>
+    <button
+        mat-raised-button
+        color="primary"
+        (click)="onCreateGroup()"
+        [disabled]="nameInput.invalid"
+    >
+        Create
+    </button>
+</div>

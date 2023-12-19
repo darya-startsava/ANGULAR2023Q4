@@ -20,3 +20,13 @@ export const groupsListUpdate = createAction(
     '[GroupPageContainerComponent] groupsListUpdate',
     props<{ currentDate: number }>()
 );
+
+export const createGroupLoading = createAction(
+    '[CreateGroupDialogComponent] createGroupLoading',
+    props<{ name: string }>()
+);
+
+export const createGroupSuccess = createAction(
+    '[CreateGroupDialogComponent] createGroupSuccess',
+    props<{ groupID: string }>()
+);

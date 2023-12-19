@@ -4,6 +4,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
 import { provideEffects } from '@ngrx/effects';
 import { provideState, provideStore } from '@ngrx/store';
+import { provideStoreDevtools } from '@ngrx/store-devtools';
 
 import { routes } from './app.routes';
 import { GroupsEffects } from './redux/effects/groups.effects';
@@ -14,7 +15,6 @@ import { groupsReducer } from './redux/reducers/groups.reducer';
 import { profileReducer } from './redux/reducers/profile.reducer';
 import { signInReducer } from './redux/reducers/signIn.reducer';
 import { signUpReducer } from './redux/reducers/signUp.reducer';
-import { provideStoreDevtools } from '@ngrx/store-devtools';
 
 export const appConfig: ApplicationConfig = {
     providers: [

@@ -13,3 +13,7 @@ export interface GroupItems {
 export interface SInterface {
     S: string;
 }
+
+export interface CreateGroupResponse {
+    groupID: string;
+}

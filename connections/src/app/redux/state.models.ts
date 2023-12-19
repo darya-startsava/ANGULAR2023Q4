@@ -44,8 +44,9 @@ export interface ProfileDataState {
 export interface GroupsState {
     data: GroupsDataState[];
     status: StatusState;
-  error: ErrorType | null;
-  countdownTimestamp: number;
+    error: ErrorType | null;
+    countdownTimestamp: number;
+    createGroupStatus: StatusState;
 }
 
 export interface GroupsDataState {
@@ -73,5 +74,5 @@ export enum ErrorType {
     NotFoundException = 'NotFoundException',
     InvalidTokenException = 'InvalidTokenException',
     InvalidIDException = 'InvalidIDException',
-    InvalidUserDataException = 'InvalidUserDataException',
+    InvalidUserDataException = 'InvalidUserDataException'
 }

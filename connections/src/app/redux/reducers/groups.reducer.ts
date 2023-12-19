@@ -13,7 +13,8 @@ const initialState: GroupsState = {
     data: [],
     status: StatusState.Init,
     error: null,
-    countdownTimestamp: 0
+    countdownTimestamp: 0,
+    createGroupStatus: StatusState.Init
 };
 
 export const groupsReducer = createReducer<GroupsState>(
@@ -30,20 +31,23 @@ export const groupsReducer = createReducer<GroupsState>(
             data,
             status: StatusState.Success,
             error: null,
-            countdownTimestamp: state.countdownTimestamp
+            countdownTimestamp: state.countdownTimestamp,
+            createGroupStatus: StatusState.Init
         };
     }),
     on(groupsListFailed, (state, { error }) => ({
         data: [],
         status: StatusState.Failed,
         error: error.error.type,
-        countdownTimestamp: state.countdownTimestamp
+        countdownTimestamp: state.countdownTimestamp,
+        createGroupStatus: StatusState.Init
     })),
     on(groupsListUpdate, (state) => ({
         ...state,
         error: null,
         countdownTimestamp: new Date().getTime(),
-        status: StatusState.Init
+        status: StatusState.Init,
+        createGroupStatus: StatusState.Init
     })),
     on(profileSignOut, () => initialState)
 );
