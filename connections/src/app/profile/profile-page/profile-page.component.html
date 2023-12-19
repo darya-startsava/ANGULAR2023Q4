@@ -1,0 +1,74 @@
+<div class="logout_button_wrapper">
+    <button
+        mat-raised-button
+        color="warn"
+        (click)="logout()"
+        [disabled]="profileStatus === 'Loading' || editStatus === 'Loading'"
+    >
+        Logout
+    </button>
+</div>
+<div class="profile-page_wrapper">
+    <h3>Your profile</h3>
+    @if (profileStatus !== 'Loading') {
+        <div class="profile-page_information_wrapper">
+            <h4>Id</h4>
+            <p>{{ uid }}</p>
+            <h4>Email</h4>
+            <p>{{ email }}</p>
+            <h4>Profile creation time</h4>
+            <p>{{ date }}</p>
+            <h4>Name</h4>
+            @if (editStatus === init) {
+                <p>{{ name }}</p>
+            }
+            @if (editStatus === inProgress || editStatus === loading) {
+                <mat-form-field>
+                    <input
+                        matInput
+                        placeholder="Name"
+                        [formControl]="nameInput"
+                        name="name"
+                    />
+                    @if (nameInput.errors?.['required']) {
+                        <mat-error>Enter your name</mat-error>
+                    } @else if (nameInput.errors?.['maxlength']) {
+                        <mat-error>Name is too long</mat-error>
+                    } @else if (nameInput.errors?.['letterName']) {
+                        <mat-error
+                            >Use only letters (at least one) and
+                            spaces</mat-error
+                        >
+                    }
+                </mat-form-field>
+            }
+        </div>
+        @if (editStatus === init) {
+            <button mat-raised-button color="primary" (click)="onEditProfile()">
+                Edit
+            </button>
+        }
+        @if (editStatus === inProgress) {
+            <div class="inProgress-buttons_wrapper">
+                <button
+                    mat-raised-button
+                    color="primary"
+                    (click)="onSaveProfile()"
+                    [disabled]="nameInput.invalid"
+                >
+                    Save
+                </button>
+                <button
+                    mat-raised-button
+                    color="warn"
+                    (click)="onCancelEditProfile()"
+                >
+                    Cancel
+                </button>
+            </div>
+        }
+    }
+    @if (editStatus === loading || profileStatus === 'Loading') {
+        <mat-spinner></mat-spinner>
+    }
+</div>

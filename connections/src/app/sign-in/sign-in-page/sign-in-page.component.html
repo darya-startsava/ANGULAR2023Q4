@@ -1,0 +1,61 @@
+<div class="signin-page_wrapper">
+    <form [formGroup]="signInForm" (ngSubmit)="signIn()">
+        <h3>Sign In</h3>
+        <p>
+            Don't have an account yet? Go to <a routerLink="/signup">Sign Up</a>
+        </p>
+        <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input
+                matInput
+                name="email"
+                formControlName="email"
+                type="email"
+                required
+            />
+            @if (email?.errors?.['required']) {
+                <mat-error>Enter your email</mat-error>
+            } @else if (email?.errors?.['email']) {
+                <mat-error>Email is incorrect</mat-error>
+            }
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Password</mat-label>
+            <input
+                matInput
+                name="password"
+                formControlName="password"
+                [type]="hide ? 'password' : 'text'"
+                required
+            />
+            <button
+                mat-icon-button
+                matSuffix
+                (click)="hide = !hide"
+                [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide"
+                type="button"
+            >
+                <mat-icon>{{
+                    hide ? 'visibility_off' : 'visibility'
+                }}</mat-icon>
+            </button>
+            @if (password?.errors?.['required']) {
+                <mat-error>Enter your password</mat-error>
+            }
+        </mat-form-field>
+        <button
+            class="submit-button"
+            mat-raised-button
+            color="primary"
+            type="submit"
+            [disabled]="
+                signInForm.invalid ||
+                signInStatus === failed ||
+                signInStatus === loading
+            "
+        >
+            Sign In
+        </button>
+    </form>
+</div>
