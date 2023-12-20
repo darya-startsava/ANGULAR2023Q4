@@ -3,9 +3,22 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 
-import { GroupsListResponse } from '../../main-page/models/group.models';
+import {
+    CreateGroupResponse,
+    GroupsListResponse
+} from '../../main-page/models/group.models';
 import { GroupService } from '../../main-page/services/group.service';
-import { groupsListFailed, groupsListLoading, groupsListSuccess } from '../actions/groups.actions';
+import {
+    createGroupFailed,
+    createGroupLoading,
+    createGroupSuccess,
+    deleteGroupFailed,
+    deleteGroupLoading,
+    deleteGroupSuccess,
+    groupsListFailed,
+    groupsListLoading,
+    groupsListSuccess
+} from '../actions/groups.actions';
 import { GroupsDataState } from '../state.models';
 
 @Injectable()
@@ -29,6 +42,35 @@ export class GroupsEffects {
                         });
                     }),
                     catchError((error) => of(groupsListFailed({ error })))
+                )
+            )
+        )
+    );
+
+    createGroupLoading$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(createGroupLoading),
+            mergeMap((action) =>
+                this.groupService.createGroup(action.name).pipe(
+                    map((data: CreateGroupResponse) =>
+                        createGroupSuccess({
+                            name: action.name,
+                            id: data.groupID
+                        })
+                    ),
+                    catchError((error) => of(createGroupFailed({ error })))
+                )
+            )
+        )
+    );
+
+    deleteGroupLoading$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(deleteGroupLoading),
+            mergeMap((action) =>
+                this.groupService.deleteGroup(action.id).pipe(
+                    map(() => deleteGroupSuccess({ id: action.id })),
+                    catchError(() => of(deleteGroupFailed()))
                 )
             )
         )

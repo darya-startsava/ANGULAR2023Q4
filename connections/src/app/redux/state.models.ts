@@ -47,6 +47,8 @@ export interface GroupsState {
     error: ErrorType | null;
     countdownTimestamp: number;
     createGroupStatus: StatusState;
+    createGroupError: ErrorType | null;
+    deleteGroupStatus: StatusState;
 }
 
 export interface GroupsDataState {

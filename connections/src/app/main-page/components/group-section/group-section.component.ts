@@ -2,18 +2,21 @@ import { CommonModule } from '@angular/common';
 import {
     Component,
     Input,
-    OnInit,
     OnChanges,
+    OnDestroy,
+    OnInit,
     SimpleChanges
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
 import { interval, Subscription } from 'rxjs';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 import {
+    clearCreateGroupInfo,
+    clearDeleteGroupInfo,
     groupsListLoading,
     groupsListUpdate
 } from '../../../redux/actions/groups.actions';
@@ -23,8 +26,8 @@ import {
     GroupsDataState,
     StatusState
 } from '../../../redux/state.models';
-import { GroupListItemComponent } from '../group-list-item/group-list-item.component';
 import { CreateGroupDialogComponent } from '../create-group-dialog/create-group-dialog.component';
+import { GroupListItemComponent } from '../group-list-item/group-list-item.component';
 
 @Component({
     selector: 'app-group-section',
@@ -38,16 +41,17 @@ import { CreateGroupDialogComponent } from '../create-group-dialog/create-group-
     templateUrl: './group-section.component.html',
     styleUrl: './group-section.component.scss'
 })
-export class GroupSectionComponent implements OnInit, OnChanges {
+export class GroupSectionComponent implements OnInit, OnChanges, OnDestroy {
     @Input() groupsListItems: GroupsDataState[] | null | undefined;
     @Input() groupsStatus: string | null | undefined;
     @Input() errorType: ErrorType | null | undefined;
     @Input() countdownTimestamp: number | undefined | null;
     @Input() createGroupStatus: string | null | undefined;
+    @Input() deleteGroupStatus: string | null | undefined;
     status = StatusState;
     countdown: number = 0;
     public countdownSubscription: Subscription | undefined;
-    private dialogRef: MatDialogRef<CreateGroupDialogComponent> | undefined;
+  private dialogRef: MatDialogRef<CreateGroupDialogComponent> | undefined;
 
     constructor(
         private _snackBar: MatSnackBar,
@@ -68,6 +72,7 @@ export class GroupSectionComponent implements OnInit, OnChanges {
             this.openSnackBar('Group was created successfully.', 'Close', {
                 duration: 3000
             });
+            this.store.dispatch(clearCreateGroupInfo());
         } else if (
             changes['createGroupStatus'] &&
             this.createGroupStatus === StatusState.Failed
@@ -79,7 +84,33 @@ export class GroupSectionComponent implements OnInit, OnChanges {
                     duration: 3000
                 }
             );
+            this.store.dispatch(clearCreateGroupInfo());
         }
+        if (
+            changes['deleteGroupStatus'] &&
+            this.deleteGroupStatus === StatusState.Success
+        ) {
+            this.openSnackBar('Group was deleted successfully.', 'Close', {
+                duration: 3000
+            });
+            this.store.dispatch(clearDeleteGroupInfo());
+        } else if (
+            changes['deleteGroupStatus'] &&
+            this.deleteGroupStatus === StatusState.Failed
+        ) {
+            this.openSnackBar(
+                'Attempt failed. Check your connection and try again.',
+                'Close',
+                {
+                    duration: 3000
+                }
+            );
+            this.store.dispatch(clearDeleteGroupInfo());
+        }
+    }
+
+    ngOnDestroy(): void {
+        this.store.dispatch(clearCreateGroupInfo());
     }
 
     openSnackBar(message: string, action: string, config: MatSnackBarConfig) {
@@ -109,10 +140,5 @@ export class GroupSectionComponent implements OnInit, OnChanges {
 
     openDialog(): void {
         this.dialogRef = this.dialog.open(CreateGroupDialogComponent);
-
-        this.dialogRef.afterClosed().subscribe((result) => {
-            console.log('The dialog was closed');
-            // this.animal = result;
-        });
     }
 }
