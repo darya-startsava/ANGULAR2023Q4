@@ -1,1 +1,8 @@
-<p class="group_name">{{group.name}}</p>
+<div class="group_item_wrapper">
+    <p class="group_name">{{ group.name }}</p>
+    @if (group.createdBy === uid) {
+        <button mat-icon-button color="warn" (click)="openDialog()">
+            <mat-icon>delete</mat-icon>
+        </button>
+    }
+</div>

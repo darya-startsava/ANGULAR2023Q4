@@ -28,5 +28,32 @@ export const createGroupLoading = createAction(
 
 export const createGroupSuccess = createAction(
     '[CreateGroupDialogComponent] createGroupSuccess',
-    props<{ groupID: string }>()
+    props<{ name: string; id: string }>()
+);
+
+export const createGroupFailed = createAction(
+    '[CreateGroupDialogComponent] createGroupFailed',
+    props<{ error: { error: ErrorState } }>()
+);
+
+export const clearCreateGroupInfo = createAction(
+    '[GroupSectionComponent] clearCreateGroupInfo'
+);
+
+export const deleteGroupLoading = createAction(
+    '[GroupListItemComponent] deleteGroupLoading',
+    props<{ id: string }>()
+);
+
+export const deleteGroupSuccess = createAction(
+    '[GroupListItemComponent] deleteGroupSuccess',
+    props<{ id: string }>()
+);
+
+export const deleteGroupFailed = createAction(
+    '[GroupListItemComponent] deleteGroupFailed'
+);
+
+export const clearDeleteGroupInfo = createAction(
+    '[GroupListItemComponent] clearDeleteGroupInfo'
 );

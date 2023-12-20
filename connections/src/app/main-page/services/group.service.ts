@@ -15,6 +15,8 @@ export class GroupService {
         'https://tasks.app.rs.school/angular/groups/list';
     private readonly createGroupUrl =
         'https://tasks.app.rs.school/angular/groups/create';
+    private readonly deleteGroupUrl =
+        'https://tasks.app.rs.school/angular/groups/delete?groupID=';
 
     constructor(private http: HttpClient) {}
     getGroupsList(): Observable<GroupsListResponse> {
@@ -31,10 +33,23 @@ export class GroupService {
         const headers = new HttpHeaders()
             .set('rs-uid', localStorage.getItem('uid') || '')
             .set('rs-email', localStorage.getItem('email') || '')
-            .set('Authorization', `Bearer ${localStorage.getItem('token')}`);
+            .set('Authorization', `Bearer ${localStorage.getItem('token')}`)
+            .set('Content-Type', 'application/json');
 
-        return this.http.post<CreateGroupResponse>(this.createGroupUrl, name, {
-            headers
-        });
+        return this.http.post<CreateGroupResponse>(
+            this.createGroupUrl,
+            { name },
+            {
+                headers
+            }
+        );
+    }
+
+    deleteGroup(id: string) {
+        const headers = new HttpHeaders()
+            .set('rs-uid', localStorage.getItem('uid') || '')
+            .set('rs-email', localStorage.getItem('email') || '')
+            .set('Authorization', `Bearer ${localStorage.getItem('token')}`);
+        return this.http.delete(this.deleteGroupUrl + id, { headers });
     }
 }

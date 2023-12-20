@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
-import { onlyLettersDigitsSpacesNameValidator } from '../../directives/only-letters-digits-spaces-name.directive';
-import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { AppState } from '../../../redux/state.models';
+
 import { createGroupLoading } from '../../../redux/actions/groups.actions';
+import { AppState } from '../../../redux/state.models';
+import { onlyLettersDigitsSpacesNameValidator } from '../../directives/only-letters-digits-spaces-name.directive';
 
 @Component({
     selector: 'app-create-group-dialog',
@@ -34,10 +35,8 @@ export class CreateGroupDialogComponent {
     ) {}
 
     onCreateGroup() {
-        console.log(this.nameInput.value);
         this.store.dispatch(
             createGroupLoading({ name: this.nameInput.value || '' })
         );
-        //  this.dialogRef.close();
     }
 }

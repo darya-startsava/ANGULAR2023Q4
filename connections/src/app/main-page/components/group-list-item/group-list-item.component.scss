@@ -1,3 +1,10 @@
-.group_name {
-  padding: 10px 0;
+.group_item_wrapper {
+
+  display: flex;
+  align-items: center;
+  column-gap: 50px;
+
+  .group_name {
+    padding: 10px 0;
+  }
 }
