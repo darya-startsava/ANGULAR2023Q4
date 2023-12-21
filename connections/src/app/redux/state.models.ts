@@ -3,6 +3,7 @@ export interface AppState {
     signIn: SignInState;
     profile: ProfileState;
     groups: GroupsState;
+    people: PeopleState;
 }
 
 export interface SignUpState {
@@ -56,6 +57,21 @@ export interface GroupsDataState {
     name: string;
     createdAt: string;
     createdBy: string;
+}
+
+export interface PeopleState {
+    data: PeopleDataState[];
+    status: StatusState;
+    error: ErrorType | null;
+    countdownTimestamp: number;
+    // createGroupStatus: StatusState;
+    // createGroupError: ErrorType | null;
+    // deleteGroupStatus: StatusState;
+}
+
+export interface PeopleDataState {
+    name: string;
+    uid: string;
 }
 
 export enum StatusState {

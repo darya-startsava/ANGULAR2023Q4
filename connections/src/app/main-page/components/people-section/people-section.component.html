@@ -1,1 +1,24 @@
-<p>people-section works!</p>
+<div class="update-button_wrapper">
+    <button
+        mat-raised-button
+        color="accent"
+        (click)="updatePeopleListItems()"
+        [disabled]="
+            this.countdownSubscription && !this.countdownSubscription.closed
+        "
+    >
+        Update list
+    </button>
+    <div *ngIf="countdown > 0">
+        You can click this button to update people list in
+        {{ countdown }} seconds.
+    </div>
+</div>
+<h2>People List:</h2>
+@if (peopleStatus === status.Success) {
+    @for (person of (peopleItems | deleteUser); track person.uid) {
+        <app-people-list-item [person]="person"></app-people-list-item>
+    }
+} @else if (peopleStatus === status.Loading) {
+    <mat-spinner></mat-spinner>
+}

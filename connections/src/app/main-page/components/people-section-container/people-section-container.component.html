@@ -1,1 +1,6 @@
-<app-people-section></app-people-section>
+<app-people-section
+    [peopleItems]="data$ | async"
+    [peopleStatus]="peopleStatus$ | async"
+    [errorType]="errorType$ | async"
+    [countdownTimestamp]="countdownTimestamp$ | async"
+></app-people-section>
