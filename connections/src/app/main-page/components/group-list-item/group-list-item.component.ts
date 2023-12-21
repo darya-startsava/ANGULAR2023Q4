@@ -12,11 +12,12 @@ import {
     StatusState
 } from '../../../redux/state.models';
 import { DeleteGroupDialogComponent } from '../delete-group-dialog/delete-group-dialog.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
     selector: 'app-group-list-item',
     standalone: true,
-    imports: [MatButtonModule, MatIconModule],
+    imports: [MatButtonModule, MatIconModule, RouterModule],
     templateUrl: './group-list-item.component.html',
     styleUrl: './group-list-item.component.scss'
 })
