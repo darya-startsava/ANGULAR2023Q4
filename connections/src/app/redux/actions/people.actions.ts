@@ -1,6 +1,9 @@
 import { createAction, props } from '@ngrx/store';
 
-import { ErrorState, PeopleDataState } from '../state.models';
+import {
+    ErrorState,
+    PeopleDataState
+} from '../state.models';
 
 export const peopleLoading = createAction(
     '[PeoplePageContainerComponent] peopleLoading'

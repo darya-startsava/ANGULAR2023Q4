@@ -5,6 +5,7 @@ import { ProfilePageContainerComponent } from './profile/profile-page-container/
 import { authGuard } from './sign-in/sign-in.guard';
 import { SignInPageContainerComponent } from './sign-in/sign-in-page-container/sign-in-page-container.component';
 import { SignUpPageComponent } from './sign-up/sign-up-page.component';
+import { ConversationPageContainerComponent } from './conversation-page/conversation-page-container/conversation-page-container.component';
 
 export const routes: Routes = [
     { path: '', pathMatch: 'full', redirectTo: 'main' },
@@ -15,5 +16,10 @@ export const routes: Routes = [
         path: 'profile',
         canActivate: [authGuard],
         component: ProfilePageContainerComponent
+    },
+    {
+        path: 'conversation/:id',
+        component: ConversationPageContainerComponent,
+        canActivate: [authGuard]
     }
 ];

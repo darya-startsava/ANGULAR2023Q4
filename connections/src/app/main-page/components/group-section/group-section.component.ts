@@ -51,7 +51,7 @@ export class GroupSectionComponent implements OnInit, OnChanges, OnDestroy {
     status = StatusState;
     countdown: number = 0;
     public countdownSubscription: Subscription | undefined;
-  private dialogRef: MatDialogRef<CreateGroupDialogComponent> | undefined;
+    private dialogRef: MatDialogRef<CreateGroupDialogComponent> | undefined;
 
     constructor(
         private _snackBar: MatSnackBar,

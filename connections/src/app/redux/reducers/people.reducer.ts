@@ -13,7 +13,7 @@ const initialState = {
     data: [],
     status: StatusState.Init,
     error: null,
-    countdownTimestamp: 0
+    countdownTimestamp: 0,
 };
 
 export const peopleReducer = createReducer<PeopleState>(
@@ -29,7 +29,7 @@ export const peopleReducer = createReducer<PeopleState>(
         data,
         status: StatusState.Success,
         error: null,
-        countdownTimestamp: state.countdownTimestamp
+        countdownTimestamp: state.countdownTimestamp,
     })),
     on(peopleFailed, (state, { error }) => ({
         ...state,

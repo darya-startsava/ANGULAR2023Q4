@@ -1,4 +1,4 @@
 <div class="people_item_wrapper">
-    <p class="person_name">{{ person.name }}</p>
+    <a (click)="handleLinkClick()" routerLink="/conversation/{{person.conversationId}}" class="person_name">{{ person.name }}</a>
 </div>
 
