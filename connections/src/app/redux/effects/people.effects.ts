@@ -2,15 +2,21 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, forkJoin, map, mergeMap, of } from 'rxjs';
 
+import {
+    ConversationsListResponse,
+    CreateConversationResponse
+} from '../../main-page/models/conversations.models';
 import { PeopleResponse } from '../../main-page/models/people.models';
+import { ConversationsService } from '../../main-page/services/conversations.service';
 import { PeopleService } from '../../main-page/services/people.service';
 import {
+    createConversationFailed,
+    createConversationLoading,
+    createConversationSuccess,
     peopleFailed,
     peopleLoading,
     peopleSuccess
 } from '../actions/people.actions';
-import { ConversationsService } from '../../main-page/services/conversations.service';
-import { ConversationsListResponse } from '../../main-page/models/conversations.models';
 
 @Injectable()
 export class PeopleEffects {
@@ -39,12 +45,12 @@ export class PeopleEffects {
                         ).Items.map((item) => ({
                             name: item.name.S,
                             uid: item.uid.S,
-                            conversationId: 'null'
+                            conversationID: null
                         })).map((item) => {
                             if (mapConversations.has(item.uid)) {
                                 return {
                                     ...item,
-                                    conversationId: mapConversations.get(
+                                    conversationID: mapConversations.get(
                                         item.uid
                                     )
                                 };
@@ -61,6 +67,28 @@ export class PeopleEffects {
             })
         )
     );
+
+    createConversationLoading$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(createConversationLoading),
+            mergeMap((action) =>
+                this.conversationsService
+                    .createConversation(action.companionID)
+                    .pipe(
+                        map((data: CreateConversationResponse) =>
+                            createConversationSuccess({
+                                companionID: action.companionID,
+                                conversationID: data.conversationID
+                            })
+                        ),
+                        catchError((error) =>
+                            of(createConversationFailed({ error }))
+                        )
+                    )
+            )
+        )
+    );
+
     constructor(
         private actions$: Actions,
         private peopleService: PeopleService,

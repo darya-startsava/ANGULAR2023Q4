@@ -1,4 +1,4 @@
-<div class="people_item_wrapper">
+<div class="people_item_wrapper" [appColoredBackground]="!!person.conversationID">
     <a
         href="#"
         (click)="handleLinkClick(); $event.preventDefault()"

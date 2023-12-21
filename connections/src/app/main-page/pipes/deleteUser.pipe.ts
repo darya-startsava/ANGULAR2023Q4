@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+
 import { PeopleDataState } from '../../redux/state.models';
 
 @Pipe({

@@ -1,6 +1,10 @@
 import { createReducer, on } from '@ngrx/store';
 
 import {
+    clearCreateConversationInfo,
+    createConversationFailed,
+    createConversationLoading,
+    createConversationSuccess,
     peopleFailed,
     peopleLoading,
     peopleSuccess,
@@ -14,6 +18,8 @@ const initialState = {
     status: StatusState.Init,
     error: null,
     countdownTimestamp: 0,
+    createConversationStatus: StatusState.Init,
+    createConversationError: null
 };
 
 export const peopleReducer = createReducer<PeopleState>(
@@ -29,7 +35,7 @@ export const peopleReducer = createReducer<PeopleState>(
         data,
         status: StatusState.Success,
         error: null,
-        countdownTimestamp: state.countdownTimestamp,
+        countdownTimestamp: state.countdownTimestamp
     })),
     on(peopleFailed, (state, { error }) => ({
         ...state,
@@ -44,6 +50,31 @@ export const peopleReducer = createReducer<PeopleState>(
         error: null,
         countdownTimestamp: new Date().getTime(),
         status: StatusState.Init
+    })),
+    on(createConversationLoading, (state) => ({
+        ...state,
+        createConversationStatus: StatusState.Loading
+    })),
+    on(createConversationSuccess, (state, { companionID, conversationID }) => ({
+        ...state,
+        createConversationStatus: StatusState.Success,
+        data: state.data.map((person) => {
+            if (person.uid === companionID) {
+                return { ...person, conversationID };
+            }
+            return person;
+        })
+    })),
+    on(createConversationFailed, (state, { error }) => ({
+        ...state,
+        error: error.error.type,
+        createConversationStatus: StatusState.Failed,
+        createConversationError: error.error.type
+    })),
+    on(clearCreateConversationInfo, (state) => ({
+        ...state,
+        createConversationStatus: StatusState.Init,
+        createConversationError: null
     })),
     on(profileSignOut, () => initialState)
 );

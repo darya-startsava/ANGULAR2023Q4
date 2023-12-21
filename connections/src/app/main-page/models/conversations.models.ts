@@ -11,3 +11,7 @@ export interface ConversationItem {
 export interface SInterface {
     S: string;
 }
+
+export interface CreateConversationResponse {
+    conversationID: string;
+}

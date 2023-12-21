@@ -2,6 +2,7 @@ import { Component, Input, OnDestroy } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
+import { RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 
@@ -12,7 +13,6 @@ import {
     StatusState
 } from '../../../redux/state.models';
 import { DeleteGroupDialogComponent } from '../delete-group-dialog/delete-group-dialog.component';
-import { RouterModule } from '@angular/router';
 
 @Component({
     selector: 'app-group-list-item',

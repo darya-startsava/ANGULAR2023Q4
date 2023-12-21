@@ -93,7 +93,8 @@ export const groupsReducer = createReducer<GroupsState>(
     })),
     on(clearCreateGroupInfo, (state) => ({
         ...state,
-        createGroupStatus: StatusState.Init
+        createGroupStatus: StatusState.Init,
+        createGroupError: null
     })),
 
     on(profileSignOut, () => initialState)

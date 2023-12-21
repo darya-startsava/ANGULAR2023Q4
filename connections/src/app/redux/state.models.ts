@@ -64,12 +64,14 @@ export interface PeopleState {
     status: StatusState;
     error: ErrorType | null;
     countdownTimestamp: number;
+    createConversationStatus: StatusState;
+    createConversationError: ErrorType | null;
 }
 
 export interface PeopleDataState {
     name: string;
     uid: string;
-    conversationId: string | null;
+    conversationID: string | null;
 }
 
 export enum StatusState {

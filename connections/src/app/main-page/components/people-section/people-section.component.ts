@@ -1,21 +1,22 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { PeopleListItemComponent } from '../people-list-item/people-list-item.component';
 import { CommonModule } from '@angular/common';
+import { Component, Input, OnInit } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { Store } from '@ngrx/store';
+import { interval, Subscription } from 'rxjs';
+
+import {
+    peopleLoading,
+    peopleUpdate
+} from '../../../redux/actions/people.actions';
 import {
     AppState,
     ErrorType,
     PeopleDataState,
     StatusState
 } from '../../../redux/state.models';
-import { Subscription, interval } from 'rxjs';
-import { Store } from '@ngrx/store';
-import {
-    peopleLoading,
-    peopleUpdate
-} from '../../../redux/actions/people.actions';
 import { DeleteUserPipe } from '../../pipes/deleteUser.pipe';
-import { MatButtonModule } from '@angular/material/button';
+import { PeopleListItemComponent } from '../people-list-item/people-list-item.component';
 
 @Component({
     selector: 'app-people-section',
