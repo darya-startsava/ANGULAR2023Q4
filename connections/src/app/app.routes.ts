@@ -7,6 +7,7 @@ import { ProfilePageContainerComponent } from './profile/profile-page-container/
 import { authGuard } from './sign-in/sign-in.guard';
 import { SignInPageContainerComponent } from './sign-in/sign-in-page-container/sign-in-page-container.component';
 import { SignUpPageComponent } from './sign-up/sign-up-page.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 export const routes: Routes = [
     { path: '', pathMatch: 'full', redirectTo: 'main' },
@@ -22,10 +23,14 @@ export const routes: Routes = [
         path: 'conversation/:id',
         component: ConversationPageContainerComponent,
         canActivate: [authGuard]
-  },
-        {
+    },
+    {
         path: 'group/:id',
         component: GroupPageContainerComponent,
         canActivate: [authGuard]
+    },
+    {
+        path: '**',
+        component: PageNotFoundComponent
     }
 ];
