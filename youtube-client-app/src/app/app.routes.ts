@@ -19,6 +19,10 @@ export const routes: Routes = [
         loadChildren: () =>
             import("./admin/admin.module").then((m) => m.AdminModule)
     },
-
+    {
+        path: "favorite",
+        loadChildren: () =>
+            import("./favorite/favorite.module").then((m) => m.FavoriteModule)
+    },
     { path: "**", component: NotFoundPageComponent }
 ];

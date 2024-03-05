@@ -6,6 +6,8 @@ import {
     FormControl,
     Validators
 } from "@angular/forms";
+import { Store } from "@ngrx/store";
+import { createCard } from "src/app/redux/actions/card.actions";
 
 import { dateBeforeValidator } from "../../directives/date-before.directive";
 
@@ -33,9 +35,18 @@ export class AdminPageComponent {
         ])
     });
 
-    constructor(private formBuilder: FormBuilder) {}
+    constructor(
+        private formBuilder: FormBuilder,
+        private store: Store
+    ) {}
 
     onSubmit(): void {
+        this.store.dispatch(
+            createCard({
+                id: `customCard${Date.now()}`,
+                createdCard: this.createCardForm.value
+            })
+        );
         this.resetForm();
     }
 

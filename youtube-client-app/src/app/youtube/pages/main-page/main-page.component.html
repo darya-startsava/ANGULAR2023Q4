@@ -1,10 +1,27 @@
+<div class="pagination_wrapper">
+    <button
+        mat-raised-button
+        color="primary"
+        [disabled]="(currentPage$ | async) === 1"
+        (click)="goToPreviousPage()"
+    >
+        Prev page
+    </button>
+    <span class="current_page">{{ currentPage$ | async }}</span>
+    <app-custom-button [template]="nextPageButton" (click)="goToNextPage()">
+    </app-custom-button>
+</div>
 <div class="search-results_wrapper">
     <app-search-results
         [searchItems]="
-            searchResultService.data$
+            currentPageItems$
                 | async
                 | filter: searchResultService.wordForFilterBy
         "
     >
     </app-search-results>
 </div>
+
+<ng-template #nextPageButton>
+    <button mat-raised-button color="primary">Next page</button>
+</ng-template>

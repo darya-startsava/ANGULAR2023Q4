@@ -1,10 +1,22 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
-import { Subscription } from "rxjs";
+import { ActivatedRoute, Router } from "@angular/router";
+import { Store } from "@ngrx/store";
+import { Observable, Subscription } from "rxjs";
+import { deleteCustomCard } from "src/app/redux/actions/card.actions";
+import { clearDetailedInformationStore } from "src/app/redux/actions/delete.actions";
+import {
+    addToFavorite,
+    removeFromFavorite
+} from "src/app/redux/actions/favorite.actions";
+import { searchVideoById } from "src/app/redux/actions/search.actions";
+import {
+    selectCurrentItem,
+    selectCurrentVideo
+} from "src/app/redux/selectors/currentItem.selectors";
+import { selectFavoriteIds } from "src/app/redux/selectors/favorite.selectors";
+import { AppState, VideoItem } from "src/app/redux/state.models";
 
-import { Item } from "../../models/search-item.model";
 import { SearchResultService } from "../../services/search-result.service";
-import { getDateStatus } from "../../utils";
 
 @Component({
     selector: "app-detailed-information-page",
@@ -12,31 +24,58 @@ import { getDateStatus } from "../../utils";
     styleUrls: ["./detailed-information-page.component.scss"]
 })
 export class DetailedInformationPageComponent implements OnInit, OnDestroy {
-    dateStatus: string;
-    item: Item;
+    item$: Observable<VideoItem>;
+    favoriteItems$: Observable<Array<string>>;
     private subscriptions: Subscription[] = [];
+    id: string;
 
     constructor(
         private route: ActivatedRoute,
-        public searchResultService: SearchResultService
+        public searchResultService: SearchResultService,
+        private store: Store<AppState>,
+        private router: Router
     ) {}
 
     ngOnInit(): void {
-        this.getItem();
+        this.id = this.route.snapshot.paramMap.get("id");
+        this.favoriteItems$ = this.store.select(selectFavoriteIds);
+        if (this.id.includes("customCard")) {
+            this.item$ = this.store.select(selectCurrentItem);
+        } else {
+            this.getItem(this.id);
+            this.item$ = this.store.select<VideoItem>(selectCurrentVideo);
+        }
     }
 
     ngOnDestroy(): void {
         this.subscriptions.forEach((item) => item.unsubscribe());
+        this.store.dispatch(clearDetailedInformationStore());
     }
 
-    getItem(): void {
-        const id = this.route.snapshot.paramMap.get("id");
-        const requestSubscription = this.searchResultService
-            .getItemById(id)
-            .subscribe(({ items: [firstItem] }) => {
-                this.item = firstItem;
-                this.dateStatus = getDateStatus(this.item.snippet.publishedAt);
-            });
-        this.subscriptions.push(requestSubscription);
+    getItem(id: string): void {
+        this.store.dispatch(searchVideoById({ id }));
+    }
+
+    deleteCustomCard():void {
+        this.store.dispatch(deleteCustomCard({ id: this.id }));
+        this.router.navigate(["/main"]);
+    }
+
+    removeFromFavorite(): void {
+        const subscription = this.item$.subscribe((item) => {
+            if (item) {
+                this.store.dispatch(removeFromFavorite({ id: item.id }));
+            }
+        });
+        this.subscriptions.push(subscription);
+    }
+
+    addToFavorite(): void {
+        const subscription = this.item$.subscribe((item) => {
+            if (item) {
+                this.store.dispatch(addToFavorite({ id: item.id }));
+            }
+        });
+        this.subscriptions.push(subscription);
     }
 }

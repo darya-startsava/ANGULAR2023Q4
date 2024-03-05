@@ -5,6 +5,8 @@ export interface ResponseSearch {
     etag: string;
     pageInfo: PageInfo;
     items: Array<ItemSearch>;
+    nextPageToken?: string;
+    prevPageToken?: string;
 }
 
 export interface ResponseSnippet {
