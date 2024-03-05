@@ -1,0 +1,11 @@
+.people_item_wrapper {
+
+  display: flex;
+  align-items: center;
+  column-gap: 50px;
+  margin: 5px 0;
+
+  .person_name {
+    padding: 10px 0;
+  }
+}

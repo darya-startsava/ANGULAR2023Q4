@@ -1,23 +1,24 @@
 import { createAction, props } from '@ngrx/store';
 
 import { ErrorState, GroupsDataState } from '../state.models';
+import { GroupMessageItem } from '../../main-page/models/group.models';
 
 export const groupsListLoading = createAction(
-    '[GroupPageContainerComponent] groupsListLoading'
+    '[GroupSectionContainerComponent] groupsListLoading'
 );
 
 export const groupsListSuccess = createAction(
-    '[GroupPageContainerComponent] groupsListSuccess',
+    '[GroupSectionContainerComponent] groupsListSuccess',
     props<{ data: GroupsDataState[] }>()
 );
 
 export const groupsListFailed = createAction(
-    '[GroupPageContainerComponent] groupsListFailed',
+    '[GroupSectionContainerComponent] groupsListFailed',
     props<{ error: { error: ErrorState } }>()
 );
 
 export const groupsListUpdate = createAction(
-    '[GroupPageContainerComponent] groupsListUpdate',
+    '[GroupSectionContainerComponent] groupsListUpdate',
     props<{ currentDate: number }>()
 );
 
@@ -56,4 +57,24 @@ export const deleteGroupFailed = createAction(
 
 export const clearDeleteGroupInfo = createAction(
     '[GroupListItemComponent] clearDeleteGroupInfo'
+);
+
+export const groupMessagesLoading = createAction(
+    '[GroupPageContainerComponent] groupMessagesLoading',
+    props<{ groupID: string }>()
+);
+
+export const groupMessagesSuccess = createAction(
+    '[GroupPageContainerComponent] groupMassagesSuccess',
+    props<{ messages: GroupMessageItem[]; groupID: string }>()
+);
+
+export const groupMessagesFailed = createAction(
+    '[GroupPageContainerComponent] groupMessagesFailed',
+    props<{ error: { error: ErrorState } }>()
+);
+
+export const groupsMessagesUpdate = createAction(
+    '[GroupPageComponent] groupMessagesUpdate',
+    props<{ currentDate: number }>()
 );

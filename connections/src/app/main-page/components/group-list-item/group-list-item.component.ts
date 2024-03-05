@@ -2,6 +2,7 @@ import { Component, Input, OnDestroy } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
+import { RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 
@@ -16,7 +17,7 @@ import { DeleteGroupDialogComponent } from '../delete-group-dialog/delete-group-
 @Component({
     selector: 'app-group-list-item',
     standalone: true,
-    imports: [MatButtonModule, MatIconModule],
+    imports: [MatButtonModule, MatIconModule, RouterModule],
     templateUrl: './group-list-item.component.html',
     styleUrl: './group-list-item.component.scss'
 })

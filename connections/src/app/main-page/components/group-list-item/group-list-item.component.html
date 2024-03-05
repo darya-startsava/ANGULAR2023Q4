@@ -1,5 +1,7 @@
 <div class="group_item_wrapper">
-    <p class="group_name">{{ group.name }}</p>
+    <a routerLink="/group/{{ group.id }}" class="group_name">{{
+        group.name
+    }}</a>
     @if (group.createdBy === uid) {
         <button mat-icon-button color="warn" (click)="openDialog()">
             <mat-icon>delete</mat-icon>

@@ -17,3 +17,14 @@ export interface SInterface {
 export interface CreateGroupResponse {
     groupID: string;
 }
+
+export interface GroupMessagesResponse {
+    Count: number;
+    Items: Array<GroupMessageItem>;
+}
+
+export interface GroupMessageItem {
+    autorID: SInterface;
+    message: SInterface;
+    createdAt: SInterface;
+}
