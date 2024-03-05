@@ -2,13 +2,14 @@
 
 ### Description:
 
- Connection App with authentication and authorization. Provides the possibility to have both private conversations and group chats. You can create your own group, delete it, start a dialogue with any user, and update groups and user lists.
+Connection App with authentication and authorization. Provides the possibility to have both private conversations and group chats. You can create your own group, delete it, start a dialogue with any user, and update groups and user lists.
 
 ### Technologies:
-- Angular 17
-- NgRx
-- RxJS
-- Angular Material
-- eslint
-- prettier
 
+-   Angular 17
+-   TypeScript
+-   NgRx
+-   RxJS
+-   Angular Material
+-   ESLint
+-   Prettier
